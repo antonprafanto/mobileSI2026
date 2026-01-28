@@ -111,7 +111,7 @@ Satu Kode → Banyak Platform
 
 #### Langkah 1: Download Flutter SDK
 
-1. Buka website resmi: **https://flutter.dev/docs/get-started/install/windows**
+1. Buka website resmi: **https://docs.flutter.dev/install**
 2. Klik tombol **"Download Flutter SDK"**
 3. Extract file zip ke folder yang **TIDAK** memerlukan admin
    - ✅ Contoh baik: `C:\flutter`
@@ -1551,3 +1551,4 @@ Buat aplikasi Flutter sederhana berisi:
 > Hubungi dosen/asisten via email atau WhatsApp group.
 >
 > **Selamat belajar! 🚀**
+
