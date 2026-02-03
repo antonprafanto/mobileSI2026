@@ -23,10 +23,6 @@
 
 📁 [`contoh_proyek/pertemuan_2_demo/`](contoh_proyek/pertemuan_2_demo/) - Proyek Flutter dengan navigasi antar demo
 
-### Untuk Pengajar:
-
-📝 [`Pertemuan_2_Live_Coding_Scenario.md`](Pertemuan_2_Live_Coding_Scenario.md) - Panduan live coding di kelas
-
 ---
 
 ## 🎯 Tujuan Pembelajaran
