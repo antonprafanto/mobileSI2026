@@ -7,7 +7,7 @@ Repository ini berisi materi pembelajaran mata kuliah **Pemrograman Mobile** unt
 | Pertemuan | Topik                                                                     | Status |
 | :-------: | ------------------------------------------------------------------------- | :----: |
 |     1     | [Pengenalan Flutter dan Dart](Pertemuan_1_Pengenalan_Flutter_dan_Dart.md) |   ✅   |
-|     2     | Widget, Layout, dan Theming                                               |   🔜   |
+|     2     | [Widget, Layout, dan Theming](Pertemuan_2_Widget_Layout_dan_Theming.md)   |   ✅   |
 |     3     | ListView, GridView, dan Navigasi                                          |   🔜   |
 |     4     | State Management                                                          |   🔜   |
 |     5     | Form dan Validasi Input                                                   |   🔜   |
@@ -22,6 +22,13 @@ Repository ini berisi materi pembelajaran mata kuliah **Pemrograman Mobile** unt
 |    14     | Deployment                                                                |   🔜   |
 |    15     | Project Presentation                                                      |   📝   |
 |    16     | UAS                                                                       |   📝   |
+
+## 📂 Contoh Kode & Proyek
+
+| Folder                                                               | Deskripsi                                                  |
+| -------------------------------------------------------------------- | ---------------------------------------------------------- |
+| [`contoh_kode/pertemuan_2/`](contoh_kode/pertemuan_2/)               | File demo per topik (StatefulWidget, Layout, Theming, dll) |
+| [`contoh_proyek/pertemuan_2_demo/`](contoh_proyek/pertemuan_2_demo/) | Flutter project lengkap dengan navigasi antar demo         |
 
 ## 🛠️ Persiapan Development
 
