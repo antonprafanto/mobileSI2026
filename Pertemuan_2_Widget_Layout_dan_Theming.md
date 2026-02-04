@@ -1,33 +1,12 @@
-# 📱 PERTEMUAN 2
+# 📱 PERTEMUAN 2 - LIVE CODING
 
 ## Widget Dasar, Layout & Theming
 
 ---
 
-## 📂 RESOURCES & DEMO FILES
-
-> 💡 **Untuk memudahkan pembelajaran, tersedia file demo yang bisa langsung dijalankan!**
-
-### File Demo (Copy ke `main.dart`):
-
-| File                                                                                       | Topik                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------ |
-| [`01_counter_demo.dart`](contoh_kode/pertemuan_2/01_counter_demo.dart)                     | StatelessWidget vs StatefulWidget    |
-| [`02_widget_dasar_demo.dart`](contoh_kode/pertemuan_2/02_widget_dasar_demo.dart)           | Text, Container, Image, Icon, Button |
-| [`03_layout_demo.dart`](contoh_kode/pertemuan_2/03_layout_demo.dart)                       | Row, Column, Stack                   |
-| [`04_spacing_alignment_demo.dart`](contoh_kode/pertemuan_2/04_spacing_alignment_demo.dart) | Padding, SizedBox, Expanded          |
-| [`05_theme_demo.dart`](contoh_kode/pertemuan_2/05_theme_demo.dart)                         | ThemeData, Dark/Light Mode           |
-| [`06_profil_page_lengkap.dart`](contoh_kode/pertemuan_2/06_profil_page_lengkap.dart)       | Contoh Jawaban Praktikum             |
-
-### Proyek Flutter Lengkap:
-
-📁 [`contoh_proyek/pertemuan_2_demo/`](contoh_proyek/pertemuan_2_demo/) - Proyek Flutter dengan navigasi antar demo
-
----
-
 ## 🎯 Tujuan Pembelajaran
 
-Setelah mengikuti pertemuan ini, mahasiswa diharapkan mampu:
+Setelah mengikuti pertemuan ini, Anda diharapkan mampu:
 
 1. ✅ Memahami perbedaan StatelessWidget dan StatefulWidget
 2. ✅ Menggunakan widget dasar Flutter (Text, Container, Image, Icon, Button)
@@ -37,186 +16,258 @@ Setelah mengikuti pertemuan ini, mahasiswa diharapkan mampu:
 
 ---
 
-## ⏱️ ESTIMASI DURASI (Total: 150 menit)
+## 📂 RESOURCES
 
-| Bagian | Topik                             | Durasi   | Keterangan                           |
-| ------ | --------------------------------- | -------- | ------------------------------------ |
-| 1      | Review Pertemuan 1                | 10 menit | Recap + tanya jawab                  |
-| 2      | StatelessWidget vs StatefulWidget | 15 menit | Konsep penting                       |
-| 3      | Widget Dasar                      | 25 menit | Text, Container, Image, Icon         |
-| 4      | Layout Widgets                    | 30 menit | **Inti materi** - Row, Column, Stack |
-| 5      | Spacing & Alignment               | 15 menit | Padding, SizedBox, MainAxis          |
-| 6      | Assets (Gambar & Font)            | 15 menit | pubspec.yaml, Image.asset            |
-| 7      | Theming                           | 20 menit | ThemeData, ColorScheme               |
-| 8      | Praktikum                         | 15 menit | Membuat halaman profil               |
-| -      | Tanya Jawab & Penutup             | 5 menit  |                                      |
+> 💡 **File demo tersedia di folder `contoh_kode/pertemuan_2/`**
 
----
-
-## 📚 BAGIAN 1: Review Pertemuan 1
-
-### Quiz Singkat (5 menit)
-
-Jawab pertanyaan berikut sebelum lanjut:
-
-1. Apa fungsi `void main()` di Dart?
-2. Sebutkan 4 tipe data dasar di Dart!
-3. Apa perbedaan `final` dan `const`?
-4. Apa itu class dan object?
-5. Widget apa yang digunakan untuk membungkus aplikasi Flutter?
-
-> 💡 Jika belum bisa menjawab, review materi Pertemuan 1!
+| File                             | Topik                                |
+| -------------------------------- | ------------------------------------ |
+| `01_counter_demo.dart`           | StatelessWidget vs StatefulWidget    |
+| `02_widget_dasar_demo.dart`      | Text, Container, Image, Icon, Button |
+| `03_layout_demo.dart`            | Row, Column, Stack                   |
+| `04_spacing_alignment_demo.dart` | Padding, SizedBox, Expanded          |
+| `05_theme_demo.dart`             | ThemeData, Dark/Light Mode           |
+| `06_profil_page_lengkap.dart`    | Contoh Jawaban Praktikum             |
 
 ---
 
-## 🧩 BAGIAN 2: StatelessWidget vs StatefulWidget
+## ⏱️ TIMELINE SESI (Total: 150 menit)
 
-### 2.1 Apa itu Widget?
+| Waktu    | Bagian | Topik            | Aktivitas                         |
+| -------- | ------ | ---------------- | --------------------------------- |
+| 10 menit | Part 0 | Review & Setup   | Quiz cepat + setup project        |
+| 20 menit | Part 1 | StatefulWidget   | Counter App - hands-on coding     |
+| 30 menit | Part 2 | Widget Dasar     | Build Profile Card step-by-step   |
+| 35 menit | Part 3 | Layout Deep Dive | Row, Column, Stack, Expanded      |
+| 20 menit | Part 4 | Spacing & Assets | Padding, SizedBox, Images & Fonts |
+| 20 menit | Part 5 | Theming          | Transform app dengan theme        |
+| 15 menit | Part 6 | Praktikum        | Guided practice                   |
 
-Di Flutter, **SEMUA yang terlihat di layar adalah Widget**.
+---
+
+## 📋 PERSIAPAN SEBELUM MEMULAI
+
+### ✅ Checklist Persiapan:
+
+- [ ] Flutter SDK OK - jalankan `flutter doctor`
+- [ ] Emulator/HP sudah terhubung dan running
+- [ ] VS Code terbuka dengan Flutter extension
+- [ ] Folder `contoh_kode/pertemuan_2/` siap untuk referensi
+- [ ] Koneksi internet stabil (untuk Image.network)
+
+### 🎬 Setup Project Baru:
+
+```bash
+# Ketik bersama:
+flutter create demo_pertemuan2
+cd demo_pertemuan2
+code .
+```
+
+```bash
+# Jalankan aplikasi
+flutter run
+```
+
+> 💡 **Tips**: Jalankan `flutter run` dulu, nanti gunakan Hot Reload (tekan `r`) untuk update cepat
+
+---
+
+## 🚀 PART 0: Review & Warm Up (10 menit)
+
+### Quiz Cepat (5 menit)
+
+Pertanyaan untuk mengecek pemahaman:
+
+1. ❓ "Apa fungsi `void main()` di Dart?"
+2. ❓ "Sebutkan 3 tipe data dasar!"
+3. ❓ "Apa itu class dan object?"
+4. ❓ "Widget apa yang membungkus aplikasi Flutter?"
+
+### Penjelasan Konsep Dasar (5 menit)
 
 ```
+📌 KONSEP PENTING PERTEMUAN INI:
+
+Di Flutter, SEMUA yang terlihat adalah WIDGET.
+
 Tombol    → Widget
 Teks      → Widget
 Gambar    → Widget
 Halaman   → Widget (kumpulan widget)
 Aplikasi  → Widget (MaterialApp)
+
+Widget = Building Blocks UI
 ```
 
-Widget adalah "building blocks" untuk membangun UI di Flutter.
+---
 
-### 2.2 Dua Jenis Widget Utama
+## 🧩 PART 1: StatefulWidget - Counter App (20 menit)
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                       WIDGET                                 │
-├──────────────────────────┬──────────────────────────────────┤
-│    StatelessWidget       │       StatefulWidget             │
-│    (Tanpa State)         │       (Dengan State)             │
-├──────────────────────────┼──────────────────────────────────┤
-│ • Tampilan TIDAK berubah │ • Tampilan BISA berubah          │
-│ • Tidak ada interaksi    │ • Ada interaksi user             │
-│ • Lebih sederhana        │ • Lebih kompleks                 │
-│ • Performa lebih baik    │ • Perlu manage state             │
-├──────────────────────────┼──────────────────────────────────┤
-│ Contoh:                  │ Contoh:                          │
-│ • Text statis            │ • Counter (angka berubah)        │
-│ • Icon                   │ • Form input                     │
-│ • Halaman About          │ • Checkbox, Switch               │
-│ • Logo                   │ • Tab navigation                 │
-└──────────────────────────┴──────────────────────────────────┘
-```
+### 🎯 Tujuan:
 
-### 2.3 Contoh StatelessWidget
+Memahami kapan dan bagaimana menggunakan StatefulWidget
+
+### ✏️ CODING BERSAMA:
+
+**� LANGKAH**: "Hapus semua kode default dan mulai dari 0. Mari kita ketik dari awal!"
+
+#### Step 1: Hapus semua isi `lib/main.dart`
 
 ```dart
+// Ketik dari awal, jangan copy-paste!
 import 'package:flutter/material.dart';
 
-// StatelessWidget - tampilan tidak berubah
-class KartuProfil extends StatelessWidget {
-  final String nama;
-  final String pekerjaan;
+void main() {
+  // Entry point - fungsi pertama yang dijalankan
+  runApp(MyApp());
+}
 
-  // Constructor
-  const KartuProfil({
-    super.key,
-    required this.nama,
-    required this.pekerjaan,
-  });
-
+// MyApp = widget root aplikasi
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // build() dipanggil SEKALI saja
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Text(
-              nama,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(pekerjaan),
-          ],
-        ),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Pertemuan 2',
+      home: CounterPage(),
     );
   }
 }
-
-// Penggunaan:
-// KartuProfil(nama: 'Budi', pekerjaan: 'Flutter Developer')
 ```
 
-### 2.4 Contoh StatefulWidget
+**🤔 PIKIRKAN**: "Apa fungsi `runApp()`?" → Jawaban: Menjalankan widget root
+
+#### Step 2: Buat StatefulWidget
 
 ```dart
-import 'package:flutter/material.dart';
-
-// StatefulWidget - tampilan bisa berubah
-class CounterApp extends StatefulWidget {
-  const CounterApp({super.key});
-
+// STATEFULWIDGET = Widget yang datanya BISA BERUBAH
+class CounterPage extends StatefulWidget {
   @override
-  State<CounterApp> createState() => _CounterAppState();
+  State<CounterPage> createState() => _CounterPageState();
 }
 
-class _CounterAppState extends State<CounterApp> {
-  // State = data yang bisa berubah
+// State = tempat menyimpan data yang bisa berubah
+class _CounterPageState extends State<CounterPage> {
+  // DATA (state) - angka counter
   int _counter = 0;
 
+  // Method untuk tambah counter
   void _increment() {
-    // setState() memberitahu Flutter untuk rebuild UI
+    // setState() = beritahu Flutter untuk UPDATE tampilan
     setState(() {
       _counter++;
     });
   }
 
-  void _decrement() {
-    setState(() {
-      if (_counter > 0) _counter--;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    // build() dipanggil SETIAP KALI setState()
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'Counter: $_counter',
-          style: const TextStyle(fontSize: 32),
-        ),
-        const SizedBox(height: 20),
-        Row(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Counter Demo'),
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
+      ),
+      body: Center(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: _decrement,
-              child: const Icon(Icons.remove),
+            Text(
+              'Anda menekan tombol sebanyak:',
+              style: TextStyle(fontSize: 18),
             ),
-            const SizedBox(width: 20),
-            ElevatedButton(
-              onPressed: _increment,
-              child: const Icon(Icons.add),
+            SizedBox(height: 10),
+            Text(
+              '$_counter',  // $ untuk interpolasi variabel
+              style: TextStyle(
+                fontSize: 80,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+              ),
             ),
           ],
         ),
-      ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _increment,
+        child: Icon(Icons.add),
+        tooltip: 'Tambah',
+      ),
     );
   }
 }
 ```
 
-### 2.5 Kapan Pakai Apa?
+### ⚡ HOT RELOAD:
+
+Tekan `r` di terminal → Lihat hasilnya!
+
+### 🎯 EKSPERIMEN 1: Apa yang terjadi tanpa setState()?
+
+**💡 PENTING**: "Mari kita coba hapus setState dan lihat apa yang terjadi"
+
+```dart
+void _increment() {
+  // Hapus setState() dulu
+  _counter++;  // Hanya ini
+}
+```
+
+**Hot Reload** → Tekan tombol → **Angka TIDAK berubah!**
+
+**💡 PENTING**:
+
+> "Tanpa `setState()`, Flutter tidak tahu harus update UI. Data berubah tapi tampilan tidak!"
+
+**Kembalikan setState()**:
+
+```dart
+void _increment() {
+  setState(() {
+    _counter++;
+  });
+}
+```
+
+### 🎯 EKSPERIMEN 2: Tambah tombol decrement
+
+**🤔 PIKIRKAN**: "Bagaimana kalau kita tambah tombol kurang?"
+
+```dart
+// Tambah method baru
+void _decrement() {
+  setState(() {
+    if (_counter > 0) _counter--;
+  });
+}
+
+// Di floatingActionButton, ganti jadi Row:
+floatingActionButton: Padding(
+  padding: const EdgeInsets.only(left: 32),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      FloatingActionButton(
+        onPressed: _decrement,
+        child: Icon(Icons.remove),
+        heroTag: 'decrement',
+      ),
+      FloatingActionButton(
+        onPressed: _increment,
+        child: Icon(Icons.add),
+        heroTag: 'increment',
+      ),
+    ],
+  ),
+),
+```
+
+**Hot Reload** → Test kedua tombol!
+
+### 💡 Kapan Pakai StatefulWidget vs StatelessWidget?
 
 ```
-Pertanyaan: "Apakah tampilan widget ini akan BERUBAH
-             setelah pertama kali ditampilkan?"
+Pertanyaan: "Apakah data dalam widget ini BERUBAH?"
 
          │
          ▼
@@ -227,85 +278,122 @@ Pertanyaan: "Apakah tampilan widget ini akan BERUBAH
    YA        TIDAK
     │          │
     ▼          ▼
-┌──────────┐ ┌──────────┐
-│ Stateful │ │ Stateless│
-│  Widget  │ │  Widget  │
-└──────────┘ └──────────┘
+StatefulWidget  StatelessWidget
 ```
 
-**Aturan sederhana:**
+**Contoh:**
 
-- Mulai dengan **StatelessWidget**
-- Ubah ke **StatefulWidget** jika perlu `setState()`
+- ✅ **Stateful**: Counter, Form, Checkbox, Animation
+- ✅ **Stateless**: Text statis, Icon, Logo, About page
 
 ---
 
-## 🎨 BAGIAN 3: Widget Dasar
+## 🎨 PART 2: Widget Dasar - Build Profile Card (30 menit)
 
-### 3.1 Text Widget
+### 🎯 Tujuan:
+
+Menguasai Text, Container, Image, Icon, Button
+
+### ✏️ Buat Halaman Baru
+
+**Step 1: Tambah widget ProfilCard sebagai halaman baru**
+
+Ubah `home:` di MaterialApp:
 
 ```dart
-// Text sederhana
-Text('Hello World')
+home: ProfilCardDemo(),
+```
 
-// Text dengan styling
+**Step 2: Buat StatelessWidget baru**
+
+```dart
+class ProfilCardDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Widget Dasar'),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Kita akan isi step by step
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+**📝 CATATAN**: "SingleChildScrollView membuat konten bisa di-scroll kalau panjang"
+
+### 📝 Demo 1: Text Widget
+
+Tambahkan di dalam Column children:
+
+```dart
+// 1. TEXT WIDGET
+Text('Halo Dunia!'),
+
+SizedBox(height: 10),
+
 Text(
-  'Flutter Keren!',
+  'Teks dengan Style',
   style: TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,
     color: Colors.blue,
-    letterSpacing: 2.0,
-    fontStyle: FontStyle.italic,
   ),
-)
+),
 
-// Text dengan alignment
-Text(
-  'Teks ini di tengah',
-  textAlign: TextAlign.center,
-)
+SizedBox(height: 10),
 
-// Text dengan jumlah baris terbatas
 Text(
-  'Ini teks yang sangat panjang sekali dan mungkin tidak muat dalam satu baris...',
-  maxLines: 2,
-  overflow: TextOverflow.ellipsis, // Tambah ... jika terpotong
-)
+  'Teks dengan berbagai gaya: italic, underline',
+  style: TextStyle(
+    fontSize: 16,
+    fontStyle: FontStyle.italic,
+    decoration: TextDecoration.underline,
+    letterSpacing: 1.5,
+  ),
+),
+
+SizedBox(height: 20),
 ```
 
-**Properti TextStyle yang sering dipakai:**
+**Hot Reload** → Lihat hasilnya!
 
-| Property        | Fungsi            | Contoh                     |
-| --------------- | ----------------- | -------------------------- |
-| `fontSize`      | Ukuran font       | `24.0`                     |
-| `fontWeight`    | Ketebalan         | `FontWeight.bold`          |
-| `color`         | Warna teks        | `Colors.red`               |
-| `fontStyle`     | Gaya font         | `FontStyle.italic`         |
-| `letterSpacing` | Jarak antar huruf | `2.0`                      |
-| `wordSpacing`   | Jarak antar kata  | `5.0`                      |
-| `decoration`    | Dekorasi          | `TextDecoration.underline` |
+**🎯 EKSPERIMEN**: Ubah warna dari `Colors.blue` ke `Colors.purple` → Hot Reload
 
-### 3.2 Container Widget
-
-Container adalah widget **serbaguna** untuk styling dan layout.
+### 📝 Demo 2: Container Widget
 
 ```dart
-// Container sederhana
+// 2. CONTAINER WIDGET
 Container(
-  width: 200,
+  width: double.infinity,
   height: 100,
-  color: Colors.blue,
-  child: Text('Hello'),
-)
+  color: Colors.orange,
+  child: Center(
+    child: Text(
+      'Container Sederhana',
+      style: TextStyle(color: Colors.white, fontSize: 18),
+    ),
+  ),
+),
 
-// Container dengan decoration (lebih fleksibel)
+SizedBox(height: 20),
+
+// Container dengan decoration (lebih keren!)
 Container(
-  width: 200,
-  height: 100,
+  width: double.infinity,
+  padding: EdgeInsets.all(20),
   decoration: BoxDecoration(
     color: Colors.blue,
-    borderRadius: BorderRadius.circular(16), // Sudut melengkung
+    borderRadius: BorderRadius.circular(16),
     boxShadow: [
       BoxShadow(
         color: Colors.black26,
@@ -313,40 +401,43 @@ Container(
         offset: Offset(0, 4),
       ),
     ],
-    border: Border.all(
-      color: Colors.white,
-      width: 2,
-    ),
+    border: Border.all(color: Colors.white, width: 3),
   ),
-  child: Center(
-    child: Text(
-      'Styled Box',
-      style: TextStyle(color: Colors.white),
-    ),
+  child: Column(
+    children: [
+      Text(
+        'Container dengan Decoration',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      SizedBox(height: 8),
+      Text(
+        'Border radius + Shadow + Border',
+        style: TextStyle(color: Colors.white70),
+      ),
+    ],
   ),
-)
+),
 
-// Container dengan padding dan margin
-Container(
-  margin: EdgeInsets.all(16),      // Jarak keluar
-  padding: EdgeInsets.all(20),     // Jarak ke dalam
-  decoration: BoxDecoration(
-    color: Colors.amber,
-    borderRadius: BorderRadius.circular(8),
-  ),
-  child: Text('Content'),
-)
+SizedBox(height: 20),
 ```
+
+**� PENTING**:
+
+> "Container itu seperti kotak serbaguna. Bisa atur ukuran, warna, border, shadow, padding!"
 
 **Visualisasi Margin vs Padding:**
 
 ```
 ┌─────────────────────────────┐
-│         MARGIN              │  ← Jarak ke LUAR (dari widget lain)
+│         MARGIN              │  ← Jarak ke LUAR
 │  ┌───────────────────────┐  │
 │  │       BORDER          │  │
 │  │  ┌─────────────────┐  │  │
-│  │  │    PADDING      │  │  │  ← Jarak ke DALAM (dari content)
+│  │  │    PADDING      │  │  │  ← Jarak ke DALAM
 │  │  │  ┌───────────┐  │  │  │
 │  │  │  │  CONTENT  │  │  │  │
 │  │  │  └───────────┘  │  │  │
@@ -355,131 +446,151 @@ Container(
 └─────────────────────────────┘
 ```
 
-### 3.3 Image Widget
+### 📝 Demo 3: Image Widget
 
 ```dart
-// Image dari internet
-Image.network(
-  'https://picsum.photos/200/300',
-  width: 200,
-  height: 150,
-  fit: BoxFit.cover,
-)
+// 3. IMAGE WIDGET
+Text(
+  'Image dari Internet:',
+  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+),
 
-// Image dari asset (file lokal)
-Image.asset(
-  'assets/images/logo.png',
-  width: 100,
-  height: 100,
-)
+SizedBox(height: 10),
 
-// Image dengan placeholder loading
-Image.network(
-  'https://example.com/image.jpg',
-  loadingBuilder: (context, child, loadingProgress) {
-    if (loadingProgress == null) return child;
-    return Center(child: CircularProgressIndicator());
-  },
-  errorBuilder: (context, error, stackTrace) {
-    return Icon(Icons.error, color: Colors.red);
-  },
-)
-
-// Image berbentuk lingkaran
-ClipOval(
-  child: Image.network(
-    'https://picsum.photos/100/100',
-    width: 100,
-    height: 100,
-    fit: BoxFit.cover,
-  ),
-)
-
-// Image dengan border radius
 ClipRRect(
-  borderRadius: BorderRadius.circular(16),
+  borderRadius: BorderRadius.circular(12),
   child: Image.network(
-    'https://picsum.photos/200/150',
+    'https://picsum.photos/400/200',
+    width: double.infinity,
+    height: 200,
     fit: BoxFit.cover,
+    loadingBuilder: (context, child, loadingProgress) {
+      if (loadingProgress == null) return child;
+      return Container(
+        height: 200,
+        child: Center(child: CircularProgressIndicator()),
+      );
+    },
+    errorBuilder: (context, error, stackTrace) {
+      return Container(
+        height: 200,
+        color: Colors.grey[300],
+        child: Center(
+          child: Icon(Icons.broken_image, size: 50),
+        ),
+      );
+    },
   ),
-)
+),
+
+SizedBox(height: 20),
 ```
 
-**BoxFit Options:**
+**� PENTING**:
 
-| BoxFit      | Deskripsi                            |
-| ----------- | ------------------------------------ |
-| `cover`     | Isi container, potong jika perlu     |
-| `contain`   | Muat semua, mungkin ada ruang kosong |
-| `fill`      | Isi container, stretch jika perlu    |
-| `fitWidth`  | Sesuaikan lebar                      |
-| `fitHeight` | Sesuaikan tinggi                     |
+> "Image.network untuk gambar dari internet. Ada loadingBuilder untuk tampilan saat loading!"
 
-### 3.4 Icon Widget
+### 📝 Demo 4: Icon & CircleAvatar
 
 ```dart
-// Icon sederhana
-Icon(Icons.home)
+// 4. ICON & CIRCLE AVATAR
+Text(
+  'Icon & Avatar:',
+  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+),
 
-// Icon dengan styling
-Icon(
-  Icons.favorite,
-  size: 48,
-  color: Colors.red,
-)
+SizedBox(height: 10),
 
-// Icon dalam tombol
-IconButton(
-  icon: Icon(Icons.settings),
-  iconSize: 32,
-  color: Colors.blue,
-  onPressed: () {
-    print('Settings ditekan');
-  },
-)
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  children: [
+    Icon(Icons.home, size: 40, color: Colors.blue),
+    Icon(Icons.favorite, size: 40, color: Colors.red),
+    Icon(Icons.star, size: 40, color: Colors.amber),
+    Icon(Icons.settings, size: 40, color: Colors.grey),
+  ],
+),
 
-// Daftar icon populer
-Icon(Icons.home)           // Rumah
-Icon(Icons.person)         // Orang
-Icon(Icons.settings)       // Pengaturan
-Icon(Icons.search)         // Cari
-Icon(Icons.favorite)       // Hati
-Icon(Icons.star)           // Bintang
-Icon(Icons.shopping_cart)  // Keranjang
-Icon(Icons.notifications)  // Notifikasi
-Icon(Icons.menu)           // Menu
-Icon(Icons.close)          // Tutup
-Icon(Icons.add)            // Tambah
-Icon(Icons.remove)         // Kurang
-Icon(Icons.edit)           // Edit
-Icon(Icons.delete)         // Hapus
+SizedBox(height: 20),
+
+// CircleAvatar
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  children: [
+    CircleAvatar(
+      radius: 30,
+      backgroundColor: Colors.purple,
+      child: Icon(Icons.person, size: 30, color: Colors.white),
+    ),
+    CircleAvatar(
+      radius: 30,
+      backgroundImage: NetworkImage('https://picsum.photos/100/100'),
+    ),
+    CircleAvatar(
+      radius: 30,
+      backgroundColor: Colors.green,
+      child: Text(
+        'AB',
+        style: TextStyle(color: Colors.white, fontSize: 20),
+      ),
+    ),
+  ],
+),
+
+SizedBox(height: 20),
 ```
 
-> 💡 **Tips**: Lihat semua icon di https://fonts.google.com/icons
-
-### 3.5 Button Widgets
+### 📝 Demo 5: Button Widgets
 
 ```dart
-// ElevatedButton (tombol dengan elevasi/bayangan)
+// 5. BUTTON WIDGETS
+Text(
+  'Berbagai Jenis Button:',
+  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+),
+
+SizedBox(height: 10),
+
+// ElevatedButton
 ElevatedButton(
   onPressed: () {
-    print('Tombol ditekan!');
+    print('ElevatedButton ditekan!');
   },
-  child: Text('Klik Saya'),
-)
+  child: Text('ElevatedButton'),
+),
+
+SizedBox(height: 10),
 
 // ElevatedButton dengan icon
 ElevatedButton.icon(
   onPressed: () {},
   icon: Icon(Icons.send),
-  label: Text('Kirim'),
-)
+  label: Text('Kirim Pesan'),
+),
 
-// ElevatedButton dengan custom style
+SizedBox(height: 10),
+
+// TextButton
+TextButton(
+  onPressed: () {},
+  child: Text('TextButton (Aksi Sekunder)'),
+),
+
+SizedBox(height: 10),
+
+// OutlinedButton
+OutlinedButton(
+  onPressed: () {},
+  child: Text('OutlinedButton (Alternatif)'),
+),
+
+SizedBox(height: 10),
+
+// Custom styled button
 ElevatedButton(
   onPressed: () {},
   style: ElevatedButton.styleFrom(
-    backgroundColor: Colors.purple,
+    backgroundColor: Colors.deepPurple,
     foregroundColor: Colors.white,
     padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
     shape: RoundedRectangleBorder(
@@ -487,93 +598,93 @@ ElevatedButton(
     ),
   ),
   child: Text('Custom Button'),
-)
+),
 
-// TextButton (tombol tanpa background)
-TextButton(
-  onPressed: () {},
-  child: Text('Text Button'),
-)
+SizedBox(height: 10),
 
-// OutlinedButton (tombol dengan border)
-OutlinedButton(
-  onPressed: () {},
-  child: Text('Outlined Button'),
-)
-
-// IconButton (tombol hanya icon)
+// IconButton
 IconButton(
   onPressed: () {},
   icon: Icon(Icons.favorite),
   color: Colors.red,
-)
-
-// FloatingActionButton (tombol mengambang)
-FloatingActionButton(
-  onPressed: () {},
-  child: Icon(Icons.add),
-)
-
-// Tombol disabled (null onPressed)
-ElevatedButton(
-  onPressed: null, // Tombol tidak aktif
-  child: Text('Disabled'),
-)
+  iconSize: 32,
+),
 ```
 
-**Perbandingan Button:**
+**🎯 CHALLENGE**: "Coba ubah warna button dari purple ke warna favorit kalian!"
 
-| Button Type            | Tampilan          | Use Case            |
-| ---------------------- | ----------------- | ------------------- |
-| `ElevatedButton`       | Dengan bayangan   | Aksi utama          |
-| `TextButton`           | Teks saja         | Aksi sekunder       |
-| `OutlinedButton`       | Dengan border     | Aksi alternatif     |
-| `IconButton`           | Icon saja         | Toolbar, action bar |
-| `FloatingActionButton` | Bulat, mengambang | Aksi utama halaman  |
+### 📝 Demo 6: Card & ListTile
 
-### 3.6 Card & ListTile
-
-**Card** adalah container dengan efek elevasi (bayangan) untuk mengelompokkan informasi.
+**📝 CATATAN**: "Card itu seperti kartu informasi. ListTile memudahkan kita susun isi card!"
 
 ```dart
+// 6. CARD & LISTTILE
+Text(
+  'Card & ListTile:',
+  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+),
+
+SizedBox(height: 10),
+
 // Card sederhana
 Card(
   child: Padding(
-    padding: const EdgeInsets.all(16),
-    child: Text('Ini adalah Card'),
+    padding: EdgeInsets.all(16),
+    child: Text('Ini adalah Card sederhana'),
   ),
-)
+),
 
-// Card dengan styling
+SizedBox(height: 10),
+
+// Card dengan ListTile
 Card(
-  elevation: 4,
+  elevation: 4,  // Tinggi bayangan (shadow)
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(12),
   ),
-  color: Colors.white,
-  child: Padding(
-    padding: const EdgeInsets.all(16),
-    child: Column(
-      children: [
-        Text('Judul Card', style: TextStyle(fontWeight: FontWeight.bold)),
-        Text('Isi konten card'),
-      ],
-    ),
-  ),
-)
-
-// Card dengan ListTile (kombinasi yang sering dipakai)
-Card(
   child: ListTile(
-    leading: Icon(Icons.person),       // Widget di kiri
-    title: Text('Judul'),              // Teks utama
-    subtitle: Text('Sub judul'),       // Teks sekunder
-    trailing: Icon(Icons.arrow_forward), // Widget di kanan
+    leading: CircleAvatar(
+      backgroundColor: Colors.blue,
+      child: Icon(Icons.person, color: Colors.white),
+    ),
+    title: Text(
+      'Nama Mahasiswa',
+      style: TextStyle(fontWeight: FontWeight.bold),
+    ),
+    subtitle: Text('NIM: 123456789'),
+    trailing: Icon(Icons.arrow_forward_ios, size: 16),
     onTap: () {
       print('Card ditekan!');
     },
   ),
-)
+),
+
+SizedBox(height: 10),
+
+// Card dengan info lebih lengkap
+Card(
+  child: Column(
+    children: [
+      ListTile(
+        leading: Icon(Icons.email, color: Colors.blue),
+        title: Text('Email'),
+        subtitle: Text('mahasiswa@example.com'),
+      ),
+      Divider(height: 1),  // Garis pemisah
+      ListTile(
+        leading: Icon(Icons.phone, color: Colors.green),
+        title: Text('Telepon'),
+        subtitle: Text('+62 812-3456-7890'),
+      ),
+      Divider(height: 1),
+      ListTile(
+        leading: Icon(Icons.location_on, color: Colors.red),
+        title: Text('Alamat'),
+        subtitle: Text('Jakarta, Indonesia'),
+      ),
+    ],
+  ),
+),
 ```
 
 **Visualisasi ListTile:**
@@ -583,953 +694,864 @@ Card(
 │ [Leading]  Title              [Trailing]│
 │            Subtitle                     │
 └────────────────────────────────────────┘
+
+Leading  = Widget di kiri (biasanya icon/avatar)
+Title    = Text utama
+Subtitle = Text sekunder (opsional)
+Trailing = Widget di kanan (biasanya icon/button)
 ```
 
-### 3.7 CircleAvatar
+**🎯 EKSPERIMEN**: Klik card dan lihat console output `print()`!
 
-**CircleAvatar** adalah widget lingkaran yang biasa dipakai untuk foto profil.
+### 💡 Kapan Pakai `const`?
+
+**💡 PENTING**: "`const` itu untuk optimasi. Memberitahu Flutter: widget ini tidak akan berubah!"
 
 ```dart
-// CircleAvatar dengan icon
-CircleAvatar(
-  radius: 40,
-  backgroundColor: Colors.blue,
-  child: Icon(Icons.person, size: 40, color: Colors.white),
-)
+// ✅ PAKAI const - nilai tidak pernah berubah
+const Text('Hello World')  // Teks selalu sama
+const Icon(Icons.home)     // Icon selalu sama
+const SizedBox(height: 20) // Ukuran selalu sama
 
-// CircleAvatar dengan gambar dari internet
-CircleAvatar(
-  radius: 50,
-  backgroundImage: NetworkImage('https://picsum.photos/100/100'),
-)
-
-// CircleAvatar dengan gambar dari asset
-CircleAvatar(
-  radius: 50,
-  backgroundImage: AssetImage('assets/images/profile.png'),
-)
-
-// CircleAvatar dengan teks (inisial)
-CircleAvatar(
-  radius: 30,
-  backgroundColor: Colors.purple,
-  child: Text(
-    'BS',
-    style: TextStyle(color: Colors.white, fontSize: 20),
-  ),
-)
+// ❌ JANGAN pakai const - nilai bisa berubah
+Text(namaUser)             // namaUser bisa beda-beda
+Text('$_counter')          // _counter berubah
+Icon(iconDariVariabel)     // icon dari variabel
 ```
 
-### 3.8 SingleChildScrollView
+**Aturan Sederhana:**
 
-**SingleChildScrollView** membuat konten bisa di-scroll ketika tidak muat di layar.
+- Kalau IDE kasih garis biru di bawah widget → tambahkan `const`
+- Kalau ada variabel/data yang berubah → jangan pakai `const`
+- Kalau ragu → biarkan saja (program tetap jalan, cuma lebih lambat dikit)
+
+**📝 CATATAN**: "`const` itu seperti foto KTP. Sekali dibuat, tidak berubah. Tapi umur di KTP vs umur sebenarnya bisa beda!"
+
+---
+
+## 📐 PART 3: Layout Deep Dive (35 menit)
+
+### 🎯 Tujuan:
+
+Menguasai Row, Column, Stack, Expanded, Positioned
+
+**� PENTING**:
+
+- **Column** = Susun vertikal, seperti tumpukan buku
+- **Row** = Susun horizontal, seperti barisan orang
+- **Stack** = Tumpuk seperti kartu remi
+- **Expanded** = Rebutan ruang, yang dapat flex lebih banyak dapat bagian lebih besar
+
+### Buat Halaman Layout Demo:
 
 ```dart
-// TANPA scroll → Jika konten terlalu panjang, akan OVERFLOW (error kuning-hitam)
-Scaffold(
-  body: Column(
-    children: [
-      // Banyak widget...
-      // Error jika tidak muat!
-    ],
-  ),
-)
-
-// DENGAN scroll → Konten bisa di-scroll
-Scaffold(
-  body: SingleChildScrollView(
-    child: Column(
-      children: [
-        // Banyak widget...
-        // Aman! Bisa scroll
-      ],
-    ),
-  ),
-)
-
-// Dengan padding
-SingleChildScrollView(
-  padding: EdgeInsets.all(16),
-  child: Column(
-    children: [
-      // konten...
-    ],
-  ),
-)
+// Di MaterialApp, ganti home jadi:
+home: LayoutDemo(),
 ```
 
-> 💡 **Kapan pakai SingleChildScrollView?**
->
-> - Ketika konten **mungkin** lebih panjang dari layar
-> - Untuk halaman form, profil, detail produk, dll
-> - Bungkus Column/Row di dalam SingleChildScrollView
-
-### 3.9 Kapan Pakai `const`?
-
-Di Flutter, `const` digunakan untuk **optimasi performa**.
+### ✏️ CODING: Column & Row
 
 ```dart
-// ✅ BENAR - Pakai const untuk widget yang nilainya tidak berubah
-const Text('Hello World')
-const Icon(Icons.home)
-const SizedBox(height: 20)
-const EdgeInsets.all(16)
-
-// ❌ TIDAK BISA - Jika ada nilai dinamis
-Text(namaUser)  // namaUser bisa berubah
-Icon(iconDinamis)  // icon dari variabel
-
-// ✅ Di constructor widget
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});  // Tambahkan const di constructor
-
+class LayoutDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Text('Static text');  // const di child
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Layout Demo'),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // === SECTION 1: COLUMN ===
+            Text(
+              '1. COLUMN (Vertikal)',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.blue[50],
+                border: Border.all(color: Colors.blue),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                children: [
+                  Container(height: 50, color: Colors.red, child: Center(child: Text('Item 1'))),
+                  SizedBox(height: 10),
+                  Container(height: 50, color: Colors.green, child: Center(child: Text('Item 2'))),
+                  SizedBox(height: 10),
+                  Container(height: 50, color: Colors.blue, child: Center(child: Text('Item 3'))),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 30),
+
+            // === SECTION 2: ROW ===
+            Text(
+              '2. ROW (Horizontal)',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.orange[50],
+                border: Border.all(color: Colors.orange),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Icon(Icons.home, size: 50, color: Colors.blue),
+                  Icon(Icons.search, size: 50, color: Colors.green),
+                  Icon(Icons.person, size: 50, color: Colors.orange),
+                  Icon(Icons.settings, size: 50, color: Colors.purple),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 30),
+
+            // === SECTION 3: MainAxisAlignment ===
+            Text(
+              '3. MainAxisAlignment',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+
+            _buildAlignmentDemo('start', MainAxisAlignment.start),
+            SizedBox(height: 10),
+            _buildAlignmentDemo('center', MainAxisAlignment.center),
+            SizedBox(height: 10),
+            _buildAlignmentDemo('end', MainAxisAlignment.end),
+            SizedBox(height: 10),
+            _buildAlignmentDemo('spaceBetween', MainAxisAlignment.spaceBetween),
+            SizedBox(height: 10),
+            _buildAlignmentDemo('spaceEvenly', MainAxisAlignment.spaceEvenly),
+
+            SizedBox(height: 30),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAlignmentDemo(String label, MainAxisAlignment alignment) {
+    return Container(
+      width: double.infinity,
+      height: 60,
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisAlignment: alignment,
+        children: [
+          Container(width: 50, height: 40, color: Colors.red, child: Center(child: Text('1'))),
+          Container(width: 50, height: 40, color: Colors.green, child: Center(child: Text('2'))),
+          Container(width: 50, height: 40, color: Colors.blue, child: Center(child: Text('3'))),
+        ],
+      ),
+    );
   }
 }
 ```
 
-**Aturan sederhana:**
+**🤔 PIKIRKAN**: "Apa bedanya spaceBetween dan spaceEvenly?"
 
-- Jika IDE menunjukkan **garis biru** di bawah widget → tambahkan `const`
-- Jika nilai **pasti tidak berubah** → pakai `const`
-- Jika **ragu**, biarkan saja (program tetap jalan)
+**Hot Reload** → Lihat perbedaannya!
 
----
+**💡 PENJELASAN**:
 
-## 📐 BAGIAN 4: Layout Widgets
+- **start**: Mulai dari kiri (Row) atau atas (Column)
+- **center**: Di tengah-tengah
+- **end**: Di ujung kanan (Row) atau bawah (Column)
+- **spaceBetween**: Jarak HANYA di antara item, tidak di pinggir
+- **spaceAround**: Jarak di antara DAN sedikit di pinggir
+- **spaceEvenly**: Jarak SAMA RATA di semua tempat
 
-### 4.1 Column (Vertikal)
+**📢 ANALOGI**:
 
-Column menyusun children **dari atas ke bawah**.
+> "Bayangkan 3 orang berdiri di ruangan:
+>
+> - **start**: Ketiga orang berkumpul di pojok kiri
+> - **spaceBetween**: Orang 1 di kiri mentok, orang 3 di kanan mentok, orang 2 di tengah
+> - **spaceEvenly**: Ketiga orang dengan jarak yang sama persis"
 
-```dart
-Column(
-  children: [
-    Text('Item 1'),
-    Text('Item 2'),
-    Text('Item 3'),
-  ],
-)
-```
+### ✏️ Demo Stack
 
-**Visualisasi:**
-
-```
-┌─────────────┐
-│   Item 1    │
-│   Item 2    │
-│   Item 3    │
-└─────────────┘
-```
-
-**Column dengan properties:**
+Tambahkan di Column children:
 
 ```dart
-Column(
-  mainAxisAlignment: MainAxisAlignment.center,    // Vertikal
-  crossAxisAlignment: CrossAxisAlignment.start,   // Horizontal
-  mainAxisSize: MainAxisSize.min,                 // Ukuran
-  children: [
-    Text('Item 1'),
-    Text('Item 2 Panjang'),
-    Text('Item 3'),
-  ],
-)
+// === SECTION 4: STACK ===
+Text(
+  '4. STACK (Tumpukan)',
+  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+),
+SizedBox(height: 10),
+
+Container(
+  width: double.infinity,
+  height: 250,
+  child: Stack(
+    children: [
+      // Layer 1 (paling bawah)
+      Container(
+        width: 200,
+        height: 200,
+        color: Colors.blue,
+      ),
+      // Layer 2
+      Positioned(
+        top: 50,
+        left: 50,
+        child: Container(
+          width: 150,
+          height: 150,
+          color: Colors.red,
+        ),
+      ),
+      // Layer 3 (paling atas)
+      Positioned(
+        top: 100,
+        left: 100,
+        child: Container(
+          width: 100,
+          height: 100,
+          color: Colors.yellow,
+        ),
+      ),
+      // Text di pojok kanan atas
+      Positioned(
+        top: 10,
+        right: 10,
+        child: Icon(Icons.favorite, color: Colors.white, size: 30),
+      ),
+      // Text di tengah
+      Center(
+        child: Text(
+          'CENTER',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    ],
+  ),
+),
+
+SizedBox(height: 30),
 ```
 
-### 4.2 Row (Horizontal)
+**💡 PENTING**:
 
-Row menyusun children **dari kiri ke kanan**.
+> "Stack seperti tumpukan kertas. Yang ditulis terakhir ada di paling atas! Positioned untuk atur posisi absolut."
 
-```dart
-Row(
-  children: [
-    Icon(Icons.star),
-    Icon(Icons.star),
-    Icon(Icons.star),
-  ],
-)
-```
-
-**Visualisasi:**
+**Visualisasi Stack:**
 
 ```
-┌─────────────────────┐
-│  ⭐   ⭐   ⭐        │
-└─────────────────────┘
-```
+Tampak dari depan:          Tampak dari samping:
 
-**Row dengan properties:**
-
-```dart
-Row(
-  mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Horizontal
-  crossAxisAlignment: CrossAxisAlignment.center,     // Vertikal
-  children: [
-    Icon(Icons.home),
-    Icon(Icons.search),
-    Icon(Icons.person),
-  ],
-)
-```
-
-### 4.3 MainAxisAlignment Options
-
-```
-MainAxisAlignment.start        MainAxisAlignment.center
-┌─────────────────────┐        ┌─────────────────────┐
-│ [1][2][3]           │        │      [1][2][3]      │
-└─────────────────────┘        └─────────────────────┘
-
-MainAxisAlignment.end          MainAxisAlignment.spaceBetween
-┌─────────────────────┐        ┌─────────────────────┐
-│           [1][2][3] │        │ [1]     [2]     [3] │
-└─────────────────────┘        └─────────────────────┘
-
-MainAxisAlignment.spaceAround  MainAxisAlignment.spaceEvenly
-┌─────────────────────┐        ┌─────────────────────┐
-│  [1]   [2]   [3]    │        │   [1]   [2]   [3]   │
-└─────────────────────┘        └─────────────────────┘
-```
-
-### 4.4 CrossAxisAlignment Options
-
-Untuk Column (arah horizontal):
-
-```
-CrossAxisAlignment.start    .center    .end
-┌───────────────┐    ┌───────────────┐    ┌───────────────┐
-│ [Item 1]      │    │    [Item 1]   │    │      [Item 1] │
-│ [Item 2]      │    │    [Item 2]   │    │      [Item 2] │
-│ [Item 3]      │    │    [Item 3]   │    │      [Item 3] │
-└───────────────┘    └───────────────┘    └───────────────┘
-```
-
-### 4.5 Stack (Tumpukan)
-
-Stack menyusun children **bertumpuk** (layer).
-
-```dart
-Stack(
-  children: [
-    // Layer 1 (paling bawah)
-    Container(
-      width: 200,
-      height: 200,
-      color: Colors.blue,
-    ),
-    // Layer 2 (di atas layer 1)
-    Container(
-      width: 150,
-      height: 150,
-      color: Colors.red,
-    ),
-    // Layer 3 (paling atas)
-    Container(
-      width: 100,
-      height: 100,
-      color: Colors.yellow,
-    ),
-  ],
-)
-```
-
-**Visualisasi:**
-
-```
-┌────────────────────┐
-│  Blue              │
-│   ┌──────────────┐ │
+┌────────────────────┐      ┌─ Yellow (atas)
+│  Blue              │      ├─ Red (tengah)
+│   ┌──────────────┐ │      └─ Blue (bawah)
 │   │ Red          │ │
-│   │  ┌────────┐  │ │
-│   │  │ Yellow │  │ │
+│   │  ┌────────┐  │ │      Yang terakhir di kode
+│   │  │ Yellow │  │ │      = paling atas di layar!
 │   │  └────────┘  │ │
 │   └──────────────┘ │
 └────────────────────┘
 ```
 
-**Stack dengan Positioned:**
+> ⚠️ **CATATAN PENTING**:
+>
+> - Urutan widget di Stack = urutan layer (pertama = bawah, terakhir = atas)
+> - Positioned harus di dalam Stack, atau akan error!
+> - Kalau tidak pakai Positioned, widget akan otomatis di pojok kiri atas
+
+### ✏️ Demo Expanded & Flexible
 
 ```dart
-Stack(
+// === SECTION 5: EXPANDED ===
+Text(
+  '5. EXPANDED (Membagi Ruang)',
+  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+),
+SizedBox(height: 10),
+
+Text('Tanpa Expanded:'),
+Row(
   children: [
-    // Background
-    Container(
-      width: 300,
-      height: 200,
-      color: Colors.grey[300],
-    ),
-    // Positioned widget
-    Positioned(
-      top: 10,
-      right: 10,
-      child: Icon(Icons.favorite, color: Colors.red),
-    ),
-    Positioned(
-      bottom: 10,
-      left: 10,
-      child: Text('Bottom Left'),
-    ),
-    // Center
-    Center(
-      child: Text('Center'),
-    ),
+    Container(width: 50, height: 50, color: Colors.red),
+    Container(width: 50, height: 50, color: Colors.blue),
+    Container(width: 50, height: 50, color: Colors.green),
   ],
-)
-```
+),
 
-### 4.6 Expanded & Flexible
+SizedBox(height: 10),
 
-**Expanded** membagi ruang yang tersisa.
-
-```dart
+Text('Dengan Expanded:'),
 Row(
   children: [
     Container(width: 50, height: 50, color: Colors.red),
     Expanded(
-      child: Container(height: 50, color: Colors.blue),
+      child: Container(height: 50, color: Colors.blue, child: Center(child: Text('EXPANDED'))),
     ),
     Container(width: 50, height: 50, color: Colors.green),
   ],
-)
-```
+),
 
-**Visualisasi:**
+SizedBox(height: 10),
 
-```
-┌────┬──────────────────────────────┬────┐
-│Red │           Blue               │Green│
-└────┴──────────────────────────────┴────┘
-  50          expands                 50
-```
-
-**Expanded dengan flex:**
-
-```dart
+Text('Expanded dengan flex ratio (1:2:1):'),
 Row(
   children: [
     Expanded(
-      flex: 1, // 1 bagian
-      child: Container(height: 50, color: Colors.red),
+      flex: 1,
+      child: Container(height: 50, color: Colors.red, child: Center(child: Text('1'))),
     ),
     Expanded(
-      flex: 2, // 2 bagian
-      child: Container(height: 50, color: Colors.blue),
+      flex: 2,
+      child: Container(height: 50, color: Colors.blue, child: Center(child: Text('2'))),
     ),
     Expanded(
-      flex: 1, // 1 bagian
-      child: Container(height: 50, color: Colors.green),
+      flex: 1,
+      child: Container(height: 50, color: Colors.green, child: Center(child: Text('1'))),
     ),
   ],
-)
+),
+
+SizedBox(height: 30),
 ```
 
-**Visualisasi:**
+**📢 JELASKAN**:
+
+> "Expanded membagi ruang yang tersisa. Flex menentukan berapa bagian yang didapat."
+
+**📢 ANALOGI**:
+
+> "Bayangkan 3 anak rebutan pizza:
+>
+> - Tanpa Expanded: Masing-masing dapat 1 slice, sisanya terbuang
+> - Dengan Expanded: Semua pizza dibagi habis!
+> - Dengan flex: Anak 1 dapat 1 bagian, anak 2 dapat 2 bagian (lebih besar), anak 3 dapat 1 bagian
+>   Total flex = 1+2+1 = 4 bagian, anak 2 dapat 2/4 = setengah pizza!"
+
+**Visualisasi Expanded:**
 
 ```
+Tanpa Expanded:
+┌────┬────┬────┬─────────────────┐
+│Red │Blue│Grn │ (ruang kosong)  │
+└────┴────┴────┴─────────────────┘
+ 50   50   50   sisanya tidak terpakai
+
+Dengan Expanded (semua ruang terpakai):
+┌────┬──────────────────────────┬────┐
+│Red │         Blue             │Grn │
+└────┴──────────────────────────┴────┘
+ 50   expanded (otomatis)        50
+
+Dengan flex ratio 1:2:1 (ruang dibagi proporsional):
 ┌──────┬────────────────┬──────┐
 │ Red  │      Blue      │Green │
 │ 1/4  │      2/4       │ 1/4  │
 └──────┴────────────────┴──────┘
+Red 25% Blue 50% Green 25%
 ```
 
----
+> ⚠️ **HATI-HATI**:
+>
+> - Expanded hanya bisa di dalam Row, Column, atau Flex!
+> - Jangan pakai width di widget yang sudah di-Expanded
+> - Kalau error "RenderFlex children have non-zero flex" → cek Expanded di tempat yang salah
 
-## 📏 BAGIAN 5: Spacing & Alignment
-
-### 5.1 SizedBox
-
-Untuk memberikan jarak antar widget.
-
-```dart
-Column(
-  children: [
-    Text('Item 1'),
-    SizedBox(height: 20), // Jarak vertikal 20 pixel
-    Text('Item 2'),
-    SizedBox(height: 10),
-    Text('Item 3'),
-  ],
-)
-
-Row(
-  children: [
-    Icon(Icons.home),
-    SizedBox(width: 16), // Jarak horizontal 16 pixel
-    Text('Home'),
-  ],
-)
-```
-
-### 5.2 Padding
-
-Memberikan jarak di dalam widget.
+### ✏️ Demo Spacer & Align
 
 ```dart
-// Padding semua sisi sama
-Padding(
-  padding: EdgeInsets.all(16),
-  child: Text('Padding 16 di semua sisi'),
-)
+// === SECTION 6: SPACER & ALIGN ===
+Text(
+  '6. SPACER & ALIGN',
+  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+),
+SizedBox(height: 10),
 
-// Padding horizontal dan vertikal berbeda
-Padding(
-  padding: EdgeInsets.symmetric(
-    horizontal: 24,
-    vertical: 12,
-  ),
-  child: Text('Padding H24 V12'),
-)
-
-// Padding tiap sisi berbeda
-Padding(
-  padding: EdgeInsets.only(
-    left: 10,
-    top: 20,
-    right: 10,
-    bottom: 5,
-  ),
-  child: Text('Padding custom'),
-)
-
-// Padding dengan LTRB (Left, Top, Right, Bottom)
-Padding(
-  padding: EdgeInsets.fromLTRB(10, 20, 10, 5),
-  child: Text('LTRB'),
-)
-```
-
-### 5.3 Center
-
-Menempatkan child di tengah parent.
-
-```dart
-Center(
-  child: Text('Saya di tengah!'),
-)
-```
-
-### 5.4 Align
-
-Menempatkan child di posisi tertentu.
-
-```dart
 Container(
-  width: 200,
-  height: 200,
-  color: Colors.grey[300],
+  width: double.infinity,
+  height: 60,
+  color: Colors.grey[200],
+  child: Row(
+    children: [
+      Text('Left'),
+      Spacer(),
+      Text('Right'),
+    ],
+  ),
+),
+
+SizedBox(height: 10),
+
+Container(
+  width: double.infinity,
+  height: 100,
+  color: Colors.blue[50],
   child: Align(
     alignment: Alignment.topRight,
-    child: Text('Top Right'),
+    child: Container(
+      padding: EdgeInsets.all(8),
+      color: Colors.red,
+      child: Text('Top Right', style: TextStyle(color: Colors.white)),
+    ),
   ),
-)
-
-// Alignment options:
-// Alignment.topLeft      Alignment.topCenter      Alignment.topRight
-// Alignment.centerLeft   Alignment.center         Alignment.centerRight
-// Alignment.bottomLeft   Alignment.bottomCenter   Alignment.bottomRight
-```
-
-### 5.5 Spacer
-
-Mengisi ruang kosong di Row/Column.
-
-```dart
-Row(
-  children: [
-    Text('Left'),
-    Spacer(), // Mengisi ruang di tengah
-    Text('Right'),
-  ],
-)
-```
-
-**Visualisasi:**
-
-```
-┌─────────────────────────────────┐
-│ Left                      Right │
-└─────────────────────────────────┘
+),
 ```
 
 ---
 
-## 🖼️ BAGIAN 6: Assets (Gambar & Font)
+## 📏 PART 4: Spacing & Assets (20 menit)
 
-### 6.1 Menambahkan Gambar
-
-#### Langkah 1: Buat folder assets
-
-```
-project_flutter/
-├── lib/
-├── assets/           ← Buat folder ini
-│   └── images/       ← Untuk gambar
-│       ├── logo.png
-│       └── background.jpg
-└── pubspec.yaml
-```
-
-#### Langkah 2: Daftarkan di pubspec.yaml
-
-```yaml
-flutter:
-  uses-material-design: true
-
-  assets:
-    - assets/images/logo.png
-    - assets/images/background.jpg
-
-  # Atau untuk semua file dalam folder:
-  # assets:
-  #   - assets/images/
-```
-
-#### Langkah 3: Gunakan di kode
+### ✏️ Demo Spacing
 
 ```dart
-Image.asset('assets/images/logo.png')
+// Buat halaman baru atau tambahkan di layout demo
 
-// Dengan properti
-Image.asset(
-  'assets/images/logo.png',
-  width: 150,
-  height: 150,
-  fit: BoxFit.contain,
-)
-```
-
-### 6.2 Menambahkan Font Custom
-
-#### Langkah 1: Download font
-
-Download dari https://fonts.google.com (format .ttf)
-
-#### Langkah 2: Buat folder fonts
-
-```
-project_flutter/
-├── lib/
-├── assets/
-│   └── fonts/           ← Buat folder ini
-│       ├── Poppins-Regular.ttf
-│       ├── Poppins-Bold.ttf
-│       └── Poppins-Italic.ttf
-└── pubspec.yaml
-```
-
-#### Langkah 3: Daftarkan di pubspec.yaml
-
-```yaml
-flutter:
-  uses-material-design: true
-
-  fonts:
-    - family: Poppins
-      fonts:
-        - asset: assets/fonts/Poppins-Regular.ttf
-        - asset: assets/fonts/Poppins-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Poppins-Italic.ttf
-          style: italic
-```
-
-#### Langkah 4: Gunakan di kode
-
-```dart
-// Per widget
+// === PADDING ===
 Text(
-  'Hello Custom Font!',
-  style: TextStyle(
-    fontFamily: 'Poppins',
-    fontSize: 20,
-  ),
-)
+  'Padding Demo',
+  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+),
+SizedBox(height: 10),
 
-// Atau set sebagai default di theme
-MaterialApp(
-  theme: ThemeData(
-    fontFamily: 'Poppins',
+Container(
+  color: Colors.yellow,
+  child: Padding(
+    padding: EdgeInsets.all(20),
+    child: Container(
+      color: Colors.blue,
+      child: Text('Padding 20 semua sisi'),
+    ),
   ),
-  home: MyHomePage(),
+),
+
+SizedBox(height: 10),
+
+Container(
+  color: Colors.yellow,
+  child: Padding(
+    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+    child: Container(
+      color: Colors.green,
+      child: Text('Padding H:40 V:10'),
+    ),
+  ),
+),
+
+SizedBox(height: 10),
+
+Container(
+  color: Colors.yellow,
+  child: Padding(
+    padding: EdgeInsets.only(left: 50, top: 10),
+    child: Container(
+      color: Colors.red,
+      child: Text('Padding Left:50 Top:10'),
+    ),
+  ),
+),
+```
+
+### 🖼️ Menambahkan Assets (Demonstrasi Live)
+
+**📢 JELASKAN**: "Sekarang kita akan menambahkan gambar dari folder lokal"
+
+#### Step 1: Buat folder assets
+
+```bash
+# Di terminal VS Code:
+mkdir assets
+mkdir assets\images
+```
+
+#### Step 2: Download gambar sample
+
+**� LANGKAH**: Buka browser → https://picsum.photos → Download 1 gambar → Simpan di `assets/images/` sebagai `sample.jpg`
+
+#### Step 3: Edit `pubspec.yaml`
+
+**� CATATAN**: "File pubspec.yaml adalah konfigurasi project kita"
+
+Cari baris `flutter:` dan tambahkan:
+
+```yaml
+flutter:
+  uses-material-design: true
+
+  # Tambahkan ini:
+  assets:
+    - assets/images/
+```
+
+**PENTING**: Perhatikan indentasi (2 spasi)!
+
+#### Step 4: Jalankan flutter pub get
+
+```bash
+flutter pub get
+```
+
+#### Step 5: Gunakan di kode
+
+```dart
+Image.asset(
+  'assets/images/sample.jpg',
+  width: 200,
+  height: 200,
+  fit: BoxFit.cover,
 )
 ```
 
-> ⚠️ **Penting**: Setelah mengubah pubspec.yaml, jalankan `flutter pub get` dan restart aplikasi!
+**Hot Restart** (tekan `R` di terminal, bukan `r`)
+
+**� PENTING**: "Untuk assets, harus Hot Restart, bukan Hot Reload!"
+
+### 🔤 Font Custom (Optional)
+
+```yaml
+# Di pubspec.yaml
+fonts:
+  - family: Poppins
+    fonts:
+      - asset: assets/fonts/Poppins-Regular.ttf
+      - asset: assets/fonts/Poppins-Bold.ttf
+        weight: 700
+```
+
+**Catatan**: Section ini opsional dan bisa dipelajari mandiri jika waktu terbatas.
+
+> ⚠️ **TROUBLESHOOTING ASSETS**:
+>
+> **Problem: "Unable to load asset"**
+>
+> - ✅ Cek path di `pubspec.yaml` (huruf besar/kecil penting!)
+> - ✅ Pastikan indentasi benar (2 spasi)
+> - ✅ Jalankan `flutter pub get`
+> - ✅ Hot **Restart** (R), bukan Hot Reload (r)
+>
+> **Problem: "No file or directory"**
+>
+> - ✅ Pastikan file ada di folder yang benar
+> - ✅ Nama file sama persis (case-sensitive!)
+>
+> **� CATATAN**:
+>
+> > "Assets seperti foto di album. Kalau fotonya belum ditempel (pub get), dan album belum dibuka ulang (restart), kamu tidak bisa lihat fotonya!"
 
 ---
 
-## 🎨 BAGIAN 7: Theming
+## 🎨 PART 5: Theming (20 menit)
 
-### 7.1 Apa itu Theme?
+### 🎯 Tujuan:
 
-Theme adalah **konfigurasi visual** yang berlaku untuk seluruh aplikasi.
+Mengubah tampilan seluruh app dengan theme
 
-Dengan theme, kamu bisa mengatur:
+**� PENTING**:
 
-- Warna utama
-- Warna teks
-- Font default
-- Bentuk tombol
-- dan lainnya...
+> "Theme itu seperti filter Instagram. Sekali pilih, seluruh foto pake filter yang sama. Ga perlu edit satu-satu!"
 
-### 7.2 Menggunakan ThemeData
+### ✏️ Basic Theme
 
-```dart
-MaterialApp(
-  title: 'My App',
-  theme: ThemeData(
-    // Warna utama
-    primarySwatch: Colors.purple,
+**� CATATAN**: "Theme itu seperti template warna untuk seluruh app!"
 
-    // Gunakan Material Design 3
-    useMaterial3: true,
-
-    // Warna background
-    scaffoldBackgroundColor: Colors.grey[100],
-
-    // AppBar theme
-    appBarTheme: AppBarTheme(
-      backgroundColor: Colors.purple,
-      foregroundColor: Colors.white,
-      elevation: 0,
-    ),
-
-    // Text theme
-    textTheme: TextTheme(
-      headlineLarge: TextStyle(
-        fontSize: 32,
-        fontWeight: FontWeight.bold,
-        color: Colors.black87,
-      ),
-      bodyMedium: TextStyle(
-        fontSize: 16,
-        color: Colors.black54,
-      ),
-    ),
-
-    // Button theme
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.purple,
-        foregroundColor: Colors.white,
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
-    ),
-  ),
-  home: HomePage(),
-)
-```
-
-### 7.3 ColorScheme (Material 3)
+Di MaterialApp, tambahkan theme:
 
 ```dart
-MaterialApp(
-  theme: ThemeData(
-    useMaterial3: true,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.deepPurple,
-      brightness: Brightness.light,
-    ),
-  ),
-  home: HomePage(),
-)
-```
-
-### 7.4 Dark Theme
-
-```dart
-MaterialApp(
-  theme: ThemeData.light(useMaterial3: true),  // Light theme
-  darkTheme: ThemeData.dark(useMaterial3: true), // Dark theme
-  themeMode: ThemeMode.system, // Ikuti pengaturan sistem
-  home: HomePage(),
-)
-```
-
-**ThemeMode options:**
-
-- `ThemeMode.light` - Selalu light
-- `ThemeMode.dark` - Selalu dark
-- `ThemeMode.system` - Ikuti pengaturan HP
-
-### 7.5 Mengakses Theme
-
-```dart
-// Di dalam widget
-Widget build(BuildContext context) {
-  // Akses warna dari theme
-  final primaryColor = Theme.of(context).primaryColor;
-  final textTheme = Theme.of(context).textTheme;
-
-  return Text(
-    'Hello',
-    style: textTheme.headlineLarge,
-  );
-}
-```
-
-### 7.6 Contoh Theme Lengkap
-
-```dart
-import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Themed App',
       debugShowCheckedModeBanner: false,
+      title: 'Pertemuan 2',
 
-      // Light Theme
+      // THEME - Atur tampilan app
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.teal,
+          seedColor: Colors.deepPurple,
           brightness: Brightness.light,
         ),
-        fontFamily: 'Poppins',
-        appBarTheme: const AppBarTheme(
+
+        // AppBar theme
+        appBarTheme: AppBarTheme(
           centerTitle: true,
           elevation: 0,
         ),
+
+        // Card theme
         cardTheme: CardTheme(
-          elevation: 2,
+          elevation: 4,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        inputDecorationTheme: InputDecorationTheme(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          filled: true,
-        ),
       ),
 
-      // Dark Theme
-      darkTheme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.teal,
-          brightness: Brightness.dark,
-        ),
-        fontFamily: 'Poppins',
-      ),
-
-      themeMode: ThemeMode.system,
-      home: const HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Welcome!',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const SizedBox(height: 16),
-            Card(
-              child: ListTile(
-                leading: Icon(Icons.star, color: colorScheme.primary),
-                title: const Text('Themed Card'),
-                subtitle: const Text('Using theme colors'),
-              ),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Themed Button'),
-            ),
-          ],
-        ),
-      ),
+      home: LayoutDemo(),
     );
   }
 }
 ```
 
+**Hot Reload** → Lihat perubahan warna!
+
+### 🎯 EKSPERIMEN: Ganti Seed Color
+
+**📢 TANYA**: "Apa warna favorit kalian?"
+
+Coba ganti-ganti:
+
+- `Colors.deepPurple` → `Colors.teal`
+- `Colors.teal` → `Colors.orange`
+- `Colors.orange` → `Colors.pink`
+
+**Hot Reload setiap kali** → Lihat seluruh app berubah warna!
+
+### ✏️ Dark Theme
+
+```dart
+return MaterialApp(
+  theme: ThemeData(
+    useMaterial3: true,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: Colors.blue,
+      brightness: Brightness.light,
+    ),
+  ),
+
+  // DARK THEME
+  darkTheme: ThemeData(
+    useMaterial3: true,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: Colors.blue,
+      brightness: Brightness.dark,
+    ),
+  ),
+
+  // Mode: system = ikuti pengaturan HP
+  themeMode: ThemeMode.system,
+
+  home: LayoutDemo(),
+);
+```
+
+**� PERHATIKAN**: Ubah dark mode di HP → App ikut berubah!
+
+### ✏️ Mengakses Theme di Widget
+
+```dart
+Widget build(BuildContext context) {
+  // Ambil theme dari context
+  final theme = Theme.of(context);
+  final colorScheme = theme.colorScheme;
+
+  return Container(
+    color: colorScheme.primaryContainer,
+    child: Text(
+      'Menggunakan theme color',
+      style: theme.textTheme.headlineMedium,
+    ),
+  );
+}
+```
+
 ---
 
-## 🎯 PRAKTIKUM: Membuat Halaman Profil
+## 🎯 PART 6: Praktikum Terpandu (15 menit)
 
-Buat halaman profil dengan kriteria:
+### 🎯 Tugas: Buat Halaman Profil Sederhana
 
-### Requirements:
-
-1. AppBar dengan judul "Profil Saya"
-2. Foto profil (bisa pakai Icon atau Image.network)
-3. Nama dan deskripsi
-4. 3-4 info card (email, telepon, alamat, dll)
-5. Tombol "Edit Profil" dan "Logout"
-6. Gunakan custom theme
+**🎯 LATIHAN**: "Sekarang kita coding bersama untuk membuat halaman profil!"
 
 ### Template Awal:
 
 ```dart
-import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Profil App',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
-      ),
-      home: const ProfilPage(),
-    );
-  }
-}
-
 class ProfilPage extends StatelessWidget {
-  const ProfilPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profil Saya'),
+        title: Text('Profil Saya'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            // TODO: Foto profil (ClipOval + Icon/Image)
+            // STEP 1: Foto Profil
+            CircleAvatar(
+              radius: 60,
+              backgroundImage: NetworkImage('https://picsum.photos/200/200'),
+            ),
 
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
-            // TODO: Nama
+            // STEP 2: Nama
+            Text(
+              'John Doe',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
 
-            // TODO: Deskripsi/Bio
+            SizedBox(height: 8),
 
-            const SizedBox(height: 24),
+            // STEP 3: Bio
+            Text(
+              'Flutter Developer | Tech Enthusiast',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey[600],
+              ),
+            ),
 
-            // TODO: Info Cards (Email, Phone, Address)
+            SizedBox(height: 24),
 
-            const SizedBox(height: 24),
+            // STEP 4: Info Cards
+            _buildInfoCard(
+              icon: Icons.email,
+              title: 'Email',
+              value: 'john.doe@example.com',
+            ),
 
-            // TODO: Buttons (Edit Profil, Logout)
+            SizedBox(height: 12),
+
+            _buildInfoCard(
+              icon: Icons.phone,
+              title: 'Telepon',
+              value: '+62 812-3456-7890',
+            ),
+
+            SizedBox(height: 12),
+
+            _buildInfoCard(
+              icon: Icons.location_on,
+              title: 'Lokasi',
+              value: 'Jakarta, Indonesia',
+            ),
+
+            SizedBox(height: 12),
+
+            _buildInfoCard(
+              icon: Icons.web,
+              title: 'Website',
+              value: 'www.johndoe.com',
+            ),
+
+            SizedBox(height: 24),
+
+            // STEP 5: Buttons
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: Icon(Icons.edit),
+                    label: Text('Edit Profil'),
+                  ),
+                ),
+                SizedBox(width: 12),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () {},
+                    icon: Icon(Icons.logout),
+                    label: Text('Logout'),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.red,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
     );
   }
-}
 
-// TODO: Buat widget InfoCard terpisah
-class InfoCard extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String value;
-
-  const InfoCard({
-    super.key,
-    required this.icon,
-    required this.title,
-    required this.value,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: Implement card UI
-    return Container();
+  Widget _buildInfoCard({
+    required IconData icon,
+    required String title,
+    required String value,
+  }) {
+    return Card(
+      child: ListTile(
+        leading: Icon(icon, color: Colors.blue),
+        title: Text(title),
+        subtitle: Text(value),
+      ),
+    );
   }
 }
 ```
 
----
+**✏️ CODING BERSAMA**: Ketik bersama step by step
 
-## 📝 LATIHAN
+**Hot Reload** setelah setiap section!
 
-### Latihan 1: StatelessWidget
+### 🎯 Challenge:
 
-Buat widget `ProductCard` yang menampilkan:
+"Sekarang customisasi dengan data kalian sendiri!"
 
-- Gambar produk (Image.network)
-- Nama produk
-- Harga
-- Tombol "Beli"
+1. Ganti nama dan bio
+2. Ganti info card dengan data kalian
+3. Ganti warna theme
+4. Tambah 1 info card baru (misal: Instagram, GitHub)
 
-### Latihan 2: StatefulWidget
-
-Buat widget `FavoriteButton` yang:
-
-- Menampilkan icon hati
-- Icon berubah warna (merah/abu-abu) saat ditekan
-- Menampilkan jumlah like
-
-### Latihan 3: Layout
-
-Buat tampilan grid 2 kolom berisi 4-6 kartu produk menggunakan:
-
-- Row dan Column
-- Atau coba GridView (bonus)
-
-### Latihan 4: Theme
-
-Buat aplikasi dengan 2 tombol:
-
-- "Light Mode"
-- "Dark Mode"
-  Yang bisa mengubah tema aplikasi saat ditekan.
+**⏱️ Waktu eksperimen: 5 menit**
 
 ---
 
-## 📚 TUGAS MINGGU INI
+## 📝 PENUTUP & TUGAS
 
-### Tugas Individu (Deadline: Pertemuan 3)
+### 📚 TUGAS MINGGU INI
 
 **Buat Halaman Profil Lengkap dengan kriteria:**
 
-1. ✅ AppBar dengan judul dan action icon
-2. ✅ Foto profil (lingkaran) dengan nama dan bio
-3. ✅ Minimal 4 info card (email, phone, lokasi, website)
-4. ✅ 2 tombol dengan styling berbeda
-5. ✅ Menggunakan custom theme (pilih warna favoritmu)
-6. ✅ Kode rapi dan ada komentar
-7. ✅ Buat sebagai StatelessWidget
+✅ **Wajib:**
 
-**Bonus poin:**
+1. AppBar dengan judul dan action icon
+2. Foto profil lingkaran dengan nama dan bio
+3. Minimal 4 info card (email, phone, lokasi, dll)
+4. 2 tombol dengan styling berbeda
+5. Menggunakan custom theme
+6. Kode rapi dan ada komentar
+7. Buat sebagai StatelessWidget
+
+🌟 **Bonus Poin:**
 
 - Menggunakan font custom (+10)
 - Menggunakan gambar dari assets (+10)
-- Responsive di berbagai ukuran layar (+10)
+- Tambah animasi sederhana (+10)
+
+**Deadline: Pertemuan 3**
 
 **Pengumpulan:**
 
@@ -1538,19 +1560,78 @@ Buat aplikasi dengan 2 tombol:
 
 ---
 
+## 🚫 ERROR UMUM & SOLUSI
+
+### 🐛 Error yang Sering Muncul:
+
+| Error                               | Penyebab                          | Solusi                                 |
+| ----------------------------------- | --------------------------------- | -------------------------------------- |
+| `RenderFlex overflowed`             | Konten lebih panjang dari layar   | Bungkus dengan `SingleChildScrollView` |
+| `Unable to load asset`              | Path salah di pubspec.yaml        | Cek path, jalankan `flutter pub get`   |
+| `setState() called after dispose()` | setState setelah widget dihapus   | Cek `mounted` sebelum setState         |
+| `const cannot be used`              | Nilai tidak compile-time constant | Hapus `const`                          |
+
+### 💡 Tips Debugging:
+
+```dart
+// 1. Gunakan Container dengan border
+Container(
+  decoration: BoxDecoration(
+    border: Border.all(color: Colors.red, width: 2),
+  ),
+  child: YourWidget(),
+)
+
+// 2. Print untuk debug
+print('Nilai counter: $_counter');
+
+// 3. Gunakan Flutter Inspector
+// View → Tool Windows → Flutter Inspector
+```
+
+---
+
+## ❓ FAQ
+
+**Q: Kenapa muncul garis kuning-hitam?**
+
+> A: Overflow error. Bungkus dengan `SingleChildScrollView`
+
+**Q: Hot Reload vs Hot Restart?**
+
+> A:
+>
+> - Hot Reload (r) = Update UI, state dipertahankan
+> - Hot Restart (R) = Restart app, state direset
+
+**Q: Kapan pakai Container vs SizedBox?**
+
+> A: SizedBox hanya untuk ukuran/spacing. Container lebih lengkap.
+
+**Q: Image dari internet tidak muncul?**
+
+> A: Cek koneksi internet dan URL valid.
+
+---
+
+## ✅ CHECKLIST SEBELUM PERTEMUAN 3
+
+- [ ] Memahami perbedaan StatelessWidget dan StatefulWidget
+- [ ] Bisa menggunakan widget dasar (Text, Container, Image, Icon, Button)
+- [ ] Bisa mengatur layout dengan Row, Column, Stack
+- [ ] Memahami Expanded dan Flexible
+- [ ] Bisa menambahkan assets (gambar)
+- [ ] Bisa menerapkan custom theme
+- [ ] Mengumpulkan tugas tepat waktu
+
+---
+
 ## 📖 REFERENSI
 
-### Dokumentasi Widget:
+### Dokumentasi:
 
-- [Text](https://api.flutter.dev/flutter/widgets/Text-class.html)
-- [Container](https://api.flutter.dev/flutter/widgets/Container-class.html)
-- [Row](https://api.flutter.dev/flutter/widgets/Row-class.html)
-- [Column](https://api.flutter.dev/flutter/widgets/Column-class.html)
-- [Stack](https://api.flutter.dev/flutter/widgets/Stack-class.html)
-
-### Tutorial:
-
-- [Flutter Layout Tutorial](https://docs.flutter.dev/ui/layout)
+- [Flutter Widget Catalog](https://docs.flutter.dev/ui/widgets)
+- [Layout Tutorial](https://docs.flutter.dev/ui/layout)
 - [Adding Assets](https://docs.flutter.dev/ui/assets-and-images)
 - [Theming](https://docs.flutter.dev/cookbook/design/themes)
 
@@ -1560,161 +1641,69 @@ Buat aplikasi dengan 2 tombol:
 
 ---
 
-## 🚫 BAGIAN 9: Error Umum & Solusinya
+## 📚 BAGIAN UNTUK PENGAJAR
 
-### Error Layout
-
-| Error                                            | Penyebab                                      | Solusi                                         |
-| ------------------------------------------------ | --------------------------------------------- | ---------------------------------------------- |
-| `A RenderFlex overflowed by X pixels`            | Konten lebih panjang dari layar               | Bungkus dengan `SingleChildScrollView`         |
-| `Vertical viewport was given unbounded height`   | Column/ListView di dalam Column tanpa batasan | Bungkus dengan `Expanded` atau berikan tinggi  |
-| `BoxConstraints forces an infinite width/height` | Widget tidak punya batasan ukuran             | Berikan `width`/`height` atau pakai `Expanded` |
-
-### Error Image
-
-| Error                          | Penyebab                                | Solusi                                               |
-| ------------------------------ | --------------------------------------- | ---------------------------------------------------- |
-| `Unable to load asset`         | Path asset salah atau belum didaftarkan | Cek path di pubspec.yaml, jalankan `flutter pub get` |
-| `Image not found`              | Nama file typo                          | Periksa nama file (case-sensitive!)                  |
-| `Network image failed to load` | URL salah atau tidak ada internet       | Tambahkan `errorBuilder` untuk handle error          |
-
-### Error Theme
-
-| Error                            | Penyebab                   | Solusi                               |
-| -------------------------------- | -------------------------- | ------------------------------------ |
-| `No MediaQuery ancestor found`   | Widget di luar MaterialApp | Pastikan widget di dalam MaterialApp |
-| `Theme.of(context) returns null` | Context salah              | Gunakan context dari build method    |
-
-### Error Umum
-
-| Error                                 | Penyebab                                  | Solusi                          |
-| ------------------------------------- | ----------------------------------------- | ------------------------------- |
-| `setState() called after dispose()`   | Memanggil setState setelah widget dihapus | Cek `mounted` sebelum setState  |
-| `The method 'X' was called on null`   | Objek belum diinisialisasi                | Gunakan null safety (`?`, `??`) |
-| `'const' keyword cannot be used here` | Nilai tidak compile-time constant         | Hapus `const`                   |
-
-### Contoh Penanganan Error Image
-
-```dart
-Image.network(
-  'https://example.com/image.jpg',
-  loadingBuilder: (context, child, loadingProgress) {
-    if (loadingProgress == null) return child;
-    return Center(
-      child: CircularProgressIndicator(
-        value: loadingProgress.expectedTotalBytes != null
-            ? loadingProgress.cumulativeBytesLoaded /
-                loadingProgress.expectedTotalBytes!
-            : null,
-      ),
-    );
-  },
-  errorBuilder: (context, error, stackTrace) {
-    return Container(
-      color: Colors.grey[300],
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.broken_image, size: 50, color: Colors.grey),
-          SizedBox(height: 8),
-          Text('Gagal memuat gambar'),
-        ],
-      ),
-    );
-  },
-)
-```
-
-### Tips Debugging Layout
-
-```dart
-// 1. Gunakan Container dengan border untuk debug
-Container(
-  decoration: BoxDecoration(
-    border: Border.all(color: Colors.red, width: 2),
-  ),
-  child: YourWidget(),
-)
-
-// 2. Gunakan Flutter Inspector di Android Studio
-// View → Tool Windows → Flutter Inspector
-
-// 3. Aktifkan debug paint
-// Di terminal saat app running, tekan 'p' untuk toggle debug paint
-```
+> ℹ️ **Catatan**: Bagian ini berisi panduan khusus untuk pengajar/dosen. Mahasiswa yang belajar mandiri bisa skip ke checklist persiapan pertemuan berikutnya.
 
 ---
 
-## ❓ FAQ (Pertanyaan Umum)
+## 💬 PERTANYAAN INTERAKTIF SELAMA KELAS
 
-**Q: Kenapa muncul garis kuning-hitam di bawah layar?**
+Pertanyaan untuk mengecek pemahaman:
 
-> A: Itu "Overflow Error". Konten kamu lebih panjang dari layar. Bungkus Column dengan `SingleChildScrollView`.
-
-**Q: Apa bedanya Container dan SizedBox?**
-
-> A: `SizedBox` hanya untuk ukuran/spacing. `Container` lebih lengkap (warna, border, padding, margin, dll). Gunakan SizedBox jika hanya perlu spacing.
-
-**Q: Kapan pakai Padding widget vs padding di Container?**
-
-> A: Keduanya sama saja. Tapi jika Container sudah ada, gunakan padding di Container. Jika hanya perlu padding, gunakan Padding widget langsung.
-
-**Q: Gambar dari internet tidak muncul, kenapa?**
-
-> A: Cek koneksi internet. Pastikan URL valid. Di Android, pastikan sudah ada permission internet di AndroidManifest.xml (biasanya sudah default).
-
-**Q: Bagaimana membuat gambar berbentuk lingkaran?**
-
-> A: Gunakan `ClipOval` atau `CircleAvatar`. Contoh:
->
-> ```dart
-> CircleAvatar(
->   radius: 50,
->   backgroundImage: NetworkImage('url'),
-> )
-> ```
-
-**Q: Apa itu Hot Reload dan Hot Restart?**
-
-> A:
->
-> - **Hot Reload (r)**: Update UI tanpa restart, state dipertahankan
-> - **Hot Restart (R)**: Restart app, state direset
->   Gunakan Hot Reload untuk perubahan UI, Hot Restart jika ada perubahan di main() atau initState()
-
-**Q: Kenapa font custom saya tidak muncul?**
-
-> A: Checklist:
->
-> 1. File .ttf ada di folder yang benar
-> 2. Sudah didaftarkan di pubspec.yaml dengan benar
-> 3. Sudah run `flutter pub get`
-> 4. Sudah restart aplikasi (Hot Restart)
-> 5. Nama fontFamily sama persis dengan yang di pubspec
-
-**Q: Apa beda ElevatedButton, TextButton, OutlinedButton?**
-
-> A:
->
-> - **ElevatedButton**: Tombol utama, ada bayangan/elevasi
-> - **TextButton**: Tombol teks saja, untuk aksi sekunder
-> - **OutlinedButton**: Tombol dengan border, alternatif ElevatedButton
+1. ❓ "Apa bedanya StatelessWidget dan StatefulWidget?"
+2. ❓ "Kenapa harus pakai setState()?"
+3. ❓ "Row vs Column, apa bedanya?"
+4. ❓ "Stack itu seperti apa dalam kehidupan nyata?"
+5. ❓ "Kapan pakai Expanded?"
+6. ❓ "Apa fungsi Theme dalam Flutter?"
+7. ❓ "Kapan pakai Hot Reload vs Hot Restart?"
 
 ---
 
-## 🎯 CHECKLIST SEBELUM PERTEMUAN 3
+## 💡 TIPS MENGAJAR
 
-- [ ] Memahami perbedaan StatelessWidget dan StatefulWidget
-- [ ] Bisa menggunakan widget dasar (Text, Container, Image, Icon, Button)
-- [ ] Bisa mengatur layout dengan Row, Column, Stack
-- [ ] Bisa menambahkan assets (gambar)
-- [ ] Bisa menerapkan custom theme
-- [ ] Mengumpulkan tugas tepat waktu
+### ✅ DO (Lakukan):
+
+- **Ketik manual**, jangan copy-paste → Mahasiswa ikut mikir
+- **Buat kesalahan sengaja** lalu debug bersama → Belajar dari error
+- **Tanya mahasiswa prediksi**: "Menurutmu apa yang terjadi kalau...?" → Active learning
+- **Hot Reload sering-sering** → Instant feedback
+- **Beri waktu eksperimen** → Hands-on practice
+- **Gunakan analogi sederhana** → Pizza, poster, Instagram filter, dll
+- **Ulangi konsep penting** → Repetition is key
+- **Tunjukkan console/terminal** → Mahasiswa lihat cara debugging
+
+### ❌ DON'T (Jangan):
+
+- **Terlalu cepat** → Mahasiswa ketinggalan
+- **Skip penjelasan saat error** → Miss learning opportunity
+- **Abaikan pertanyaan** → Mahasiswa jadi takut bertanya
+- **Langsung kasih jawaban** → Bimbing mereka menemukan sendiri
+- **Pakai istilah terlalu teknis** → Gunakan bahasa sehari-hari dulu
+
+### 🎯 Tips Praktis untuk Kelas:
+
+**Dealing dengan Mahasiswa Ketinggalan:**
+
+1. Pause sebentar → Tanya "Ada yang belum selesai?"
+2. Pair programming → Yang cepat bantu yang lambat
+3. Sediakan completed code di file demo untuk catch up
+
+**Contoh Pertanyaan Interaktif:**
+
+- "Widget apa yang kalian sudah coba?"
+- "Kenapa pakai StatefulWidget di sini, bukan Stateless?"
+- "Kapan sebaiknya pakai Expanded vs SizedBox?"
+
+**Phrases yang Membantu:**
+
+- Saat ada error: "Bagus! Error itu guru terbaik. Mari kita baca pesannya..."
+- Saat mahasiswa stuck: "Coba lihat baris X, apa yang berbeda?"
+- Saat menjelaskan: "Analoginya seperti... [gunakan analogi sehari-hari]"
 
 ---
 
-> 💬 **Pertanyaan?**
+> 🚀 **Selamat Mengajar! Semoga sesi live coding menyenangkan dan efektif!**
 >
-> Hubungi dosen/asisten via email atau WhatsApp group.
->
-> **Selamat belajar! 🚀**
+> 💬 Jika ada pertanyaan dari mahasiswa di luar materi, catat dan jawab di pertemuan berikutnya.
