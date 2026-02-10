@@ -1,4 +1,4 @@
-# ðŸ“± PERTEMUAN 3 - LIVE CODING
+ï»¿# ðŸ“± PERTEMUAN 3 - LIVE CODING
 
 ## ListView, GridView & Navigasi
 
@@ -512,11 +512,11 @@ ListView.separated(
 
 ```
 +-----------------+
-¦   Contact 1     ¦
-+-----------------¦  ? Divider
-¦   Contact 2     ¦
-+-----------------¦  ? Divider
-¦   Contact 3     ¦
+ï¿½   Contact 1     ï¿½
++-----------------ï¿½  ? Divider
+ï¿½   Contact 2     ï¿½
++-----------------ï¿½  ? Divider
+ï¿½   Contact 3     ï¿½
 +-----------------+
 ```
 
@@ -620,7 +620,7 @@ SizedBox(
 ```
 ? Scroll horizontal ?
 +----+ +----+ +----+ +----+
-¦ 1  ¦ ¦ 2  ¦ ¦ 3  ¦ ¦ 4  ¦ ...
+ï¿½ 1  ï¿½ ï¿½ 2  ï¿½ ï¿½ 3  ï¿½ ï¿½ 4  ï¿½ ...
 +----+ +----+ +----+ +----+
 ```
 
@@ -652,11 +652,11 @@ ListView vs GridView:
 
 ListView:           GridView:
 +---------+         +---------+
-¦ Item 1  ¦         ¦ 1  ¦ 2  ¦
-+---------¦         +----+----¦
-¦ Item 2  ¦         ¦ 3  ¦ 4  ¦
-+---------¦         +----+----¦
-¦ Item 3  ¦         ¦ 5  ¦ 6  ¦
+ï¿½ Item 1  ï¿½         ï¿½ 1  ï¿½ 2  ï¿½
++---------ï¿½         +----+----ï¿½
+ï¿½ Item 2  ï¿½         ï¿½ 3  ï¿½ 4  ï¿½
++---------ï¿½         +----+----ï¿½
+ï¿½ Item 3  ï¿½         ï¿½ 5  ï¿½ 6  ï¿½
 +---------+         +---------+
 
 Satu kolom          Multiple kolom
@@ -935,9 +935,9 @@ home: ProductGridPage(),
 ```
 crossAxisCount: 2         crossAxisCount: 3         crossAxisCount: 4
 +-----------+            +-----------+            +-----------+
-¦  1  ¦  2  ¦            ¦ 1 ¦ 2 ¦ 3 ¦            ¦1 ¦2 ¦3 ¦4 ¦
-+-----+-----¦            +---+---+---¦            +--+--+--+--¦
-¦  3  ¦  4  ¦            ¦ 4 ¦ 5 ¦ 6 ¦            ¦5 ¦6 ¦7 ¦8 ¦
+ï¿½  1  ï¿½  2  ï¿½            ï¿½ 1 ï¿½ 2 ï¿½ 3 ï¿½            ï¿½1 ï¿½2 ï¿½3 ï¿½4 ï¿½
++-----+-----ï¿½            +---+---+---ï¿½            +--+--+--+--ï¿½
+ï¿½  3  ï¿½  4  ï¿½            ï¿½ 4 ï¿½ 5 ï¿½ 6 ï¿½            ï¿½5 ï¿½6 ï¿½7 ï¿½8 ï¿½
 +-----------+            +-----------+            +-----------+
 Lebih lebar              Balanced                 Lebih sempit
 ```
@@ -977,10 +977,10 @@ childAspectRatio: 1.0    childAspectRatio: 0.75   childAspectRatio: 1.5
 (Kotak sempurna)         (Tinggi/Portrait)        (Lebar/Landscape)
 
 +--------+               +------+                 +--------------+
-¦        ¦               ¦      ¦                 ¦              ¦
-¦   1:1  ¦               ¦      ¦                 ¦     1.5:1    ¦
-¦        ¦               ¦ 3:4  ¦                 ¦              ¦
-+--------+               ¦      ¦                 +--------------+
+ï¿½        ï¿½               ï¿½      ï¿½                 ï¿½              ï¿½
+ï¿½   1:1  ï¿½               ï¿½      ï¿½                 ï¿½     1.5:1    ï¿½
+ï¿½        ï¿½               ï¿½ 3:4  ï¿½                 ï¿½              ï¿½
++--------+               ï¿½      ï¿½                 +--------------+
                          +------+
 ```
 
@@ -1034,7 +1034,7 @@ gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
 **Hot Reload** ? Jumlah kolom otomatis adjust based on screen width!
 
 **?? CATATAN**: 
-- Layar 400px lebar ? 2 kolom (400 / 150 ˜ 2.6 ? floor = 2)
+- Layar 400px lebar ? 2 kolom (400 / 150 ï¿½ 2.6 ? floor = 2)
 - Layar 600px lebar ? 4 kolom (600 / 150 = 4)
 - More responsive untuk berbagai ukuran layar!
 
@@ -1069,9 +1069,9 @@ Flutter menggunakan konsep **Stack** (tumpukan) untuk navigasi.
 ```
 Awal:                Push:                Pop:
 +---------+         +---------+         +---------+
-¦         ¦         ¦ Page B  ¦ ? Top   ¦         ¦
-¦         ¦         +---------¦         ¦         ¦
-¦ Page A  ¦ ? Top   ¦ Page A  ¦         ¦ Page A  ¦ ? Top
+ï¿½         ï¿½         ï¿½ Page B  ï¿½ ? Top   ï¿½         ï¿½
+ï¿½         ï¿½         +---------ï¿½         ï¿½         ï¿½
+ï¿½ Page A  ï¿½ ? Top   ï¿½ Page A  ï¿½         ï¿½ Page A  ï¿½ ? Top
 +---------+         +---------+         +---------+
 
                     Add new page        Remove top page
@@ -1269,9 +1269,9 @@ itemBuilder: (context, index) {
 ```
 Awal (Grid):          Tap Product 1:        Tap Back:
 +-----------+        +-----------+         +-----------+
-¦   Grid    ¦ ? Top  ¦  Detail 1 ¦ ? Top   ¦   Grid    ¦ ? Top  
-+-----------+        +-----------¦         +-----------+
-                     ¦   Grid    ¦
+ï¿½   Grid    ï¿½ ? Top  ï¿½  Detail 1 ï¿½ ? Top   ï¿½   Grid    ï¿½ ? Top  
++-----------+        +-----------ï¿½         +-----------+
+                     ï¿½   Grid    ï¿½
                      +-----------+
 ```
 
@@ -1279,17 +1279,17 @@ Awal (Grid):          Tap Product 1:        Tap Back:
 
 ```
 +-----------+
-¦  Detail 5 ¦ ? Top (visible)
-+-----------¦
-¦  Detail 4 ¦
-+-----------¦
-¦  Detail 3 ¦
-+-----------¦
-¦  Detail 2 ¦
-+-----------¦
-¦  Detail 1 ¦
-+-----------¦
-¦   Grid    ¦
+ï¿½  Detail 5 ï¿½ ? Top (visible)
++-----------ï¿½
+ï¿½  Detail 4 ï¿½
++-----------ï¿½
+ï¿½  Detail 3 ï¿½
++-----------ï¿½
+ï¿½  Detail 2 ï¿½
++-----------ï¿½
+ï¿½  Detail 1 ï¿½
++-----------ï¿½
+ï¿½   Grid    ï¿½
 +-----------+
 ```
 
@@ -1438,11 +1438,11 @@ ElevatedButton(
 ```
 push:                      pushReplacement:
 +---------+               +---------+
-¦ Page C  ¦ ? New         ¦ Page C  ¦ ? New
-+---------¦               +---------+
-¦ Page B  ¦               (Page B diganti, hilang dari stack)
-+---------¦
-¦ Page A  ¦
+ï¿½ Page C  ï¿½ ? New         ï¿½ Page C  ï¿½ ? New
++---------ï¿½               +---------+
+ï¿½ Page B  ï¿½               (Page B diganti, hilang dari stack)
++---------ï¿½
+ï¿½ Page A  ï¿½
 +---------+
 ```
 
@@ -1464,18 +1464,18 @@ push:                      pushReplacement:
 ```
 Constructor Method (RECOMMENDED):
 +-------------+                  +-------------+
-¦  List Page  ¦                  ¦ Detail Page ¦
-¦             ¦ --------------? ¦             ¦
-¦ Product obj ¦ ProductDetailPage¦ product     ¦
+ï¿½  List Page  ï¿½                  ï¿½ Detail Page ï¿½
+ï¿½             ï¿½ --------------? ï¿½             ï¿½
+ï¿½ Product obj ï¿½ ProductDetailPageï¿½ product     ï¿½
 +-------------+    (product: p)  +-------------+
   Type-safe ?                      Direct access ?
   "Langsung kasih paket pas antar"
 
 Arguments Method:
 +-------------+                  +-------------+
-¦  List Page  ¦                  ¦ Detail Page ¦
-¦             ¦ --------------? ¦             ¦
-¦ Any data    ¦ arguments: {...} ¦ Cast needed ¦
+ï¿½  List Page  ï¿½                  ï¿½ Detail Page ï¿½
+ï¿½             ï¿½ --------------? ï¿½             ï¿½
+ï¿½ Any data    ï¿½ arguments: {...} ï¿½ Cast needed ï¿½
 +-------------+                  +-------------+
   Flexible ?                       Type-unsafe ??
   "Tulis alamat di amplop, harus buka dulu"
@@ -2140,4 +2140,5 @@ Jika ada waktu extra (unlikely), students bisa:
 **?? Pertemuan 3 Materi Complete! ??**
 
 **Next**: Pertemuan 4 - Forms, Input \u0026 Validation
+
 
