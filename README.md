@@ -47,7 +47,7 @@ Repository ini berisi materi pembelajaran mata kuliah **Pemrograman Mobile** unt
 
 ## 👨‍🏫 Dosen Pengampu
 
-**Anton Prafanto, S.Kom., M.Cs.**  
+**Anton Prafanto, S.Kom., M.T.**  
 Program Studi Sistem Informasi  
 Fakultas Teknik  
 Universitas Mulawarman
@@ -59,3 +59,4 @@ Materi ini dibuat untuk keperluan pembelajaran di lingkungan Universitas Mulawar
 ---
 
 > _"The best way to learn programming is by doing it."_
+
