@@ -268,7 +268,7 @@ final contacts = List.generate(
   (index) => Contact(
     name: 'Contact ${index + 1}',
     phone: '+62 812 ${index.toString().padLeft(4, '0')} ${index.toString().padLeft(4, '0')}',
-    imageUrl: 'https://i.pravatar.cc/150?img=${index % 70}',
+    imageUrl: 'https://picsum.photos/seed/${index + 1}/150',
   ),
 );
 ```
@@ -1443,4 +1443,5 @@ onTap: () async {
 **🎉 Pertemuan 3 Complete!**
 
 **Next**: Pertemuan 4 - Forms, Input & Validation
+
 
