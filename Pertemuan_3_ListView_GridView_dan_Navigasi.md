@@ -1,4 +1,4 @@
-﻿# 📱 PERTEMUAN 3 - LIVE CODING
+# 📱 PERTEMUAN 3 - LIVE CODING
 
 ## ListView, GridView & Navigasi
 
@@ -8,11 +8,25 @@
 
 Setelah mengikuti pertemuan ini, Anda diharapkan mampu:
 
-1. ✅ Menampilkan data dalam ListView dan GridView
-2. ✅ Membuat custom list item
+1. ✅ Menampilkan data dalam ListView
+2. ✅ Membuat custom list items  
 3. ✅ Mengimplementasikan navigasi antar halaman
 4. ✅ Mengirim dan menerima data antar halaman
 5. ✅ Menggunakan named routes
+
+---
+
+## ⏱️ TIMELINE SESI (Total: 150 menit)
+
+| Durasi   | Topik | Aktivitas |
+|----------|-------|-----------|
+| 10 menit | Part 0 | Review & Warm Up |
+| 30 menit | Part 1 | ListView Hands-On |
+| 20 menit | Part 2 | GridView Hands-On |
+| 40 menit | Part 3 | Navigation + Data Passing |
+| 10 menit | Part 4 | Named Routes Overview |
+| 35 menit | Part 5 | Praktikum Terpandu - Catalog app dengan navigation |
+| 5 menit  | Part 6 | Wrap Up + Q&A + checklist |
 
 ---
 
@@ -20,82 +34,55 @@ Setelah mengikuti pertemuan ini, Anda diharapkan mampu:
 
 > 💡 **File demo tersedia di folder `contoh_kode/pertemuan_3/`**
 
-| File                           | Topik                               |
-| ------------------------------ | ----------------------------------- |
-| `01_contact_list_demo.dart`    | ListView.builder dengan custom item |
-| `02_product_grid_demo.dart`    | GridView.builder untuk product grid |
-| `03_navigation_demo.dart`      | Navigator push dan pop              |
-| `04_data_passing_demo.dart`    | Passing data via constructor        |
-| `05_return_data_demo.dart`     | Return data dari halaman            |
-| `06_named_routes_demo.dart`    | Named routes setup                  |
-| `07_catalog_app_complete.dart` | Solusi lengkap praktikum            |
-
----
-
-## ⏱️ TIMELINE SESI (Total: 150 menit)
-
-| Waktu    | Bagian | Topik                | Aktivitas                                   |
-| -------- | ------ | -------------------- | ------------------------------------------- |
-| 10 menit | Part 0 | Review & Setup       | Quiz cepat + setup project                  |
-| 30 menit | Part 1 | ListView Hands-On    | Builder demo + custom item + experiment     |
-| 20 menit | Part 2 | GridView Hands-On    | Product grid demo + aspect ratio experiment |
-| 40 menit | Part 3 | Navigation + Data    | Push/pop + passing data integrated          |
-| 10 menit | Part 4 | Named Routes (Quick) | Show setup, reference untuk later           |
-| 35 menit | Part 5 | Praktikum Terpandu   | Catalog app dengan navigation               |
-| 5 menit  | Part 6 | Wrap Up              | Q&A + checklist                             |
+| File | Deskripsi |
+|------|-----------|
+| `01_contact_list_demo.dart` | Contact list dengan ListView |
+| `02_product_grid_demo.dart` | Product grid dengan GridView |
+| `03_navigation_basic_demo.dart` | Push dan Pop navigation |
+| `04_navigation_with_data_demo.dart` | Navigation dengan passing data |
+| `05_return_data_demo.dart` | Menerima return value dari page |
+| `06_named_routes_demo.dart` | Named routes setup |
+| `07_catalog_app_complete.dart` | Catalog app lengkap (praktikum solution) |
 
 ---
 
 ## 📋 PERSIAPAN SEBELUM MEMULAI
 
-### ✅ Checklist Persiapan:
-
-- [ ] Flutter SDK installed & verified (`flutter doctor`)
-- [ ] VS Code dengan Flutter extension
-- [ ] Sudah menyelesaikan tugas Pertemuan 2
-- [ ] Memahami StatefulWidget & setState
-- [ ] Familiar dengan MaterialApp & Scaffold
-
-### 🎬 Setup Project Baru:
-
-```bash
-# Ketik bersama:
-flutter create demo_pertemuan3
-cd demo_pertemuan3
-code .
-```
-
-**Hot Reload shortcut**: Tekan `r` di terminal setelah save file.
+- ✅ Flutter SDK terinstall
+- ✅ Editor (VS Code / Android Studio) ready
+- ✅ Device / emulator running
+- ✅ Review materi Pertemuan 2 (Widget & Layout)
 
 ---
 
-## 🚀 PART 0: Review & Warm Up (10 menit)
+## 🔄 PART 0: Review & Warm Up (10 menit)
 
-### Quiz Cepat (5 menit)
+### Quick Quiz (5 menit)
 
-Pertanyaan untuk mengecek pemahaman:
+**Jawab pertanyaan berikut untuk check understanding:**
 
-1. ❓ Apa perbedaan StatelessWidget dan StatefulWidget?
-2. ❓ Widget apa yang dipakai untuk layout horizontal?
-3. ❓ Apa fungsi `SingleChildScrollView`?
-4. ❓ Bagaimana cara menggunakan `CircleAvatar` untuk foto profil?
-5. ❓ Apa fungsi `Theme.of(context)`?
+1. **Apa bedanya StatelessWidget dan StatefulWidget?**
+2. **Kapan pakai Column, kapan pakai ListView?**
+3. **Apa fungsi `setState`?**
+4. **Bagaimana cara membuat widget reusable?**
+5. **Apa itu BuildContext?**
 
-> 💡 Jika belum bisa menjawab, review materi Pertemuan 2!
+> 💡 **JANGAN LANJUT** sebelum yakin paham basic concepts di atas!
 
-### Konsep Penting (5 menit)
+### Konsep Hari Ini (5 menit)
 
-```
-📌 KONSEP PENTING PERTEMUAN INI:
+**Analogi sederhana:**
 
-ListView & GridView = Scrollable widgets untuk menampilkan data banyak
-Navigator = System navigasi antar halaman (menggunakan stack)
+> **ListView** = Instagram feed (scroll tak terbatas)  
+> **GridView** = Galeri foto (grid layout)  
+> **Navigation** = Perpindahan antar halaman seperti buka app lain
 
-Analogi Sederhana:
-• ListView = Instagram feed (scroll vertikal satu-satu)
-• GridView = Galeri foto (kotak-kotak)
-• Navigator = Tumpukan buku (push = naruh buku, pop = ambil buku)
-```
+**Yang akan kita pelajari:**
+
+1. Menampilkan **banyak data** efisien (lazy loading)
+2. Membuat **grid layout** untuk catalog/gallery
+3. **Navigasi** antar halaman dengan data
+4. **Return value** dari halaman yang ditutup
 
 ---
 
@@ -106,27 +93,33 @@ Analogi Sederhana:
 **Kapan pakai Column? Kapan pakai ListView?**
 
 ```
-Bedanya dengan Column:
-┌─────────────────────────────────────────────────────────────┐
-│              Column                    ListView             │
-├─────────────────────────────────────────────────────────────┤
-│ • Tidak bisa scroll otomatis   │ • Otomatis scrollable      │
-│ • Semua item dirender          │ • Hanya item terlihat      │
-│ • Untuk item sedikit (<10)     │ • Untuk item banyak (10+)  │
-│ • Perlu SingleChildScrollView  │ • Sudah include scroll     │
-└─────────────────────────────────────────────────────────────┘
+Column:                    ListView:
+┌─────────┐               ┌─────────┐
+│ Item 1  │               │ Item 1  │ ← Scroll otomatis
+│ Item 2  │               │ Item 2  │ ← Lazy loading  
+│ Item 3  │               │ Item 3  │ ← Untuk data banyak (10+)
+└─────────┘               │ Item 4  │
+                          │ Item 5  │
+❌ Tidak bisa scroll      └─────────┘
+❌ Semua item dirender    
+❌ Untuk item sedikit (<10)
 ```
 
 **💡 ANALOGI**:
 
-> "Column seperti foto grup yang dicetak semua sekaligus.
-> ListView seperti scroll Instagram - hanya muat foto yang terlihat di layar, sisanya di-load saat scroll."
+> "Column seperti **daftar di kertas** (terbatas).  
+> ListView seperti **feed Instagram** (scroll tak terbatas)."
 
-### ✏️ CODING BERSAMA: Contact List App
+**Kapan pakai ListView:**
+- ✅ Data banyak (>10 items)
+- ✅ Butuh scroll
+- ✅ Perlu performance (lazy loading)
 
-**Step 1: Create Contact Model** (5 menit)
+### ✏️ CODING BERSAMA: Contact List App (25 menit)
 
-Buat folder baru `lib/models/` dan file `contact.dart`:
+**Step 1: Create Contact Model** (3 menit)
+
+Buat file `lib/models/contact.dart`:
 
 ```dart
 // lib/models/contact.dart
@@ -143,74 +136,81 @@ class Contact {
 }
 ```
 
-**📝 CATATAN**: Model ini untuk menyimpan data kontak. Properties-nya final karena data tidak berubah setelah dibuat.
+**📝 CATATAN**: Model ini simple data class untuk hold contact info.
 
 **Step 2: Create Contact List Page** (10 menit)
 
-Buat file baru `lib/pages/contact_list_page.dart`:
+Buat file `lib/pages/contact_list_page.dart`:
 
 ```dart
 // lib/pages/contact_list_page.dart
 import 'package:flutter/material.dart';
 import '../models/contact.dart';
 
-class ContactListPage extends StatefulWidget {
+class ContactListPage extends StatelessWidget {
   const ContactListPage({super.key});
 
   @override
-  State<ContactListPage> createState() => _ContactListPageState();
-}
-
-class _ContactListPageState extends State<ContactListPage> {
-  // Dummy data contacts
-  final List<Contact> contacts = [
-    Contact(
-      name: 'Budi Santoso',
-      phone: '+62 812-3456-7890',
-      imageUrl: 'https://i.pravatar.cc/150?img=1',
-    ),
-    Contact(
-      name: 'Siti Aminah',
-      phone: '+62 813-9876-5432',
-      imageUrl: 'https://i.pravatar.cc/150?img=2',
-    ),
-    Contact(
-      name: 'Ahmad Fauzi',
-      phone: '+62 815-1111-2222',
-      imageUrl: 'https://i.pravatar.cc/150?img=3',
-    ),
-    Contact(
-      name: 'Dewi Lestari',
-      phone: '+62 821-3333-4444',
-      imageUrl: 'https://i.pravatar.cc/150?img=4',
-    ),
-    Contact(
-      name: 'Rizki Pratama',
-      phone: '+62 822-5555-6666',
-      imageUrl: 'https://i.pravatar.cc/150?img=5',
-    ),
-  ];
-
-  @override
   Widget build(BuildContext context) {
+    // Dummy data - nanti bisa dari API
+    final contacts = [
+      Contact(
+        name: 'Alice Johnson',
+        phone: '+62 812 3456 7890',
+        imageUrl: 'https://i.pravatar.cc/150?img=1',
+      ),
+      Contact(
+        name: 'Bob Smith',
+        phone: '+62 813 9876 5432',
+        imageUrl: 'https://i.pravatar.cc/150?img=2',
+      ),
+      Contact(
+        name: 'Charlie Brown',
+        phone: '+62 821 1111 2222',
+        imageUrl: 'https://i.pravatar.cc/150?img=3',
+      ),
+      // Tambah 5 contacts lagi untuk test scroll
+      Contact(
+        name: 'Diana Prince',
+        phone: '+62 822 3333 4444',
+        imageUrl: 'https://i.pravatar.cc/150?img=4',
+      ),
+      Contact(
+        name: 'Ethan Hunt',
+        phone: '+62 823 5555 6666',
+        imageUrl: 'https://i.pravatar.cc/150?img=5',
+      ),
+      Contact(
+        name: 'Fiona Apple',
+        phone: '+62 824 7777 8888',
+        imageUrl: 'https://i.pravatar.cc/150?img=6',
+      ),
+      Contact(
+        name: 'George Martin',
+        phone: '+62 825 9999 0000',
+        imageUrl: 'https://i.pravatar.cc/150?img=7',
+      ),
+      Contact(
+        name: 'Hannah Montana',
+        phone: '+62 826 1234 5678',
+        imageUrl: 'https://i.pravatar.cc/150?img=8',
+      ),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Kontak Saya'),
-        centerTitle: true,
       ),
       body: ListView.builder(
-        itemCount: contacts.length,  // Jumlah item
+        itemCount: contacts.length,
         itemBuilder: (context, index) {
-          // Builder dipanggil untuk SETIAP item
           final contact = contacts[index];
-
           return ListTile(
             leading: CircleAvatar(
               backgroundImage: NetworkImage(contact.imageUrl),
             ),
             title: Text(contact.name),
             subtitle: Text(contact.phone),
-            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
             onTap: () {
               print('Tapped: ${contact.name}');
             },
@@ -222,12 +222,9 @@ class _ContactListPageState extends State<ContactListPage> {
 }
 ```
 
-**Step 3: Update main.dart**
-
-Ganti `home:` di MaterialApp:
+**Step 3: Update main.dart** (2 menit)
 
 ```dart
-// lib/main.dart
 import 'package:flutter/material.dart';
 import 'pages/contact_list_page.dart';
 
@@ -241,11 +238,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'Pertemuan 3',
       theme: ThemeData(
+        primarySwatch: Colors.blue,
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
       home: const ContactListPage(),
     );
@@ -253,278 +249,51 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-**Hot Reload** → Lihat contact list muncul!
+**Hot Reload!** (Ctrl+S atau save file)
 
-**💡 PENTING**: Perhatikan `itemBuilder` dipanggil untuk setiap item. Ini yang disebut **lazy loading** - hanya render item yang terlihat di layar.
+✅ You should see scrollable list of 8 contacts!
 
-**Visualisasi cara kerja ListView.builder:**
+**💡 PENTING**: 
+- `ListView.builder` hanya render items yang visible (lazy loading)
+- `itemCount` = jumlah total items
+- `itemBuilder` = function yang dipanggil per item
 
-```
-Data: [A, B, C, D, E, F, G, H, I, J, ...]
+### 🎯 EKSPERIMEN 1: ListView vs Column Performance (5 menit)
 
-Layar (hanya render yang terlihat):
-┌─────────────────┐
-│  A  ← rendered  │
-│  B  ← rendered  │
-│  C  ← rendered  │
-│  D  ← rendered  │
-│  E  ← rendered  │
-└─────────────────┘
-   F  ← belum dirender
-   G  ← belum dirender
-   ...
-
-Saat scroll ke bawah, F dan G baru di-render!
-```
-
-**💡 ANALOGI**:
-
-> "itemBuilder seperti pabrik. Tidak buat semua produk sekaligus, tapi buat satu-satu saat dibutuhkan. Lebih efisien!"
-
-> ⚠️ **TROUBLESHOOTING**:
->
-> **Problem**: "RenderBox was not laid out"
->
-> - **Cause**: ListView di dalam Column tanpa Expanded
-> - **Fix**: Wrap ListView dengan `Expanded`:
->   ```dart
->   Column(
->     children: [
->       Text('Header'),
->       Expanded(  // ← Tambahkan ini!
->         child: ListView.builder(...),
->       ),
->     ],
->   )
->   ```
->
-> **Problem**: "The getter 'length' was called on null"
->
-> - **Cause**: List contacts belum diinisialisasi
-> - **Fix**: Initialize dengan empty list:
->   ```dart
->   final List<Contact> contacts = [];
->   ```
-
-### Step 4: Custom List Item (10 menit)
-
-Buat widget terpisah untuk custom list item:
+**Try this**: Generate 50 contacts!
 
 ```dart
-// lib/widgets/contact_tile.dart
-import 'package:flutter/material.dart';
-import '../models/contact.dart';
-
-class ContactTile extends StatelessWidget {
-  final Contact contact;
-  final VoidCallback onTap;
-
-  const ContactTile({
-    super.key,
-    required this.contact,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-      child: ListTile(
-        contentPadding: const EdgeInsets.all(12),
-        leading: CircleAvatar(
-          radius: 30,
-          backgroundImage: NetworkImage(contact.imageUrl),
-        ),
-        title: Text(
-          contact.name,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 4),
-            Row(
-              children: [
-                const Icon(Icons.phone, size: 16, color: Colors.grey),
-                const SizedBox(width: 4),
-                Text(contact.phone),
-              ],
-            ),
-          ],
-        ),
-        trailing: const Icon(
-          Icons.arrow_forward_ios,
-          size: 16,
-          color: Colors.grey,
-        ),
-        onTap: onTap,
-      ),
-    );
-  }
-}
+final contacts = List.generate(
+  50,
+  (index) => Contact(
+    name: 'Contact ${index + 1}',
+    phone: '+62 812 ${index.toString().padLeft(4, '0')} ${index.toString().padLeft(4, '0')}',
+    imageUrl: 'https://i.pravatar.cc/150?img=${index % 70}',
+  ),
+);
 ```
 
-Update `ContactListPage` untuk gunakan `ContactTile`:
+**Hot Reload!** Scroll super smooth!
+
+**Now try Column** (bad practice):
 
 ```dart
-// Dalam ListView.builder, ganti return statement:
-itemBuilder: (context, index) {
-  return ContactTile(
-    contact: contacts[index],
-    onTap: () {
-      print('Tapped: ${contacts[index].name}');
-    },
-  );
-},
-```
-
-**Hot Reload** → Sekarang list lebih menarik dengan Card!
-
-### 🎯 EKSPERIMEN 1: ListView vs Column
-
-**Task**: Mari buktikan bedanya Column dan ListView!
-
-1. **Buat 50 items** - Tambah lebih banyak dummy data:
-
-   ```dart
-   final List<Contact> contacts = List.generate(
-     50,
-     (index) => Contact(
-       name: 'Contact ${index + 1}',
-       phone: '+62 812-${1000 + index}',
-       imageUrl: 'https://i.pravatar.cc/150?img=${(index % 70) + 1}',
-     ),
-   );
-   ```
-
-2. **Ganti ListView dengan Column**:
-
-   ```dart
-   // Ganti ini:
-   ListView.builder(...)
-
-   // Dengan ini:
-   SingleChildScrollView(
-     child: Column(
-       children: contacts.map((contact) => ContactTile(...)).toList(),
-     ),
-   )
-   ```
-
-3. **Hot Reload** → Lihat: Loading lebih lambat karena semua 50 items di-render sekaligus!
-
-4. **Kembalikan ke ListView.builder** → Hot Reload → Lebih cepat!
-
-**🎯 Lesson**: ListView.builder lebih efisien untuk data banyak!
-
-### 🎯 EKSPERIMEN 2: Pull-to-Refresh
-
-**Task**: Tambahkan fitur "tarik untuk refresh"
-
-Wrap ListView dengan `RefreshIndicator`:
-
-```dart
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(title: const Text('Kontak Saya')),
-    body: RefreshIndicator(
-      onRefresh: _refreshData,  // Fungsi yang dipanggil saat refresh
-      child: ListView.builder(
-        itemCount: contacts.length,
-        itemBuilder: (context, index) {
-          return ContactTile(
-            contact: contacts[index],
-            onTap: () => print('Tapped: ${contacts[index].name}'),
-          );
-        },
-      ),
-    ),
-  );
-}
-
-// Tambahkan method ini:
-Future<void> _refreshData() async {
-  // Simulasi loading dari server
-  await Future.delayed(const Duration(seconds: 2));
-
-  setState(() {
-    // Update UI (misal: shuffle data)
-    contacts.shuffle();
-  });
-}
-```
-
-**Hot Reload** → Tarik ke bawah → Data di-shuffle!
-
-### 💡 Tips & Best Practices
-
-**DO ✅:**
-
-- Gunakan `.builder` untuk data > 10 items
-- Pisahkan custom item ke widget terpisah (reusable!)
-- Gunakan `const` untuk widget yang tidak berubah
-- Tambahkan `itemExtent` jika semua item sama tinggi:
-  ```dart
-  ListView.builder(
-    itemExtent: 72.0,  // Tinggi tetap, lebih cepat render!
-    itemBuilder: ...,
-  )
-  ```
-
-**DON'T ❌:**
-
-- Jangan gunakan `ListView(children: ...)` untuk data banyak
-- Jangan buat widget kompleks di dalam `itemBuilder` - extract ke class
-- Jangan panggil `setState` terlalu sering saat scroll
-
----
-### ?? Advanced ListView Topics
-
-#### ListView.separated - Garis Pembatas
-
-Menambahkan **divider** (garis pembatas) antar item secara otomatis:
-
-```dart
-ListView.separated(
-  itemCount: contacts.length,
-  separatorBuilder: (context, index) {
-    // Builder untuk pembatas
-    return const Divider(
-      thickness: 1,
-      height: 1,
-      color: Colors.grey,
-    );
-  },
-  itemBuilder: (context, index) {
-    return ContactTile(
-      contact: contacts[index],
-      onTap: () => print('Tapped: {contacts[index].name}'),
-    );
-  },
+body: SingleChildScrollView(
+  child: Column(
+    children: contacts.map((contact) {
+      return ListTile(/* ... */);
+    }).toList(),
+  ),
 )
 ```
 
-**Visualisasi:**
+**Hot Reload!** Scroll laggy karena render ALL 50 items sekaligus!
 
-```
-+-----------------+
-�   Contact 1     �
-+-----------------�  ? Divider
-�   Contact 2     �
-+-----------------�  ? Divider
-�   Contact 3     �
-+-----------------+
-```
+**🎓 PELAJARAN**: Untuk data banyak, ALWAYS use `ListView.builder`!
 
-**?? CATATAN**: `separatorBuilder` dipanggil untuk setiap gap antar item. Item terakhir tidak punya separator.
+### 🎯 EKSPERIMEN 2: Pull-to-Refresh (5 menit)
 
-#### ScrollController - Kontrol Scroll Programmatically
-
-Untuk scroll ke posisi tertentu dengan kode:
+Upgrade to StatefulWidget dan add RefreshIndicator:
 
 ```dart
 class ContactListPage extends StatefulWidget {
@@ -535,79 +304,105 @@ class ContactListPage extends StatefulWidget {
 }
 
 class _ContactListPageState extends State<ContactListPage> {
-  final ScrollController _scrollController = ScrollController();
-  final List<Contact> contacts = [...];  // Data contacts
+  List<Contact> contacts = [/* ... sama seperti sebelumnya ... */];
 
-  @override
-  void dispose() {
-    _scrollController.dispose();  // PENTING: Dispose untuk avoid memory leak!
-    super.dispose();
-  }
-
-  void _scrollToTop() {
-    _scrollController.animateTo(
-      0,  // Posisi awal (top)
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeOut,
-    );
+  Future<void> _refreshData() async {
+    // Simulasi loading dari API
+    await Future.delayed(const Duration(seconds: 2));
+    
+    setState(() {
+      // Shuffle contacts untuk demo
+      contacts.shuffle();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Kontak Saya')),
-      body: ListView.builder(
-        controller: _scrollController,  // Attach controller
-        itemCount: contacts.length,
-        itemBuilder: (context, index) {
-          return ContactTile(
-            contact: contacts[index],
-            onTap: () => print('Tapped: {contacts[index].name}'),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _scrollToTop,
-        child: const Icon(Icons.arrow_upward),
-        tooltip: 'Scroll to Top',
+      body: RefreshIndicator(
+        onRefresh: _refreshData,
+        child: ListView.builder(/* ... sama seperti sebelumnya ... */),
       ),
     );
   }
 }
 ```
 
-**?? ANALOGI**:
+**Hot Reload!** Tarik dari atas untuk refresh!
 
-> "ScrollController seperti remote control elevator - bisa langsung ke lantai tertentu (posisi scroll) dengan kode."
+### 💡 Advanced ListView Topics
 
-**?? PENTING**: Jangan lupa `dispose()` controller! Kalau tidak, terjadi memory leak.
+#### ListView.separated - Garis Pembatas
+
+Untuk add divider/separator between items:
+
+```dart
+ListView.separated(
+  itemCount: contacts.length,
+  separatorBuilder: (context, index) {
+    return const Divider(
+      thickness: 1,
+      height: 1,
+      color: Colors.grey,
+    );
+  },
+  itemBuilder: (context, index) {
+    return ContactTile(contact: contacts[index]);
+  },
+)
+```
+
+#### ScrollController - Kontrol Scroll Programmatically
+
+```dart
+final ScrollController _scrollController = ScrollController();
+
+// In build:
+body: Column(
+  children: [
+    Expanded(
+      child: ListView.builder(
+        controller: _scrollController,
+        /* ... */
+      ),
+    ),
+    FloatingActionButton(
+      onPressed: () {
+        _scrollController.animateTo(
+          0,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeOut,
+        );
+      },
+      child: const Icon(Icons.arrow_upward),
+    ),
+  ],
+),
+
+// IMPORTANT: Dispose controller!
+@override
+void dispose() {
+  _scrollController.dispose();
+  super.dispose();
+}
+```
 
 #### Horizontal ListView - Scroll Horizontal
 
-ListView yang scroll ke samping (horizontal):
-
 ```dart
 SizedBox(
-  height: 120,  // WAJIB berikan tinggi untuk horizontal ListView!
+  height: 120, // REQUIRED!
   child: ListView.builder(
-    scrollDirection: Axis.horizontal,  // Ubah arah scroll
+    scrollDirection: Axis.horizontal,
     itemCount: 10,
     itemBuilder: (context, index) {
       return Container(
-        width: 100,  // Lebar setiap item
+        width: 100,
         margin: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: Colors.blue[100 * ((index % 9) + 1)],
-          borderRadius: BorderRadius.circular(8),
-        ),
+        color: Colors.blue,
         child: Center(
-          child: Text(
-            'Item index',
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
-          ),
+          child: Text('Item $index'),
         ),
       );
     },
@@ -615,67 +410,62 @@ SizedBox(
 )
 ```
 
-**Visualisasi:**
+> ⚠️ **TROUBLESHOOTING**:
+>
+> **Problem**: "ListView items tidak muncul"
+> - **Cause**: ListView di dalam Column tanpa Expanded
+> - **Fix**: Wrap ListView dengan `Expanded` widget
+>
+> **Problem**: "Horizontal ListView unbounded width error"
+> - **Cause**: Tidak ada height constraint
+> - **Fix**: Wrap dengan `SizedBox(height: ...)` 
 
-```
-? Scroll horizontal ?
-+----+ +----+ +----+ +----+
-� 1  � � 2  � � 3  � � 4  � ...
-+----+ +----+ +----+ +----+
-```
+### 💡 Tips & Best Practices
 
-**?? TROUBLESHOOTING**:
+**DO ✅:**
+- Gunakan `ListView.builder` untuk data > 10 items
+- Gunakan `const` untuk widget yang tidak berubah
+- Add `separatorBuilder` jika butuh divider
+- Dispose ScrollController saat tidak dipakai
 
-**Problem**: "RenderBox has unbounded width"
-- **Cause**: Horizontal ListView tanpa height constraint
-- **Fix**: WAJIB wrap dengan `SizedBox` yang punya `height`:
-  ```dart
-  SizedBox(
-    height: 120,  // ? HARUS ada!
-    child: ListView.builder(
-      scrollDirection: Axis.horizontal,
-      ...
-    ),
-  )
-  ```
+**DON'T ❌:**
+- Jangan pakai Column untuk data banyak
+- Jangan render semua items sekaligus
+- Jangan lupa dispose controller
 
 ---
 
-## ?? PART 2: GridView Hands-On (20 menit)
+## 🔲 PART 2: GridView Hands-On (20 menit)
 
-### ?? Konsep Dasar: GridView vs ListView
+### 💡 Konsep Dasar: GridView vs ListView
 
-**Kapan pakai ListView? Kapan pakai GridView?**
+**Kapan pakai GridView? Kapan pakai ListView?**
 
 ```
-ListView vs GridView:
+ListView (1 kolom):          GridView (multiple kolom):
+┌─────────────┐             ┌─────┬─────┬─────┐
+│   Item 1    │             │  1  │  2  │  3  │
+├─────────────┤             ├─────┼─────┼─────┤
+│   Item 2    │             │  4  │  5  │  6  │
+├─────────────┤             ├─────┼─────┼─────┤
+│   Item 3    │             │  7  │  8  │  9  │
+└─────────────┘             └─────┴─────┴─────┘
 
-ListView:           GridView:
-+---------+         +---------+
-� Item 1  �         � 1  � 2  �
-+---------�         +----+----�
-� Item 2  �         � 3  � 4  �
-+---------�         +----+----�
-� Item 3  �         � 5  � 6  �
-+---------+         +---------+
-
-Satu kolom          Multiple kolom
-Scroll vertikal     Scroll vertikal tapi banyak per baris
+Untuk list items      Untuk gallery/catalog
 ```
 
-**?? ANALOGI**:
+**💡 ANALOGI**:
 
-> "ListView seperti antrian ATM (satu-satu ke bawah).
-> GridView seperti etalase toko - produk disusun rapi dalam kotak-kotak, mudah lihat banyak item sekaligus!"
+> "ListView = Daftar kontak (vertical).  
+> GridView = Etalase toko (grid produk)."
 
-**Kapan Pakai GridView?**
-- ? Galeri foto/video
-- ? Product catalog/marketplace
-- ? Dashboard dengan tiles
-- ? Icon grid
-- ? Calendar view
+**Kapan pakai GridView:**
+- ✅ Gallery / Photo grid
+- ✅ Product catalog
+- ✅ Icon grid / App drawer
+- ✅ Calendar / Date picker
 
-### ?? CODING BERSAMA: Product Grid
+### ✏️ CODING BERSAMA: Product Grid (15 menit)
 
 **Step 1: Create Product Model** (3 menit)
 
@@ -684,7 +474,7 @@ Buat file `lib/models/product.dart`:
 ```dart
 // lib/models/product.dart
 class Product {
-  final String id;
+  final int id;
   final String name;
   final double price;
   final String imageUrl;
@@ -700,7 +490,7 @@ class Product {
 }
 ```
 
-**Step 2: Create Product Card Widget** (7 menit)
+**Step 2: Create ProductCard Widget** (7 menit)
 
 Buat file `lib/widgets/product_card.dart`:
 
@@ -728,7 +518,7 @@ class ProductCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Gambar produk (bagian atas)
+            // Image takes available space
             Expanded(
               child: Image.network(
                 product.imageUrl,
@@ -736,10 +526,12 @@ class ProductCard extends StatelessWidget {
                 fit: BoxFit.cover,
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress == null) return child;
-                  return Container(
-                    color: Colors.grey[200],
-                    child: const Center(
-                      child: CircularProgressIndicator(),
+                  return Center(
+                    child: CircularProgressIndicator(
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                              loadingProgress.expectedTotalBytes!
+                          : null,
                     ),
                   );
                 },
@@ -755,7 +547,7 @@ class ProductCard extends StatelessWidget {
                 },
               ),
             ),
-            // Info produk (bagian bawah)
+            // Product info
             Padding(
               padding: const EdgeInsets.all(8),
               child: Column(
@@ -763,20 +555,19 @@ class ProductCard extends StatelessWidget {
                 children: [
                   Text(
                     product.name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Rp {product.price.toStringAsFixed(0)}',
+                    'Rp ${product.price.toStringAsFixed(0)}',
                     style: TextStyle(
                       color: Colors.green[700],
                       fontWeight: FontWeight.w600,
-                      fontSize: 13,
                     ),
                   ),
                 ],
@@ -790,12 +581,7 @@ class ProductCard extends StatelessWidget {
 }
 ```
 
-**?? CATATAN**: 
-- `Expanded` pada gambar membuat gambar mengisi space yang tersedia
-- `loadingBuilder` menampilkan loading indicator saat gambar loading
-- `errorBuilder` menampilkan icon jika gambar gagal load
-
-**Step 3: Create Product Grid Page** (10 menit)
+**Step 3: Create ProductGridPage** (10 menit)
 
 Buat file `lib/pages/product_grid_page.dart`:
 
@@ -806,89 +592,88 @@ import '../models/product.dart';
 import '../widgets/product_card.dart';
 
 class ProductGridPage extends StatelessWidget {
-  ProductGridPage({super.key});
-
-  // Dummy data products
-  final List<Product> products = [
-    Product(
-      id: '1',
-      name: 'Laptop Gaming',
-      price: 12000000,
-      imageUrl: 'https://picsum.photos/seed/laptop/200/200',
-      category: 'Electronics',
-    ),
-    Product(
-      id: '2',
-      name: 'Smartphone',
-      price: 5000000,
-      imageUrl: 'https://picsum.photos/seed/phone/200/200',
-      category: 'Electronics',
-    ),
-    Product(
-      id: '3',
-      name: 'Headphone',
-      price: 500000,
-      imageUrl: 'https://picsum.photos/seed/headphone/200/200',
-      category: 'Accessories',
-    ),
-    Product(
-      id: '4',
-      name: 'Mechanical Keyboard',
-      price: 750000,
-      imageUrl: 'https://picsum.photos/seed/keyboard/200/200',
-      category: 'Accessories',
-    ),
-    Product(
-      id: '5',
-      name: 'Gaming Mouse',
-      price: 350000,
-      imageUrl: 'https://picsum.photos/seed/mouse/200/200',
-      category: 'Accessories',
-    ),
-    Product(
-      id: '6',
-      name: 'Monitor 27 inch',
-      price: 3500000,
-      imageUrl: 'https://picsum.photos/seed/monitor/200/200',
-      category: 'Electronics',
-    ),
-    Product(
-      id: '7',
-      name: 'Webcam HD',
-      price: 800000,
-      imageUrl: 'https://picsum.photos/seed/webcam/200/200',
-      category: 'Accessories',
-    ),
-    Product(
-      id: '8',
-      name: 'USB Microphone',
-      price: 1200000,
-      imageUrl: 'https://picsum.photos/seed/mic/200/200',
-      category: 'Accessories',
-    ),
-  ];
+  const ProductGridPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Dummy products
+    final products = [
+      Product(
+        id: 1,
+        name: 'Laptop Gaming',
+        price: 15000000,
+        imageUrl: 'https://picsum.photos/seed/laptop/300',
+        category: 'Electronics',
+      ),
+      Product(
+        id: 2,
+        name: 'Smartphone Pro',
+        price: 8000000,
+        imageUrl: 'https://picsum.photos/seed/phone/300',
+        category: 'Electronics',
+      ),
+      Product(
+        id: 3,
+        name: 'Headphones',
+        price: 500000,
+        imageUrl: 'https://picsum.photos/seed/headphone/300',
+        category: 'Audio',
+      ),
+      Product(
+        id: 4,
+        name: 'Smart Watch',
+        price: 3000000,
+        imageUrl: 'https://picsum.photos/seed/watch/300',
+        category: 'Wearables',
+      ),
+      Product(
+        id: 5,
+        name: 'Camera DSLR',
+        price: 12000000,
+        imageUrl: 'https://picsum.photos/seed/camera/300',
+        category: 'Photography',
+      ),
+      Product(
+        id: 6,
+        name: 'Tablet Pro',
+        price: 7000000,
+        imageUrl: 'https://picsum.photos/seed/tablet/300',
+        category: 'Electronics',
+      ),
+      Product(
+        id: 7,
+        name: 'Gaming Mouse',
+        price: 800000,
+        imageUrl: 'https://picsum.photos/seed/mouse/300',
+        category: 'Gaming',
+      ),
+      Product(
+        id: 8,
+        name: 'Mechanical Keyboard',
+        price: 1500000,
+        imageUrl: 'https://picsum.photos/seed/keyboard/300',
+        category: 'Gaming',
+      ),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Katalog Produk'),
-        centerTitle: true,
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(16),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,        // Jumlah kolom
-          crossAxisSpacing: 12,     // Jarak horizontal antar item
-          mainAxisSpacing: 12,      // Jarak vertikal antar item
-          childAspectRatio: 0.75,   // Rasio lebar:tinggi (0.75 = lebih tinggi)
+          crossAxisCount: 2,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          childAspectRatio: 0.75,
         ),
         itemCount: products.length,
         itemBuilder: (context, index) {
           return ProductCard(
             product: products[index],
             onTap: () {
-              print('Tapped: {products[index].name}');
+              print('Tapped: ${products[index].name}');
             },
           );
         },
@@ -898,169 +683,113 @@ class ProductGridPage extends StatelessWidget {
 }
 ```
 
-**Update main.dart** untuk ProductGridPage:
+**Hot Reload!** Grid of 8 products muncul!
 
+### 🎯 EKSPERIMEN 1: CrossAxisCount - Ubah Jumlah Kolom (3 menit)
+
+Try different column counts:
+
+**2 Kolom** (default):
 ```dart
-// lib/main.dart - Update home:
-home: ProductGridPage(),
+crossAxisCount: 2,
 ```
 
-**Hot Reload** ? Product grid muncul dengan 2 kolom!
-
-**?? PENTING**: Perhatikan `gridDelegate` - ini yang mengatur layout grid!
-
-### ?? EKSPERIMEN 1: CrossAxisCount - Ubah Jumlah Kolom
-
-**Task**: Mari coba ubah jumlah kolom!
-
-1. **2 kolom (default)**:
-   ```dart
-   crossAxisCount: 2,  // Lebar, spacing besar
-   ```
-
-2. **3 kolom**:
-   ```dart
-   crossAxisCount: 3,  // Lebih rapat, item lebih kecil
-   ```
-   **Hot Reload** ? Item jadi lebih kecil!
-
-3. **4 kolom**:
-   ```dart
-   crossAxisCount: 4,  // Sangat rapat
-   ```
-   **Hot Reload** ? Item sangat kecil!
-
-**Visualisasi:**
-
-```
-crossAxisCount: 2         crossAxisCount: 3         crossAxisCount: 4
-+-----------+            +-----------+            +-----------+
-�  1  �  2  �            � 1 � 2 � 3 �            �1 �2 �3 �4 �
-+-----+-----�            +---+---+---�            +--+--+--+--�
-�  3  �  4  �            � 4 � 5 � 6 �            �5 �6 �7 �8 �
-+-----------+            +-----------+            +-----------+
-Lebih lebar              Balanced                 Lebih sempit
+**3 Kolom**:
+```dart
+crossAxisCount: 3,
 ```
 
-**?? Lesson**: crossAxisCount mengatur berapa kolom. Semakin banyak kolom, semakin kecil item!
-
-**?? ANALOGI**:
-
-> "crossAxisCount = berapa kolom rak di toko. 2 kolom = lebar dan jelas, 4 kolom = lebih banyak tapi kecil."
-
-### ?? EKSPERIMEN 2: ChildAspectRatio - Ubah Bentuk Item
-
-**Task**: Ubah rasio lebar:tinggi item!
-
-1. **1.0 (kotak sempurna)**:
-   ```dart
-   childAspectRatio: 1.0,  // Width = Height
-   ```
-   **Hot Reload** ? Item jadi kotak sempurna!
-
-2. **0.75 (lebih tinggi - portrait)**:
-   ```dart
-   childAspectRatio: 0.75,  // Height > Width
-   ```
-   **Hot Reload** ? Item lebih tinggi (default untuk product)
-
-3. **1.5 (lebih lebar - landscape)**:
-   ```dart
-   childAspectRatio: 1.5,  // Width > Height
-   ```
-   **Hot Reload** ? Item lebih lebar/pendek
-
-**Visualisasi:**
-
-```
-childAspectRatio: 1.0    childAspectRatio: 0.75   childAspectRatio: 1.5
-(Kotak sempurna)         (Tinggi/Portrait)        (Lebar/Landscape)
-
-+--------+               +------+                 +--------------+
-�        �               �      �                 �              �
-�   1:1  �               �      �                 �     1.5:1    �
-�        �               � 3:4  �                 �              �
-+--------+               �      �                 +--------------+
-                         +------+
+**4 Kolom**:
+```dart
+crossAxisCount: 4,
 ```
 
-**?? Lesson**: AspectRatio mengontrol bentuk item!
+Visualisasi:
+```
+2 kolom:          3 kolom:        4 kolom:
+┌────┬────┐      ┌───┬───┬───┐   ┌──┬──┬──┬──┐
+│ 1  │ 2  │      │ 1 │ 2 │ 3 │   │1 │2 │3 │4 │
+├────┼────┤      ├───┼───┼───┤   ├──┼──┼──┼──┤
+│ 3  │ 4  │      │ 4 │ 5 │ 6 │   │5 │6 │7 │8 │
+└────┴────┘      └───┴───┴───┘   └──┴──┴──┴──┘
+```
 
-**?? ANALOGI**:
+**🎓 PELAJARAN**: `crossAxisCount` = jumlah kolom horizontal
 
-> "AspectRatio = bentuk kotak. 1.0 = Rubik (kotak), 0.75 = Smartphone (berdiri), 1.5 = Laptop (tidur)."
+### 🎯 EKSPERIMEN 2: ChildAspectRatio - Ubah Bentuk Item (3 menit)
 
-> ?? **TROUBLESHOOTING**:
->
-> **Problem**: "GridView tidak muncul" / layar kosong
-> - **Cause 1**: GridView di dalam Column tanpa Expanded
-> - **Fix**: Wrap dengan `Expanded`:
->   ```dart
->   Column(
->     children: [
->       Text('Header'),
->       Expanded(  // ? Tambahkan!
->         child: GridView.builder(...),
->       ),
->     ],
->   )
->   ```
-> - **Cause 2**: itemCount = 0 atau data kosong
-> - **Fix**: Pastikan `itemCount: products.length` dan products tidak kosong
->
-> **Problem**: "Images tidak muncul"
-> - **Cause**: Network error atau URL salah
-> - **Fix**: Cek `errorBuilder` sudah ada, gunakan placeholder icon
->
-> **Problem**: "Bottom overflowed by X pixels"  
-> - **Cause**: AspectRatio terlalu kecil, text overflow
-> - **Fix**: Increase aspectRatio atau gunakan `maxLines` + `overflow: TextOverflow.ellipsis`
+**Ratio 1.0** (kotak/square):
+```dart
+childAspectRatio: 1.0,
+```
 
-### ?? EKSPERIMEN 3 (BONUS): MaxCrossAxisExtent
+**Ratio 0.75** (portrait - lebih tinggi):
+```dart
+childAspectRatio: 0.75,
+```
 
-**Task**: Buat grid responsive berdasarkan lebar maksimum item!
+**Ratio 1.5** (landscape - lebih lebar):
+```dart
+childAspectRatio: 1.5,
+```
 
-Ganti `gridDelegate` dengan:
+**💡 ANALOGI**:
+
+> "Aspect ratio seperti bentuk kotak:
+> - 1.0 = Rubik cube (kotak sempurna)
+> - 0.75 = Smartphone (vertikal)
+> - 1.5 = Laptop screen (horizontal)"
+
+### 🎯 EKSPERIMEN 3 (BONUS): MaxCrossAxisExtent - Responsive Grid (2 menit)
+
+Instead of fixed columns, use max width per item:
 
 ```dart
 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-  maxCrossAxisExtent: 150,  // Lebar maksimum setiap item (px)
+  maxCrossAxisExtent: 150, // Max 150px per item
   crossAxisSpacing: 12,
   mainAxisSpacing: 12,
   childAspectRatio: 0.75,
 ),
 ```
 
-**Hot Reload** ? Jumlah kolom otomatis adjust based on screen width!
+**Result**: Jumlah kolom adjust otomatis based on screen width!
+- Small screen (360px) → 2 kolom
+- Medium screen (540px) → 3 kolom
+- Large screen (720px) → 4 kolom
 
-**?? CATATAN**: 
-- Layar 400px lebar ? 2 kolom (400 / 150 � 2.6 ? floor = 2)
-- Layar 600px lebar ? 4 kolom (600 / 150 = 4)
-- More responsive untuk berbagai ukuran layar!
+> ⚠️ **TROUBLESHOOTING**:
+>
+> **Problem**: "GridView tidak muncul / blank"
+> - **Cause**: GridView di dalam Column tanpa Expanded
+> - **Fix**: Wrap dengan `Expanded`
+>
+> **Problem**: "Images tidak load"
+> - **Cause**: Network issue atau URL salah
+> - **Fix**: Add `errorBuilder` (sudah ada di code)
+>
+> **Problem**: "Bottom overflowed by X pixels"
+> - **Cause**: Text terlalu panjang atau aspectRatio salah
+> - **Fix**: Gunakan `maxLines` + `overflow: TextOverflow.ellipsis`
 
-**Kapan Pakai Mana?**
-- `FixedCrossAxisCount` ? Jumlah kolom tetap (misal: always 2 kolom)
-- `MaxCrossAxisExtent` ? Responsive, adjust otomatis based on screen width
+### 💡 Tips & Best Practices
 
-### ?? Tips \u0026 Best Practices
+**DO ✅:**
+- Gunakan `.builder` untuk data > 10 items
+- Add loading & error builders untuk images
+- Gunakan `childAspectRatio` untuk control item shape
+- Consider `MaxCrossAxisExtent` untuk responsive layout
 
-**DO ?:**
-- Gunakan `.builder` untuk data dinamis
-- Set `childAspectRatio` sesuai konten (product biasanya 0.6-0.8)
-- Tambahkan `loadingBuilder` dan `errorBuilder` untuk images
-- Gunakan `MaxCrossAxisExtent` untuk responsive design
-- Keep card content simple untuk performa
-
-**DON'T ?:**
-- Jangan hardcode terlalu banyak children (gunakan `.builder`!)
-- Jangan lupa `Expanded` pada image di dalam Column
-- Jangan set aspectRatio terlalu ekstrem (< 0.5 atau > 2.0)
+**DON'T ❌:**
+- Jangan hardcode image size inside GridView
+- Jangan lupa `Expanded` untuk image widget
+- Jangan pakai GridView untuk list items (use ListView)
 
 ---
 
-## ?? PART 3: Navigation + Passing Data (40 menit)
+## 🧭 PART 3: Navigation + Passing Data (40 menit)
 
-### ?? Konsep Stack Navigation
+### 💡 Konsep Stack Navigation
 
 Flutter menggunakan konsep **Stack** (tumpukan) untuk navigasi.
 
@@ -1068,23 +797,23 @@ Flutter menggunakan konsep **Stack** (tumpukan) untuk navigasi.
 
 ```
 Awal:                Push:                Pop:
-+---------+         +---------+         +---------+
-�         �         � Page B  � ? Top   �         �
-�         �         +---------�         �         �
-� Page A  � ? Top   � Page A  �         � Page A  � ? Top
-+---------+         +---------+         +---------+
+┌─────────┐         ┌─────────┐         ┌─────────┐
+│         │         │ Page B  │ ← Top   │         │
+│         │         ├─────────┤         │         │
+│ Page A  │ ← Top   │ Page A  │         │ Page A  │ ← Top
+└─────────┘         └─────────┘         └─────────┘
 
                     Add new page        Remove top page
 ```
 
-**?? ANALOGI**:
+**💡 ANALOGI**:
 
 > "Navigator seperti tumpukan buku di meja:
-> - **Push** = Naruh buku baru di atas tumpukan
+> - **Push** = Taruh buku baru di atas tumpukan
 > - **Pop** = Ambil buku paling atas
 > - **Yang di atas** = Halaman yang terlihat user"
 
-### ?? CODING BERSAMA: Multi-Page App (20 menit)
+### ✏️ CODING BERSAMA: Multi-Page App (20 menit)
 
 **Step 1: Create Product Detail Page** (8 menit)
 
@@ -1096,11 +825,11 @@ import 'package:flutter/material.dart';
 import '../models/product.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  final Product product;  // Data dari halaman sebelumnya
+  final Product product;
 
   const ProductDetailPage({
     super.key,
-    required this.product,  // Constructor parameter
+    required this.product,
   });
 
   @override
@@ -1108,13 +837,12 @@ class ProductDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(product.name),
-        // Back button otomatis muncul!
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Gambar besar
+            // Large image
             Image.network(
               product.imageUrl,
               width: double.infinity,
@@ -1128,13 +856,12 @@ class ProductDetailPage extends StatelessWidget {
                 );
               },
             ),
-            // Info produk
+            // Product info
             Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Nama produk
                   Text(
                     product.name,
                     style: const TextStyle(
@@ -1143,9 +870,8 @@ class ProductDetailPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  // Harga
                   Text(
-                    'Rp {product.price.toStringAsFixed(0)}',
+                    'Rp ${product.price.toStringAsFixed(0)}',
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.green[700],
@@ -1153,7 +879,6 @@ class ProductDetailPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  // Category
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 12,
@@ -1172,7 +897,6 @@ class ProductDetailPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  // Description
                   const Text(
                     'Deskripsi Produk',
                     style: TextStyle(
@@ -1196,14 +920,12 @@ class ProductDetailPage extends StatelessWidget {
           ],
         ),
       ),
-      // Tombol di bottom
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: ElevatedButton(
             onPressed: () {
-              // TODO: Add to cart logic (nanti di return data)
-              print('Add to cart: {product.name}');
+              print('Add to cart: ${product.name}');
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 16),
@@ -1222,27 +944,20 @@ class ProductDetailPage extends StatelessWidget {
 }
 ```
 
-**?? CATATAN**: 
-- Product data dikirim via **constructor parameter**
-- Back button otomatis muncul di AppBar
-- `SafeArea` memastikan bottom button tidak tertutup notch/gesture bar
-
 **Step 2: Navigate dari Grid ke Detail** (5 menit)
 
 Update `ProductGridPage` - ganti `onTap`:
 
 ```dart
-// Di ProductGridPage, dalam GridView.builder:
 itemBuilder: (context, index) {
   return ProductCard(
     product: products[index],
     onTap: () {
-      // Navigator.push untuk buka halaman baru
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => ProductDetailPage(
-            product: products[index],  // Kirim data via constructor
+            product: products[index],
           ),
         ),
       );
@@ -1251,118 +966,50 @@ itemBuilder: (context, index) {
 },
 ```
 
-**Hot Reload & Test** ? Tap produk ? Detail page muncul!
+**Hot Reload & Test!** Tap produk → Detail page muncul!
 
-**?? PENTING**: 
+**💡 PENTING**: 
 - `Navigator.push` menambah halaman baru di atas stack
 - `MaterialPageRoute` mengatur transition animation
 - `builder` function creates the destination page
 
 **Step 3: Test Push & Pop** (7 menit)
 
-1. **Tap** salah satu product ? Detail page muncul
-2. **Tap back button** di appBar ? Kembali ke grid
-3. **Tap** product lain ? Detail page baru muncul
+1. **Tap** salah satu product → Detail page muncul
+2. **Tap back button** di appBar → Kembali ke grid
+3. **Tap** product lain → Detail page baru muncul
 
 **Visualisasi apa yang terjadi:**
 
 ```
 Awal (Grid):          Tap Product 1:        Tap Back:
-+-----------+        +-----------+         +-----------+
-�   Grid    � ? Top  �  Detail 1 � ? Top   �   Grid    � ? Top  
-+-----------+        +-----------�         +-----------+
-                     �   Grid    �
-                     +-----------+
+┌───────────┐        ┌───────────┐         ┌───────────┐
+│   Grid    │ ← Top  │  Detail 1 │ ← Top   │   Grid    │ ← Top  
+└───────────┘        ├───────────┤         └───────────┘
+                     │   Grid    │
+                     └───────────┘
 ```
 
-**?? PIKIRKAN**: Apa yang terjadi jika kita push 5 halaman berturut-turut? Stack jadi:
-
-```
-+-----------+
-�  Detail 5 � ? Top (visible)
-+-----------�
-�  Detail 4 �
-+-----------�
-�  Detail 3 �
-+-----------�
-�  Detail 2 �
-+-----------�
-�  Detail 1 �
-+-----------�
-�   Grid    �
-+-----------+
-```
-
-Pop 5 kali untuk kembali ke Grid!
-
-> ?? **TROUBLESHOOTING**:
->
-> **Problem**: "Navigator operation requested with a context that does not include a Navigator"
-> - **Cause**: Menggunakan `context` yang salah (biasanya context dari MaterialApp)
-> - **Fix**: Pastikan context dari widget di DALAM MaterialApp:
->   ```dart
->   // SALAH:
->   class MyApp extends StatelessWidget {
->     Widget build(BuildContext context) {
->       return MaterialApp(
->         home: ElevatedButton(
->           onPressed: () => Navigator.push(context, ...),  // ? context MyApp!
->         ),
->       );
->     }
->   }
->  
->   // BENAR:
->   class MyApp extends StatelessWidget {
->     Widget build(BuildContext context) {
->       return MaterialApp(
->         home: HomePage(),  // ? Separate widget
->       );
->     }
->   }
->  
->   class HomePage extends StatelessWidget {
->     Widget build(BuildContext context) {
->       return ...ElevatedButton(
->         onPressed: () => Navigator.push(context, ...),  // ? context HomePage ?
->       );
->     }
->   }
->   ```
->
-> **Problem**: "There are multiple heroes that share the same tag"
-> - **Cause**: Dua widget dengan Hero tag yang sama
-> - **Fix**: Gunakan unique tag, misalnya product ID:
->   ```dart
->   Hero(tag: 'product-{product.id}', child: Image(...))
->   ```
-
-### ?? EKSPERIMEN 1: Return Data dari Detail Page (15 menit)
+### 🎯 EKSPERIMEN 1: Return Data dari Detail Page (15 menit)
 
 **Task**: Tambah fitur rating di detail page, return rating ke grid!
 
 **Step 1**: Modifikasi ProductDetailPage untuk return rating
 
-Update tombol di `ProductDetailPage`:
-
 ```dart
 // Ganti ElevatedButton di bottomNavigationBar:
 ElevatedButton(
   onPressed: () {
-    // Pop dengan return value (rating)
-    Navigator.pop(context, 5);  // Return rating 5
+    Navigator.pop(context, 5); // Return rating 5
   },
-  child: const Text('Beri Rating \u0026 Kembali'),
+  child: const Text('Beri Rating & Kembali'),
 )
 ```
 
 **Step 2**: Terima return value di ProductGridPage
 
-Update `onTap` di ProductGridPage:
-
 ```dart
 onTap: () async {
-  // await untuk tunggu hasil dari detail page
   final rating = await Navigator.push<int>(
     context,
     MaterialPageRoute(
@@ -1372,12 +1019,12 @@ onTap: () async {
     ),
   );
   
-  // rating akan null jika user tap back button
-  // rating akan ada value jika user tap tombol
   if (rating != null) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Rating {products[index].name}: rating \u2b50'),
+        content: Text(
+          'Rating ${products[index].name}: $rating ⭐',
+        ),
         duration: const Duration(seconds: 2),
       ),
     );
@@ -1385,231 +1032,104 @@ onTap: () async {
 },
 ```
 
-**Hot Reload & Test**:
-1. Tap product
-2. Tap "Beri Rating & Kembali"  
-3. Snackbar muncul dengan rating!
+**Hot Reload & Test!** Snackbar muncul dengan rating!
 
-**?? PENTING**: 
-- `await Navigator.push` menunggu halaman di-pop
-- `Navigator.pop(context, value)` return value saat pop
-- Value bisa any type (int, String, Map, custom object)
-
-**?? PIKIRKAN**: Bagaimana jika ingin return complex data?
-
-```dart
-// Bisa return Map:
-Navigator.pop(context, {
-  'rating': 5,
-  'review': 'Produk bagus!',
-  'wouldRecommend': true,
-});
-
-// Atau custom class:
-class ReviewData {
-  final int rating;
-  final String review;
-  ReviewData(this.rating, this.review);
-}
-Navigator.pop(context, ReviewData(5, 'Bagus!'));
-```
-
-### ?? EKSPERIMEN 2: Navigator.pushReplacement (5 menit)
-
-**Task**: Pahami bedanya push vs pushReplacement!
-
-Create simple demo page:
-
-```dart
-// Mini demo - tidak perlu file terpisah, test di existing page
-ElevatedButton(
-  onPressed: () {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => NextPage()),
-    );
-  },
-  child: Text('Go to Next (Replace)'),
-)
-```
+### 🎯 EKSPERIMEN 2: Navigator.pushReplacement (5 menit)
 
 **Visualisasi:**
 
 ```
 push:                      pushReplacement:
-+---------+               +---------+
-� Page C  � ? New         � Page C  � ? New
-+---------�               +---------+
-� Page B  �               (Page B diganti, hilang dari stack)
-+---------�
-� Page A  �
-+---------+
+┌─────────┐               ┌─────────┐
+│ Page C  │ ← New         │ Page C  │ ← New
+├─────────┤               └─────────┘
+│ Page B  │               (Page B diganti)
+├─────────┤
+│ Page A  │
+└─────────┘
 ```
 
 **Kapan Pakai pushReplacement?**
-- ? Login ? Home (setelah login, tidak bisa back ke login)
-- ? Splash ? Home
-- ? Onboarding ? Home
-- ? Payment Success ? Order List (tidak bisa back ke payment)
+- ✅ Login → Home (tidak bisa back ke login)
+- ✅ Splash → Home
+- ✅ Payment Success → Order List
 
-**?? ANALOGI**:
+**💡 ANALOGI**: "push = Tambah buku baru. pushReplacement = Ganti buku paling atas."
 
-> "push = Tambah buku baru di tumpukan (bisa kembali).  
-> pushReplacement = Ganti buku paling atas (tidak bisa kembali ke buku lama)."
+> ⚠️ **TROUBLESHOOTING**:
+>
+> **Problem**: "Navigator operation requested with a context..."
+> - **Cause**: Context salah (dari MaterialApp)
+> - **Fix**: Gunakan context dari widget di DALAM MaterialApp
+>
+> **Problem**: "Multiple heroes that share the same tag"
+> - **Cause**: Dua widget dengan Hero tag sama
+> - **Fix**: Gunakan unique tag: `Hero(tag: 'product-${product.id}')`
 
-### ?? Data Passing: Constructor vs Arguments
+### 💡 Tips & Best Practices
 
-**Analogi Pengiriman Paket:**
-
-```
-Constructor Method (RECOMMENDED):
-+-------------+                  +-------------+
-�  List Page  �                  � Detail Page �
-�             � --------------? �             �
-� Product obj � ProductDetailPage� product     �
-+-------------+    (product: p)  +-------------+
-  Type-safe ?                      Direct access ?
-  "Langsung kasih paket pas antar"
-
-Arguments Method:
-+-------------+                  +-------------+
-�  List Page  �                  � Detail Page �
-�             � --------------? �             �
-� Any data    � arguments: {...} � Cast needed �
-+-------------+                  +-------------+
-  Flexible ?                       Type-unsafe ??
-  "Tulis alamat di amplop, harus buka dulu"
-```
-
-**Rekomendasi**: Gunakan **Constructor** (yang kita pakai di atas) - lebih aman dan langsung!
-
-### ?? Tips \u0026 Best Practices
-
-**DO ?:**
+**DO ✅:**
 - Gunakan constructor untuk passing data (type-safe)
 - `await` Navigator.push jika butuh return value
 - Gunakan `pushReplacement` untuk flow yang tidak boleh back
-- Add Hero animation untuk smooth transition
 - Dispose controller/listener saat pop
 
-**DON'T ?:**
-- Jangan push terlalu banyak halaman (deep stack = memory issue)
+**DON'T ❌:**
+- Jangan push terlalu banyak halaman (deep stack)
 - Jangan lupa handle null return value
 - Jangan gunakan global variable untuk passing data
 - Jangan pakai `pushReplacement` jika user perlu back
 
 ---
 
-## ??? PART 4: Named Routes - Quick Overview (10 menit)
+## 🗺️ PART 4: Named Routes - Quick Overview (10 menit)
 
-> **?? NOTE**: Named routes adalah topik advanced. Untuk pertemuan ini, kita hanya **kenalan dulu**. Implementasi detail nanti di pertemuan berikutnya!
+> 📝 **NOTE**: Named routes adalah topik advanced. Untuk pertemuan ini, kita hanya **kenalan dulu**.
 
-### ?? Apa itu Named Routes?
+### Before vs After
 
-Daripada tulis `MaterialPageRoute` berulang-ulang, kita bisa kasih **nama** ke setiap route.
-
-**Analogi**: 
-
-> "Bayangkan peta. Daripada tulis alamat lengkap tiap kali (MaterialPageRoute), lebih mudah sebut nama tempat saja: '/ home', '/detail', '/cart'."
-
-### Before (Tanpa Named Routes):
-
+**Before (Tanpa Named Routes):**
 ```dart
-// Harus tulis berulang-ulang
 Navigator.push(
   context,
   MaterialPageRoute(builder: (context) => DetailPage()),
 );
-
-Navigator.push(
-  context,
-  MaterialPageRoute(builder: (context) => CartPage()),
-);
 ```
 
-### After (Dengan Named Routes):
-
-**Setup di main.dart:**
-
+**After (Dengan Named Routes):**
 ```dart
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      // Define routes sekali
-      routes: {
-        '/': (context) => HomePage(),
-        '/detail': (context) => DetailPage(),
-        '/cart': (context) => CartPage(),
-      },
-      initialRoute: '/',
-    );
-  }
-}
-```
+// Setup di main.dart
+routes: {
+  '/': (context) => HomePage(),
+  '/detail': (context) => DetailPage(),
+},
 
-**Navigate cukup pakai nama:**
-
-```dart
-// Lebih simple!
+// Navigate
 Navigator.pushNamed(context, '/detail');
-Navigator.pushNamed(context, '/cart');
 ```
 
-### ?? Kapan Pakai Named Routes?
+**💡 ANALOGI**: "Bayangkan peta - lebih mudah sebut nama tempat (/home, /detail) daripada alamat lengkap!"
 
-**Pakai Named Routes jika:**
-- ? App punya banyak halaman (>5)
-- ? Navigation flow kompleks
-- ? Perlu deep linking (buka app langsung ke halaman tertentu)
-- ? Team besar (konsistensi naming)
-
-**Skip Named Routes jika:**
-- ? App simple (2-3 halaman saja)
-- ? Perlu pass complex data via constructor (named routes lebih ribet)
-
-### ?? Challenge (Optional):
-
-Coba convert ProductGrid ? ProductDetail navigation ke named routes!
-
-**Hint:**
-1. Define routes di main.dart
-2. Ganti `Navigator.push` jadi `Navigator.pushNamed`
-3. Pass data via arguments (bukan constructor)
-
-**Solusi ada di file demo**: `06_named_routes_demo.dart`
-
-> ?? **PENTING**: Untuk praktikum hari ini, **pakai constructor method** (yang sudah kita pelajari). Named routes optional!
+**Kapan Pakai Named Routes?**
+- ✅ App punya banyak halaman (>5)
+- ✅ Perlu deep linking
+- ❌ Skip jika app simple (2-3 halaman)
 
 ---
 
-## ??? PART 5: Praktikum Terpandu - Catalog App (35 menit)
+## 🛠️ PART 5: Praktikum Terpandu - Catalog App (35 menit)
 
-### ?? Tujuan Praktikum:
+### 🎯 Tujuan
 
-Buat **Mini E-Commerce App** dengan fitur:
-1. ? Product Grid (GridView)
-2. ? Product Detail Page (Navigation)
-3. ? Add to Cart (Return data)
-4. ? Cart counter badge
+Buat **Mini E-Commerce App** dengan:
+1. ✅ Product Grid (GridView)
+2. ✅ Product Detail Page (Navigation)
+3. ✅ Add to Cart (Return data)
+4. ✅ Cart counter badge
 
-### ?? Requirements Checklist:
+### Step 1: Add Cart State (5 menit)
 
-- [ ] Minimal 8 produk (network images)
-- [ ] Grid 2 kolom, aspect ratio 0.75
-- [ ] Tap produk ? Detail page
-- [ ] Detail page: image, name, price, category, description
-- [ ] Tombol "Tambah ke Keranjang"
-- [ ] Return `true` saat add to cart
-- [ ] Show cart count di AppBar badge
-
-### ?? Step-by-Step Implementation (30 menit)
-
-**CATATAN**: Kita sudah punya ProductGridPage dan ProductDetailPage dari Part 2-3. Sekarang tinggal tambah cart functionality!
-
-#### Step 1: Add Cart State to Grid Page (5 menit)
-
-Update `ProductGridPage` jadi StatefulWidget dengan cart counter:
+Convert ProductGridPage to StatefulWidget:
 
 ```dart
 class ProductGridPage extends StatefulWidget {
@@ -1620,24 +1140,19 @@ class ProductGridPage extends StatefulWidget {
 }
 
 class _ProductGridPageState extends State<ProductGridPage> {
-  int cartCount = 0;  // Track jumlah item di cart
+  int cartCount = 0;
   
-  final List<Product> products = [...];  // Existing products
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Katalog Produk'),
         actions: [
-          // Cart badge
           Stack(
             children: [
               IconButton(
                 icon: const Icon(Icons.shopping_cart),
-                onPressed: () {
-                  // TODO: Navigate to cart page (nanti)
-                },
+                onPressed: () {},
               ),
               if (cartCount > 0)
                 Positioned(
@@ -1645,316 +1160,151 @@ class _ProductGridPageState extends State<ProductGridPage> {
                   top: 8,
                   child: Container(
                     padding: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.red,
                       shape: BoxShape.circle,
                     ),
-                    constraints: const BoxConstraints(
-                      minWidth: 20,
-                      minHeight: 20,
-                    ),
                     child: Text(
-                      'cartCount',
+                      '$cartCount',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 12,
-                        fontWeight: FontWeight.bold,
                       ),
-                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
             ],
           ),
-          const SizedBox(width: 8),
         ],
       ),
-      body: GridView.builder(...),  // Existing grid
+      body: GridView.builder(/* ... */),
     );
   }
 }
 ```
 
-**Hot Reload** ? Cart icon muncul di AppBar (badge masih 0)
-
-#### Step 2: Update ProductDetailPage to Return Boolean (5 menit)
-
-Modify tombol di `ProductDetailPage`:
+### Step 2: Update ProductDetailPage (5 menit)
 
 ```dart
-// Ganti ElevatedButton di bottomNavigationBar:
 ElevatedButton(
   onPressed: () {
-    // Return true = item berhasil ditambahkan
-    Navigator.pop(context, true);
+    Navigator.pop(context, true); // Return true = added
   },
-  style: ElevatedButton.styleFrom(
-    padding: const EdgeInsets.symmetric(vertical: 16),
-    backgroundColor: Colors.blue,
-    foregroundColor: Colors.white,
-  ),
-  child: const Text(
-    'Tambah ke Keranjang',
-    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-  ),
-),
+  child: const Text('Tambah ke Keranjang'),
+)
 ```
 
-#### Step 3: Handle Return Value in Grid Page (10 menit)
-
-Update `onTap` di GridView.builder:
+### Step 3: Handle Return Value (10 menit)
 
 ```dart
-itemBuilder: (context, index) {
-  return ProductCard(
-    product: products[index],
-    onTap: () async {
-      // await untuk tunggu user tap button
-      final result = await Navigator.push<bool>(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ProductDetailPage(
-            product: products[index],
-          ),
+onTap: () async {
+  final result = await Navigator.push<bool>(
+    context,
+    MaterialPageRoute(
+      builder: (context) => ProductDetailPage(
+        product: products[index],
+      ),
+    ),
+  );
+  
+  if (result == true) {
+    setState(() {
+      cartCount++;
+    });
+    
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('${products[index].name} ditambahkan ke keranjang!'),
         ),
       );
-      
-      // Jika user tap "Tambah ke Keranjang"
-      if (result == true) {
-        setState(() {
-          cartCount++;  // Increment cart
-        });
-        
-        // Show confirmation snackbar
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                '{products[index].name} ditambahkan ke keranjang!',
-              ),
-              duration: const Duration(seconds: 2),
-              action: SnackBarAction(
-                label: 'OK',
-                onPressed: () {},
-              ),
-            ),
-          );
-        }
-      }
-    },
-  );
+    }
+  }
 },
 ```
 
-**Hot Reload & Test**:
-1. Tap produk ? Detail page
-2. Tap "Tambah ke Keranjang"
-3. Kembali ke grid ? Badge muncul dengan angka 1!
-4. Tap produk lain ? Tambah lagi ? Badge jadi 2!
-
-**?? Selamat! Cart functionality works!**
-
-#### Step 4: BONUS - Add Loading State (5 menit)
-
-Make detail page more realistic dengan simulasi loading:
-
-```dart
-// Di ProductDetailPage, ubah button jadi StatefulWidget button:
-class _AddToCartButton extends StatefulWidget {
-  @override
-  State<_AddToCartButton> createState() => _AddToCartButtonState();
-}
-
-class _AddToCartButtonState extends State<_AddToCartButton> {
-  bool isLoading = false;
-
-  Future<void> addToCart() async {
-    setState(() => isLoading = true);
-    
-    // Simulasi API call
-    await Future.delayed(const Duration(seconds: 1));
-    
-    setState(() => isLoading = false);
-    
-    if (mounted) {
-      Navigator.pop(context, true);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: isLoading ? null : addToCart,
-      style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-      ),
-      child: isLoading
-          ? const SizedBox(
-              height: 20,
-              width: 20,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              ),
-            )
-          : const Text(
-              'Tambah ke Keranjang',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-    );
-  }
-}
-```
-
-**Hot Reload & Test** ? Button shows loading spinner selama 1 detik!
-
-#### Step 5: Polish & Testing (5 menit)
-
-**Checklist Final:**
-- [ ] 8+ products displayed in grid
-- [ ] Grid scrollable
-- [ ] Tap product opens detail
-- [ ] Detail shows all info (image, name, price, category, description)
-- [ ] "Tambah ke Keranjang" button works
-- [ ] Cart badge updates correctly
-- [ ] SnackBar shows confirmation
-- [ ] Back navigation works smoothly
-
-**?? COMPLETED! Mini E-Commerce App selesai!**
-
-### ?? Tips Debugging:
-
-**Problem**: Badge tidak update setelah add to cart
-- **Check**: Apakah `setState` dipanggil?
-- **Check**: Apakah `result == true` condition benar?
-
-**Problem**: SnackBar tidak muncul
-- **Check**: Apakah `if (mounted)` ada?
-- **Check**: Apakah context masih valid?
-
-**Problem**: App crash saat pop
-- **Check**: Apakah ada Navigator.pop ganda?
-- **Check**: Apakah dispose dipanggil dua kali?
+**Test!** Badge updates saat add to cart!
 
 ---
 
-## ?? PART 6: Wrap Up \u0026 Review (5 menit)
+## 🎯 PART 6: Wrap Up & Review (5 menit)
 
-### ? Apa yang Sudah Dipelajari Hari Ini?
+### ✅ Yang Sudah Dipelajari
 
-1. **ListView.builder** - Efisien untuk data banyak, lazy loading
-2. **GridView.builder** - Grid layout untuk galeri/catalog
-3. **Navigator.push/pop** - Navigasi antar halaman dengan stack
-4. **Passing Data** - Via constructor (recommended)
-5. **Return Data** - Terima value dari halaman yang di-close
-6. **Praktikum** - Mini e-commerce dengan cart functionality
+1. **ListView.builder** - Efficient scrolling lists
+2. **GridView.builder** - Grid layouts  
+3. **Navigator.push/pop** - Navigation dengan stack
+4. **Passing Data** - Via constructor
+5. **Return Data** - Terima value dari halaman tertutup
 
-### ?? Achievement Unlocked:
+### 🏆 Achievement Unlocked
 
-- ? Bisa buat scrollable list dengan custom items
-- ? Bisa buat product grid responsif
-- ? Bisa navigasi antar halaman
-- ? Bisa kirim dan terima data antar halaman
-- ? Bisa buat multi-page app dengan state management
+- ✅ Bisa buat scrollable list
+- ✅ Bisa buat product grid
+- ✅ Bisa navigasi antar halaman
+- ✅ Bisa kirim/terima data
+- ✅ Buat multi-page app
 
-### ?? Tugas Rumah:
+### 📝 Tugas Rumah
 
-**Kembangkan Mini E-Commerce App dengan fitur tambahan:**
+Kembangkan Catalog App dengan:
 
-1. **Category Filter** (MEDIUM)
-   - Tambah dropdown/chips untuk filter by category
-   - GridView update based on selected category
+1. **Category Filter** (MEDIUM) - Filter by category
+2. **Search** (MEDIUM) - Search bar
+3. **Cart Page** (HARD) - Full cart page
+4. **Rating** (EASY) - Add product ratings
 
-2. **Search Functionality** (MEDIUM)
-   - Add search bar di AppBar
-   - Filter products by name
-
-3. **Cart Page** (HARD)
-   - Buat halaman baru untuk lihat cart items
-   - List semua produk yang ditambahkan
-   - Bisa hapus item dari cart
-   - Total price calculation
-
-4. **Product Rating** (EASY)
-   - Tambah rating (1-5 ?) di product model
-   - Show stars di product card dan detail page
-
-**Deadline**: Submit sebelum Pertemuan 4
-
-**Format Submit**:
-- ZIP file atau GitHub repo link
-- Include: full Flutter project (ready to run)
-- Filename: `Pertemuan3_NIM_Nama.zip`
-
-### ?? Pertanyaan Refleksi:
-
-1. Apa bedanya ListView.builder dan ListView biasa?
-2. Kapan pakai GridView, kapan pakai ListView?
-3. Apa yang terjadi jika push 10 halaman tanpa pernah pop?
-4. Kenapa harus pakai constructor untuk passing data?
-5. Apa fungsi `await` di Navigator.push?
+**Deadline**: Sebelum Pertemuan 4
 
 ---
 
-## ? FAQ - Frequently Asked Questions
+## ❓ FAQ - Frequently Asked Questions
 
 ### Q1: Kapan pakai ListView vs GridView vs SingleChildScrollView?
 
 **A**: 
-- `ListView` ? Data banyak, satu kolom vertikal
-- `GridView` ? Data banyak, multiple kolom (galeri, products)
-- `SingleChildScrollView` ? Content static/sedikit yang perlu scroll (misal: form panjang)
+- `ListView` → Data banyak, 1 kolom vertikal
+- `GridView` → Data banyak, multiple kolom
+- `SingleChildScrollView` → Content sedikit/static
 
-**Rule of thumb**: Data > 10 items ? WAJIB pakai .builder!
+**Rule**: Data > 10 items → WAJIB pakai .builder!
 
-### Q2: Apa bedanya push, pushReplacement, dan pushAndRemoveUntil?
+### Q2: Bedanya push, pushReplacement, pushAndRemoveUntil?
 
 **A**:
-- `push` ? Tambah halaman di atas stack (bisa back)
-- `pushReplacement` ? Ganti halaman current (tidak bisa back ke current)
-- `pushAndRemoveUntil` ? Push halaman baru, hapus semua halaman sebelumnya sampai kondisi tertentu
+- `push` → Tambah halaman (bisa back)
+- `pushReplacement` → Ganti halaman (tidak bisa back)
+- `pushAndRemoveUntil` → Push + hapus semua sebelumnya
 
-**Example use cases**:
-- Login ? Home: `pushReplacement` (tidak bisa back ke login)
-- Logout: `pushAndRemoveUntil` (hapus semua, back ke landing page)
+### Q3: Kenapa images tidak muncul?
 
-### Q3: Kenapa images tidak muncul di GridView?
+**A**: 
+1. Network issue → Cek internet
+2. URL salah → Verify di browser
+3. Tidak ada errorBuilder → Add error handling
 
-**A**: Beberapa kemungkinan:
-1. **Network issue** ? Cek internet connection
-2. **URL salah** ? Verify URL di browser dulu
-3. **Tidak ada errorBuilder** ? Image error tidak keliatan
-4. **Aspect ratio masalah** ? Image terlalu kecil
+**Fix**: Selalu add `loadingBuilder` dan `errorBuilder`!
 
-**Fix**: Selalu tambahkan `loadingBuilder` dan `errorBuilder`!
+### Q4: Error "RenderBox was not laid out"?
 
-### Q4: Error "RenderBox was not laid out" - gimana fix?
-
-**A**: Ini berarti widget butuh constraint tapi tidak dapat.
-
-**Common causes**:
-- ListView/GridView di dalam Column tanpa `Expanded`
-- Nested scrollable widgets
+**A**: Widget butuh constraint tapi tidak dapat.
 
 **Fix**:
 ```dart
 Column(
   children: [
-    Text('Header'),
-    Expanded(  // ? ADD THIS!
-      child: ListView.builder(...),
+    Expanded( // ← ADD THIS!
+      child: ListView.builder(/* ... */),
     ),
   ],
 )
 ```
 
-### Q5: Bagaimana cara pass multiple data ke halaman baru?
+### Q5: Cara pass multiple data ke halaman baru?
 
-**A**: Beberapa cara:
+**A**: 
 
-**1. Multiple constructor parameters (BEST)**:
+**Best - Multiple constructor parameters**:
 ```dart
 Navigator.push(
   context,
@@ -1968,177 +1318,128 @@ Navigator.push(
 );
 ```
 
-**2. Custom class/model**:
-```dart
-class PageData {
-  final Product product;
-  final int userId;
-  PageData(this.product, this.userId);
-}
+### Q6: Apa itu `mounted` dan kenapa perlu cek?
 
-Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (context) => DetailPage(data: pageData),
-  ),
-);
-```
-
-### Q6: Apa itu `mounted` dan kenapa harus cek `if (mounted)`?
-
-**A**: `mounted` cek apakah widget masih ada di tree (belum di-dispose).
-
-**Problem tanpa cek**:
-```dart
-Future<void> loadData() async {
-  await Future.delayed(Duration(seconds: 2));
-  setState(() {});  // ? CRASH jika user sudah pop page!
-}
-```
+**A**: `mounted` cek apakah widget masih di tree.
 
 **Fix**:
 ```dart
 Future<void> loadData() async {
   await Future.delayed(Duration(seconds: 2));
-  if (mounted) {  // ? Safe!
+  if (mounted) { // ✅ Safe!
     setState(() {});
   }
 }
 ```
 
-### Q7: Bagaimana cara buat Hero animation untuk smooth transition?
+### Q7: Cara buat Hero animation?
 
-**A**: Wrap image dengan `Hero` widget:
+**A**: 
 
-**Di Grid Page**:
+**Grid Page**:
 ```dart
 Hero(
-  tag: 'product-{product.id}',  // Unique tag
+  tag: 'product-${product.id}',
   child: Image.network(product.imageUrl),
 )
 ```
 
-**Di Detail Page**:
+**Detail Page**:
 ```dart
 Hero(
-  tag: 'product-{product.id}',  // SAME tag!
+  tag: 'product-${product.id}', // SAME tag!
   child: Image.network(product.imageUrl),
 )
 ```
 
-**Result**: Image "terbang" dari grid ke detail dengan smooth animation! ?
+Result: Image "terbang" dengan smooth animation! ✨
 
 ### Q8: Cara handle async operation saat navigate?
 
-**A**: Gunakan `await` dan `async`:
-
+**A**:
 ```dart
 onTap: () async {
-  // Show loading
-  showDialog(context: context, builder: (context) => LoadingDialog());
+  showDialog(/* loading */);
+  final data = await fetchData();
+  Navigator.pop(context); // Hide loading
   
-  // Fetch data
-  final data = await fetchProductDetail(product.id);
-  
-  // Hide loading
-  if (mounted) Navigator.pop(context);
-  
-  // Navigate dengan data
   if (mounted) {
-    await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DetailPage(data: data),
-      ),
-    );
+    await Navigator.push(/* ... */);
   }
 }
 ```
 
 ---
 
-## ????? FOR INSTRUCTORS ONLY
+## 👨‍🏫 FOR INSTRUCTORS ONLY
 
-> **?? Instruksi untuk Dosen/Instruktur**
+> 📌 Instruksi untuk Dosen/Instruktur
 
-### Persiapan Sebelum Kelas:
+### Persiapan Sebelum Kelas (30 menit)
 
-1. **Test All Code** (30 menit before class)
-   - Run semua demo files di `contoh_kode/pertemuan_3/`
-   - Verify images load (network connection!)
-   - Test pada emulator DAN device fisik
+1. **Test All Code**
+   - Run semua demo files
+   - Verify images load
+   - Test pada device fisik
 
 2. **Prepare Backup Plan**
    - Download local images jika internet unstable
-   - Prepare screenshots untuk key steps
-   - Backup project jika live coding gagal
+   - Prepare screenshots
+   - Backup project
 
 3. **Setup Classroom**
-   - Projector/screen tested
-   - Sample app running di device
-   - WiFi stable (untuk network images)
+   - Projector tested
+   - Sample app running
+   - WiFi stable
 
-### Timeline Management:
+### Timeline Management
 
-**STRICT timing to fit 150 minutes**:
-- Part 0: 10 min MAX (skip quiz jika students slow)
-- Part 1: 30 min (bisa skip horizontal ListView jika waktu mepet)
+**STRICT timing untuk 150 menit**:
+- Part 0: 10 min (skip quiz jika slow)
+- Part 1: 30 min (bisa skip horizontal ListView)
 - Part 2: 20 min (skip Experiment 3 jika perlu)
-- Part 3: 40 min (JANGAN potong - ini core!)  
-- Part 4: 10 min (cukup explain concept, no coding)
-- Part 5: 35 min (students code along, instructor guide)
-- Part 6: 5 min (wrap up cepat)
+- Part 3: 40 min (JANGAN potong - core!)  
+- Part 4: 10 min (concept only)
+- Part 5: 35 min (students code along)
+- Part 6: 5 min
 
-**Jika waktu kurang**: Skip Part 4 entirely, fokus ke praktikum.
+**Jika waktu kurang**: Skip Part 4, fokus praktikum.
 
-### Common Student Mistakes to Watch:
+### Common Student Mistakes
 
-1. **Lupa import** - Sering lupa import model/widget
-2. **Typo di constructor** - `requierd` instead of `required`
-3. **Null safety** - Lupa `?` atau `!` untuk nullable
-4. **Context error** - Pakai context dari wrong widget
+1. **Lupa import** - Remind to check imports
+2. **Typo** - `requierd` instead of `required`
+3. **Null safety** - Lupa `?` atau `!`
+4. **Context error** - Wrong widget context
 5. **setState di async** - Lupa cek `mounted`
 
-### Grading Praktikum:
+### Grading Praktikum
 
-Use rubric from implementation plan (Section 8).
+**Quick grading**:
+- 50% = Code runs
+- 70% = All features work
+- 85% = Code clean
+- 95%+ = Bonus features
 
-**Quick grading tips**:
-- 50% = Code runs without error
-- 70% = All basic features work
-- 85% = Code clean, well-structured
-- 95%+ = Bonus features implemented
+### Discussion Prompts
 
-### Discussion Prompts:
-
-**For engagement**:
 - "Apa app favorit kalian yang pakai GridView?"
-- "Gimana rasanya pakai app yang load 1000 items sekaligus?" (introduce lazy loading)
-- "Pernah experience app yang navigation-nya membingungkan? Kenapa?"
+- "Pernah experience app yang navigation-nya membingungkan?"
 
-### Differentiation:
+### Differentiation
 
-**For fast learners**:
-- Challenge: Implement MaxCrossAxisExtent responsive grid
-- Challenge: Add Hero animation
-- Challenge: Implement full cart page with remove functionality
+**Fast learners**:
+- Hero animation
+- Full cart page
+- Sort & filter
 
-**For struggling students**:
-- Provide complete `ProductGridPage` skeleton
-- Let them just modify `onTap` and cart logic
-- Pair programming with faster student
-
-### Extension Activities:
-
-Jika ada waktu extra (unlikely), students bisa:
-1. Add product favorit feature (heart icon toggle)
-2. Implement sort (price low-high, name A-Z)
-3. Add product quantity selector di detail page
+**Struggling students**:
+- Provide skeleton code
+- Pair programming
+- Focus on cart logic only
 
 ---
 
-**?? Pertemuan 3 Materi Complete! ??**
+**🎉 Pertemuan 3 Complete!**
 
-**Next**: Pertemuan 4 - Forms, Input \u0026 Validation
-
-
+**Next**: Pertemuan 4 - Forms, Input & Validation
