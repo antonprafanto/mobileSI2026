@@ -25,12 +25,23 @@ Repository ini berisi materi pembelajaran mata kuliah **Pemrograman Mobile** unt
 
 ## 📂 Contoh Kode & Proyek
 
-| Folder                                                               | Deskripsi                                                  |
-| -------------------------------------------------------------------- | ---------------------------------------------------------- |
-| [`contoh_kode/pertemuan_2/`](contoh_kode/pertemuan_2/)               | File demo per topik (StatefulWidget, Layout, Theming, dll) |
-| [`contoh_kode/pertemuan_3/`](contoh_kode/pertemuan_3/)               | File demo ListView, GridView, Navigation (7 demos)         |
-| [`contoh_kode/pertemuan_4/`](contoh_kode/pertemuan_4/)               | File demo State Management & Provider (6 demos)            |
-| [`contoh_proyek/pertemuan_2_demo/`](contoh_proyek/pertemuan_2_demo/) | Flutter project lengkap dengan navigasi antar demo         |
+> 💡 **Penjelasan struktur**: Lihat [PENJELASAN_STRUKTUR.md](contoh_kode/PENJELASAN_STRUKTUR.md)
+
+### Demo Files (contoh_kode/)
+
+| Folder                                                 | Deskripsi                                                  |
+| ------------------------------------------------------ | ---------------------------------------------------------- |
+| [`contoh_kode/pertemuan_2/`](contoh_kode/pertemuan_2/) | File demo per topik (StatefulWidget, Layout, Theming, dll) |
+| [`contoh_kode/pertemuan_3/`](contoh_kode/pertemuan_3/) | File demo ListView, GridView, Navigation (7 demos)         |
+| [`contoh_kode/pertemuan_4/`](contoh_kode/pertemuan_4/) | File demo State Management & Provider (6 demos)            |
+
+### Full Flutter Projects (contoh_proyek/)
+
+| Folder                                                               | Deskripsi                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------- |
+| [`contoh_proyek/pertemuan_2_demo/`](contoh_proyek/pertemuan_2_demo/) | Flutter project lengkap dengan navigasi antar demo |
+
+**Note**: Untuk Pertemuan 3 & 4, praktikum project dibangun step-by-step dalam material. Complete code ada di dalam dokumen materi!
 
 ## 🛠️ Persiapan Development
 
