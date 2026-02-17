@@ -1,4 +1,4 @@
-# 📱 PERTEMUAN 4 - LIVE CODING
+# 📱 PERTEMUAN 4
 
 ## State Management dengan Provider
 
@@ -2302,4 +2302,5 @@ Consider alternatives when:
 **🎉 Pertemuan 4 Complete!**
 
 **Next**: Pertemuan 5 - Forms, Validasi & Debugging
+
 
