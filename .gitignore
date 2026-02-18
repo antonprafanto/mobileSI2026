@@ -1,0 +1,21 @@
+# ============================================
+# Git Ignore - mobileSI2026
+# Hanya track: Pertemuan_*.md, contoh_proyek/, contoh_kode/
+# ============================================
+
+# Ignore semua file di root kecuali yang diizinkan
+/*
+
+# IZINKAN file-file ini:
+!.gitignore
+!README.md
+!Pertemuan_1_Pengenalan_Flutter_dan_Dart.md
+!Pertemuan_2_Widget_Layout_dan_Theming.md
+!Pertemuan_3_ListView_GridView_dan_Navigasi.md
+!Pertemuan_4_State_Management_dengan_Provider.md
+!contoh_proyek/
+!contoh_kode/
+
+# Pastikan isi folder contoh_proyek dan contoh_kode ikut di-track
+!contoh_proyek/**
+!contoh_kode/**
