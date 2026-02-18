@@ -2,6 +2,10 @@
 // PRAKTIKUM SOLUTION: Shopping Cart dengan Provider - Complete Implementation
 // Pertemuan 4 - State Management dengan Provider
 // REQUIRES: flutter pub add provider
+//
+// NOTE: Demo ini menggunakan 'emoji' field di Product model (offline-friendly!).
+// Di materi Part 5, Product juga menggunakan 'emoji' - konsisten dengan demo ini.
+// Keduanya bisa diubah ke Image.network di Pertemuan 6 (Networking).
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

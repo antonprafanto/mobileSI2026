@@ -2,6 +2,9 @@
 // Demo: Multiple Providers (Cart + User + Theme)
 // Pertemuan 4 - State Management dengan Provider
 // REQUIRES: flutter pub add provider
+//
+// NOTE: CartModel di demo ini disederhanakan (hanya itemCount: int).
+// Untuk implementasi CartModel lengkap dengan Product detail, lihat demo 04.
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

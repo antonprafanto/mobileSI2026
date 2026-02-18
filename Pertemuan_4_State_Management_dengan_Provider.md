@@ -19,16 +19,16 @@ Setelah mengikuti pertemuan ini, Anda diharapkan mampu:
 
 ## ⏱️ TIMELINE SESI (Total: 150 menit)
 
-| Durasi   | Topik  | Aktivitas                                |
-|----------|--------|------------------------------------------|
-| 10 menit | Part 0 | Review & Warm Up                         |
-| 15 menit | Part 1 | Understanding State (Ephemeral vs App)   |
-| 20 menit | Part 2 | setState dan Keterbatasannya             |
-| 10 menit | Part 3 | Introduction to Provider                 |
-| 25 menit | Part 4 | ChangeNotifier Pattern                   |
-| 50 menit | Part 5 | Shopping Cart Hands-On (MAIN PROJECT)    |
-| 15 menit | Part 6 | Advanced Provider Topics                 |
-| 5 menit  | Part 7 | Wrap Up + Praktikum briefing             |
+| Durasi   | Topik  | Aktivitas                              |
+| -------- | ------ | -------------------------------------- |
+| 10 menit | Part 0 | Review & Warm Up                       |
+| 15 menit | Part 1 | Understanding State (Ephemeral vs App) |
+| 20 menit | Part 2 | setState dan Keterbatasannya           |
+| 10 menit | Part 3 | Introduction to Provider               |
+| 25 menit | Part 4 | ChangeNotifier Pattern                 |
+| 50 menit | Part 5 | Shopping Cart Hands-On (MAIN PROJECT)  |
+| 15 menit | Part 6 | Advanced Provider Topics               |
+| 5 menit  | Part 7 | Wrap Up + Praktikum briefing           |
 
 ---
 
@@ -36,14 +36,14 @@ Setelah mengikuti pertemuan ini, Anda diharapkan mampu:
 
 > 💡 **File demo tersedia di folder `contoh_kode/pertemuan_4/`**
 
-| File | Deskripsi |
-|------|-----------|
-| `01_counter_setstate_demo.dart` | Counter dengan setState (baseline) |
-| `02_prop_drilling_problem_demo.dart` | Problem: passing state 3 levels deep |
-| `03_counter_provider_demo.dart` | Counter solution dengan Provider |
-| `04_shopping_cart_complete.dart` | Shopping cart lengkap (praktikum solution) |
-| `05_multi_provider_demo.dart` | Multiple providers (Cart + User + Theme) |
-| `06_selector_optimization_demo.dart` | Selector untuk performance optimization |
+| File                                 | Deskripsi                                  |
+| ------------------------------------ | ------------------------------------------ |
+| `01_counter_setstate_demo.dart`      | Counter dengan setState (baseline)         |
+| `02_prop_drilling_problem_demo.dart` | Problem: passing state 3 levels deep       |
+| `03_counter_provider_demo.dart`      | Counter solution dengan Provider           |
+| `04_shopping_cart_complete.dart`     | Shopping cart lengkap (praktikum solution) |
+| `05_multi_provider_demo.dart`        | Multiple providers (Cart + User + Theme)   |
+| `06_selector_optimization_demo.dart` | Selector untuk performance optimization    |
 
 ---
 
@@ -76,6 +76,7 @@ Setelah mengikuti pertemuan ini, Anda diharapkan mampu:
 **Scenario:**
 
 > Bayangkan kamu buat aplikasi **shopping cart**:
+>
 > - Product list page perlu show items
 > - Cart badge di AppBar perlu show jumlah items
 > - Cart page perlu show detail items
@@ -85,6 +86,7 @@ Setelah mengikuti pertemuan ini, Anda diharapkan mampu:
 **Question**: Gimana caranya semua page bisa akses cart yang SAMA? 🤔
 
 **Bad Solution** (yang akan kita hindari):
+
 ```dart
 HomePage(cart: myCart, onAdd: () {...})
   └─> ProductPage(cart: myCart, onAdd: () {...})
@@ -95,6 +97,7 @@ HomePage(cart: myCart, onAdd: () {...})
 Pass cart ke SEMUA widget? 😱 **NIGHTMARE!**
 
 **Good Solution** (yang akan kita pelajari):
+
 ```dart
 Provider<CartModel> ← ONE source
     ├─> HomePage ← read cart
@@ -114,6 +117,7 @@ Semua widget akses cart langsung! 🎉
 **State** = Data yang bisa berubah dan mempengaruhi tampilan UI.
 
 **Contoh State**:
+
 - Counter value (0, 1, 2, ...)
 - Login status (logged in / logged out)
 - Shopping cart items
@@ -135,12 +139,14 @@ Semua widget akses cart langsung! 🎉
 
 ### 💡 ANALOGI: State seperti Catatan
 
-> **Ephemeral State** = Sticky note di mejamu  
+> **Ephemeral State** = Sticky note di mejamu
+>
 > - Hanya kamu yang akses
 > - Hilang kalau pindah meja
 > - Contoh: Draft email yang belum dikirim
 >
-> **App State** = Whiteboard di ruang meeting  
+> **App State** = Whiteboard di ruang meeting
+>
 > - Semua orang lihat
 > - Tetap ada meskipun orang keluar-masuk
 > - Contoh: Todo list tim
@@ -181,7 +187,7 @@ class _CounterPageState extends State<CounterPage> {
   @override
   Widget build(BuildContext context) {
     print('CounterPage rebuilt!'); // ← We'll see this print
-    
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Counter with setState'),
@@ -256,12 +262,14 @@ class MyApp extends StatelessWidget {
 **Hot Reload!** Klik tombol Increment → Counter naik!
 
 **💡 YANG TERJADI**:
+
 1. User tap button → `_increment()` dipanggil
 2. `setState(() { _counter++; })` → Modify state + mark dirty
 3. Flutter rebuild widget
 4. `build()` dipanggil lagi → UI update dengan nilai baru
 
 **setState SANGAT COCOK untuk:**
+
 - ✅ Local widget state (form input, checkbox)
 - ✅ Simple counter, toggle
 - ✅ Animation state
@@ -365,7 +373,7 @@ ElevatedButton.icon(
 ```
 CounterPage (_counter: 5)
       │
-      ├─> Display value: ✓ Easy  
+      ├─> Display value: ✓ Easy
       │
       └─> Navigate to DisplayPage(counter: 5)
               │
@@ -378,6 +386,7 @@ CounterPage (_counter: 5)
 > ⚠️ **PROBLEM YANG MUNCUL**:
 >
 > **Problem**: "Too many parameters to pass"
+>
 > - **Symptom**: Constructor jadi panjang dengan banyak callbacks
 > - **Worse**: Deep widgets (3+ levels) susah akses data dari top
 > - **Result**: Code jadi messy, hard to maintain
@@ -386,18 +395,21 @@ CounterPage (_counter: 5)
 ### 💡 Tips & Best Practices - Kapan Pakai setState
 
 **DO ✅:**
+
 - Gunakan setState untuk state LOCAL (1 widget)
 - State yang bersifat sementara (UI state)
 - Simple toggle, checkbox, text input
 - State yang tidak perlu di-share
 
 **DON'T ❌:**
+
 - Jangan pakai setState untuk state yang di-share >2 widgets
 - Jangan pass state through 3+ levels (prop drilling)
 - Jangan duplicate state di multiple widgets
 - Jangan pakai untuk app-wide data (cart, user, theme)
 
 **KAPAN PINDAH KE PROVIDER?**
+
 - State perlu diakses >2 pages
 - Banyak widgets perlu same state
 - State complex (cart with add/remove/update)
@@ -412,11 +424,12 @@ CounterPage (_counter: 5)
 Saat app tumbuh besar, setState punya masalah serius: **Prop Drilling**.
 
 **💡 ANALOGI - Telepon Beranting**:
+
 ```
 Boss → Manager → Supervisor → Team Lead → Worker
 
 Boss bilang: "Increase salary"
-Harus lewat 4 orang! 
+Harus lewat 4 orang!
 Kalau Manager lupa pass? FAIL!
 ```
 
@@ -711,6 +724,7 @@ Widget build(BuildContext context) {
 **Test**: Increment di HomePage → Check console
 
 Result:
+
 ```
 🔴 HomePage rebuilt!
 ```
@@ -718,6 +732,7 @@ Result:
 Only HomePage rebuilds! ✓ Good.
 
 **But imagine**:
+
 - 10 pages need counter
 - 5 pages need reset function
 - Constructor parameters = NIGHTMARE 😱
@@ -725,16 +740,19 @@ Only HomePage rebuilds! ✓ Good.
 > ⚠️ **TROUBLESHOOTING - setState Limitations**:
 >
 > **Problem**: "Too many constructor parameters"
+>
 > - **Cause**: Passing state through multiple levels
 > - **Impact**: Code hard to read, maintain, test
 > - **Sign**: Widget has >3 parameters just for passing data
 >
 > **Problem**: "Widget doesn't use data but needs to pass it"
+>
 > - **Cause**: Prop drilling (middle widget just courier)
 > - **Impact**: Tight coupling, hard to refactor
 > - **Example**: ProfilePage doesn't use onReset but must pass it
 >
 > **Problem**: "Duplicate state in multiple widgets"
+>
 > - **Cause**: Each widget has own copy of state
 > - **Impact**: State out of sync, bugs
 > - **Sign**: Same data stored in 2+ places
@@ -742,12 +760,14 @@ Only HomePage rebuilds! ✓ Good.
 ### 💡 Tips & Best Practices - When setState Fails
 
 **setState FAILS when:**
+
 - ❌ State needed in >2 widgets
 - ❌ Widgets tidak direct parent-child
 - ❌ Deep nesting (3+ levels)
 - ❌ State complex (cart, user profile)
 
 **SIGNS you need better state management:**
+
 - 🚩 Constructor has >5 parameters
 - 🚩 Passing callbacks 3+ levels deep
 - 🚩 Widget just "passes through" data
@@ -784,14 +804,14 @@ Hard to add device!          Easy to add new listener!
 
 ### Why Provider?
 
-| Feature | setState | Provider |
-|---------|----------|----------|
-| **Scope** | Local (1 widget) | App-wide |
-| **Sharing** | Via parameters | Direct access |
-| **Rebuilds** | Entire widget | Only listeners |
-| **Testing** | Hard (coupled) | Easy (injectable) |
-| **Code** | Prop drilling | Clean |
-| **Official** | ✓ Built-in | ✓ Recommended |
+| Feature      | setState         | Provider          |
+| ------------ | ---------------- | ----------------- |
+| **Scope**    | Local (1 widget) | App-wide          |
+| **Sharing**  | Via parameters   | Direct access     |
+| **Rebuilds** | Entire widget    | Only listeners    |
+| **Testing**  | Hard (coupled)   | Easy (injectable) |
+| **Code**     | Prop drilling    | Clean             |
+| **Official** | ✓ Built-in       | ✓ Recommended     |
 
 ### Provider Benefits
 
@@ -810,17 +830,19 @@ Hard to add device!          Easy to add new listener!
 dependencies:
   flutter:
     sdk: flutter
-  provider: ^6.1.0  # ← ADD THIS LINE
+  provider: ^6.1.0 # ← ADD THIS LINE
 ```
 
 **Step 2**: Install package
 
 Terminal/Command Prompt:
+
 ```bash
 flutter pub get
 ```
 
 Atau shortcut:
+
 ```bash
 flutter pub add provider
 ```
@@ -871,13 +893,13 @@ Home  Profile Settings
 
 ### Provider vs Other Solutions
 
-| Solution | Complexity | Learning Curve | Use Case |
-|----------|-----------|----------------|----------|
-| **setState** | ⭐ | Easy | Local state |
-| **Provider** | ⭐⭐ | Medium | App state |
-| **Riverpod** | ⭐⭐⭐ | Hard | Large apps |
-| **Bloc** | ⭐⭐⭐⭐ | Very Hard | Enterprise |
-| **GetX** | ⭐⭐ | Medium | All-in-one |
+| Solution     | Complexity | Learning Curve | Use Case    |
+| ------------ | ---------- | -------------- | ----------- |
+| **setState** | ⭐         | Easy           | Local state |
+| **Provider** | ⭐⭐       | Medium         | App state   |
+| **Riverpod** | ⭐⭐⭐     | Hard           | Large apps  |
+| **Bloc**     | ⭐⭐⭐⭐   | Very Hard      | Enterprise  |
+| **GetX**     | ⭐⭐       | Medium         | All-in-one  |
 
 **Recommendation**: Start dengan Provider! Official + Cukup powerful + Not too complex.
 
@@ -891,7 +913,7 @@ Di Part 4, kita akan belajar **ChangeNotifier** - core pattern di Provider!
 class CounterModel extends ChangeNotifier {
   int _count = 0;
   int get count => _count;
-  
+
   void increment() {
     _count++;
     notifyListeners(); // ← Magic happens here!
@@ -908,6 +930,7 @@ Simple kan? Let's go! 🚀
 ### What is ChangeNotifier?
 
 **ChangeNotifier** adalah class yang:
+
 - Menyimpan state
 - Notify listeners saat state berubah
 - Pattern: **Observable** (observers listen to changes)
@@ -939,28 +962,28 @@ import 'package:flutter/foundation.dart';
 class CounterModel extends ChangeNotifier {
   // 1. Private state variable
   int _count = 0;
-  
+
   // 2. Public getter for read access
   int get count => _count;
-  
+
   // 3. Public methods to modify state
   void increment() {
     _count++;                // Modify state
     notifyListeners();       // ← CRUCIAL! Notify all listeners
   }
-  
+
   void decrement() {
     if (_count > 0) {
       _count--;
       notifyListeners();
     }
   }
-  
+
   void reset() {
     _count = 0;
     notifyListeners();
   }
-  
+
   // Optional: method dengan parameter
   void addValue(int value) {
     _count += value;
@@ -997,7 +1020,7 @@ Update `main.dart`:
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'models/counter_model.dart';
-import 'pages/counter_provider_page.dart';
+import 'pages/counter_page.dart'; // File yang dibuat di Part 1 (Step 3)
 
 void main() {
   runApp(
@@ -1027,6 +1050,7 @@ class MyApp extends StatelessWidget {
 ```
 
 **💡 KEY POINTS**:
+
 - `ChangeNotifierProvider` membuat CounterModel available ke semua widgets di bawahnya
 - `create` function dipanggil ONCE saat app start
 - Semua child widgets bisa akses CounterModel!
@@ -1047,7 +1071,7 @@ class CounterProviderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('🔴 CounterProviderPage build'); // We'll see this ONCE
-    
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Counter with Provider'),
@@ -1061,7 +1085,7 @@ class CounterProviderPage extends StatelessWidget {
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 20),
-            
+
             // Consumer - Only THIS widget rebuilds!
             Consumer<CounterModel>(
               builder: (context, counter, child) {
@@ -1076,7 +1100,7 @@ class CounterProviderPage extends StatelessWidget {
                 );
               },
             ),
-            
+
             const SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -1146,7 +1170,7 @@ You can also use `context.watch` (simpler but rebuilds more):
 Widget build(BuildContext context) {
   // Watch for changes - rebuilds ENTIRE widget
   final counter = context.watch<CounterModel>();
-  
+
   return Scaffold(
     body: Center(
       child: Text('${counter.count}'),
@@ -1157,11 +1181,11 @@ Widget build(BuildContext context) {
 
 **Consumer vs context.watch**:
 
-| Method | Rebuild Scope | Use Case |
-|--------|---------------|----------|
-| `Consumer` | Only Consumer widget | Targeted rebuild (better performance) |
-| `context.watch` | Entire build method | Simple cases, small widgets |
-| `context.read` | No rebuild | Callbacks, event handlers only |
+| Method          | Rebuild Scope        | Use Case                              |
+| --------------- | -------------------- | ------------------------------------- |
+| `Consumer`      | Only Consumer widget | Targeted rebuild (better performance) |
+| `context.watch` | Entire build method  | Simple cases, small widgets           |
+| `context.read`  | No rebuild           | Callbacks, event handlers only        |
 
 ### 🎯 EKSPERIMEN 4: Compare Rebuilds (5 menit)
 
@@ -1189,16 +1213,19 @@ return Text('${counter.count}');
 > ⚠️ **TROUBLESHOOTING - ChangeNotifier**:
 >
 > **Problem**: "Could not find the correct Provider<CounterModel>"
+>
 > - **Cause**: ChangeNotifierProvider tidak di atas widget yang consume
 > - **Fix**: Move ChangeNotifierProvider di main.dart, wrap MaterialApp
 > - **Verify**: Provider harus di parent/ancestor dari Consumer
 >
 > **Problem**: "UI tidak update saat state berubah"
+>
 > - **Cause**: Lupa call `notifyListeners()`
 > - **Fix**: Add `notifyListeners()` setelah every state change
 > - **Pattern**: Always `_field++; notifyListeners();`
 >
 > **Problem**: "context.read used inside build method"
+>
 > - **Cause**: Trying to read inside build (should watch/Consumer)
 > - **Fix**: Use `context.watch` or `Consumer` in build, `read` in callbacks
 > - **Rule**: read = callbacks, watch = build
@@ -1206,6 +1233,7 @@ return Text('${counter.count}');
 ### 💡 Tips & Best Practices - ChangeNotifier
 
 **DO ✅:**
+
 - Extend ChangeNotifier untuk model classes
 - Use private fields (`_count`) dengan public getters
 - ALWAYS call notifyListeners() after state change
@@ -1214,6 +1242,7 @@ return Text('${counter.count}');
 - Create separate model classes (not in widgets)
 
 **DON'T ❌:**
+
 - Don't forget notifyListeners() (most common mistake!)
 - Don't use context.read inside build method
 - Don't modify state without notifying
@@ -1227,10 +1256,10 @@ return Text('${counter.count}');
 class MyModel extends ChangeNotifier {
   // Private state
   Type _field = initialValue;
-  
+
   // Public getter
   Type get field => _field;
-  
+
   // Public methods
   void updateField(newValue) {
     _field = newValue;
@@ -1248,6 +1277,7 @@ class MyModel extends ChangeNotifier {
 Build **Mini E-Commerce Shopping Cart** dengan Provider!
 
 **Features Checklist**:
+
 - [ ] Product model
 - [ ] Cart model with ChangeNotifier
 - [ ] Product list page
@@ -1269,18 +1299,20 @@ class Product {
   final String id;
   final String name;
   final double price;
-  final String imageUrl;
-  final String category;
-  
+  final String emoji;      // ← Emoji sebagai gambar produk (offline-friendly!)
+  final String description;
+
   Product({
     required this.id,
     required this.name,
     required this.price,
-    required this.imageUrl,
-    required this.category,
+    required this.emoji,
+    required this.description,
   });
 }
 ```
+
+> 💡 **Kenapa emoji?** Lebih simple, tidak perlu internet, dan mudah diubah ke `Image.network` nanti di Pertemuan 6 (Networking)!
 
 **Step 2: Create CartItem Model** (3 menit)
 
@@ -1291,12 +1323,12 @@ import 'product.dart';
 class CartItem {
   final Product product;
   int quantity;
-  
+
   CartItem({
     required this.product,
     this.quantity = 1,
   });
-  
+
   // Calculated property
   double get totalPrice => product.price * quantity;
 }
@@ -1313,24 +1345,24 @@ import 'cart_item.dart';
 class CartModel extends ChangeNotifier {
   // Private state - Map for O(1) lookup
   final Map<String, CartItem> _items = {};
-  
+
   // Getters
   Map<String, CartItem> get items => _items;
-  
+
   List<CartItem> get itemsList => _items.values.toList();
-  
+
   int get itemCount => _items.length;
-  
+
   int get totalQuantity {
     return _items.values.fold(0, (sum, item) => sum + item.quantity);
   }
-  
+
   double get totalPrice {
     return _items.values.fold(0.0, (sum, item) => sum + item.totalPrice);
   }
-  
+
   bool get isEmpty => _items.isEmpty;
-  
+
   // Methods
   void addItem(Product product) {
     if (_items.containsKey(product.id)) {
@@ -1342,22 +1374,22 @@ class CartModel extends ChangeNotifier {
     }
     notifyListeners(); // ← Notify UI!
   }
-  
+
   void removeItem(String productId) {
     _items.remove(productId);
     notifyListeners();
   }
-  
+
   void increaseQuantity(String productId) {
     if (_items.containsKey(productId)) {
       _items[productId]!.quantity++;
       notifyListeners();
     }
   }
-  
+
   void decreaseQuantity(String productId) {
     if (!_items.containsKey(productId)) return;
-    
+
     if (_items[productId]!.quantity > 1) {
       _items[productId]!.quantity--;
     } else {
@@ -1366,7 +1398,7 @@ class CartModel extends ChangeNotifier {
     }
     notifyListeners();
   }
-  
+
   void clear() {
     _items.clear();
     notifyListeners();
@@ -1375,6 +1407,7 @@ class CartModel extends ChangeNotifier {
 ```
 
 **💡 CODE EXPLANATION**:
+
 - `Map<String, CarItem>` untuk fast lookup by product ID
 - `fold()` untuk calculate totals efficiently
 - Every method calls `notifyListeners()` after modifying state
@@ -1436,43 +1469,43 @@ class ProductListPage extends StatelessWidget {
         id: '1',
         name: 'Laptop Gaming',
         price: 15000000,
-        imageUrl: 'https://picsum.photos/seed/laptop/300',
-        category: 'Electronics',
+        emoji: '💻',
+        description: 'Laptop gaming performa tinggi',
       ),
       Product(
         id: '2',
-        name: 'Smartphone Pro', 
+        name: 'Smartphone Pro',
         price: 8000000,
-        imageUrl: 'https://picsum.photos/seed/phone/300',
-        category: 'Electronics',
+        emoji: '📱',
+        description: 'Smartphone flagship terbaru',
       ),
       Product(
         id: '3',
         name: 'Wireless Headphones',
         price: 1500000,
-        imageUrl: 'https://picsum.photos/seed/headphone/300',
-        category: 'Audio',
+        emoji: '🎧',
+        description: 'Headphones noise-cancelling',
       ),
       Product(
         id: '4',
         name: 'Smart Watch',
         price: 3000000,
-        imageUrl: 'https://picsum.photos/seed/watch/300',
-        category: 'Wearables',
+        emoji: '⌚',
+        description: 'Smartwatch dengan health tracking',
       ),
       Product(
         id: '5',
         name: 'Camera DSLR',
         price: 12000000,
-        imageUrl: 'https://picsum.photos/seed/camera/300',
-        category: 'Photography',
+        emoji: '📷',
+        description: 'Kamera DSLR profesional',
       ),
       Product(
         id: '6',
         name: 'Tablet Pro',
         price: 7000000,
-        imageUrl: 'https://picsum.photos/seed/tablet/300',
-        category: 'Electronics',
+        emoji: '📟',
+        description: 'Tablet untuk produktivitas',
       ),
     ];
 
@@ -1540,27 +1573,24 @@ class ProductListPage extends StatelessWidget {
         itemBuilder: (context, index) {
           final product = products[index];
           return Card(
-            clipBehavior: Clip.antiAlias,
+            elevation: 3,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
               children: [
                 Expanded(
-                  child: Image.network(
-                    product.imageUrl,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: Colors.grey[300],
-                        child: const Icon(Icons.image, size: 50),
-                      );
-                    },
+                  child: Container(
+                    color: Colors.deepPurple.shade50,
+                    child: Center(
+                      child: Text(
+                        product.emoji,
+                        style: const TextStyle(fontSize: 64),
+                      ),
+                    ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         product.name,
@@ -1570,6 +1600,7 @@ class ProductListPage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 4),
                       Text(
@@ -1577,7 +1608,7 @@ class ProductListPage extends StatelessWidget {
                         style: TextStyle(
                           color: Colors.green[700],
                           fontWeight: FontWeight.w600,
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                       const SizedBox(height: 8),
@@ -1587,7 +1618,7 @@ class ProductListPage extends StatelessWidget {
                           onPressed: () {
                             // Add to cart using Provider!
                             context.read<CartModel>().addItem(product);
-                            
+
                             // Show feedback
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
@@ -1620,8 +1651,6 @@ class ProductListPage extends StatelessWidget {
 **Hot Reload!** Product grid muncul + Cart badge works!
 
 ---
-
-(To be continued in next script - Part 5 Step 6: Cart Page + Experiments + FAQ + Instructor section)
 
 **Step 6: Create Cart Page** (12 menit)
 
@@ -1723,22 +1752,19 @@ class CartPage extends StatelessWidget {
                         padding: const EdgeInsets.all(8),
                         child: Row(
                           children: [
-                            // Product image
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.network(
-                                product.imageUrl,
-                                width: 80,
-                                height: 80,
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return Container(
-                                    width: 80,
-                                    height: 80,
-                                    color: Colors.grey[300],
-                                    child: const Icon(Icons.image),
-                                  );
-                                },
+                            // Product emoji
+                            Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                color: Colors.deepPurple.shade50,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  product.emoji,
+                                  style: const TextStyle(fontSize: 40),
+                                ),
                               ),
                             ),
                             const SizedBox(width: 12),
@@ -1974,11 +2000,11 @@ final theme = context.watch<ThemeModel>();
 
 **Comparison Table**:
 
-| Method | Rebuild | Use in build() | Use in callback | Best For |
-|--------|---------|----------------|-----------------|----------|
-| **Consumer** | ✅ Yes (optimized) | ✅ Yes | ❌ No | Specific widget rebuild |
-| **context.watch** | ✅ Yes (entire widget) | ✅ Yes | ❌ No | Simple cases |
-| **context.read** | ❌ No | ❌ No | ✅ Yes | Triggering actions |
+| Method            | Rebuild                | Use in build() | Use in callback | Best For                |
+| ----------------- | ---------------------- | -------------- | --------------- | ----------------------- |
+| **Consumer**      | ✅ Yes (optimized)     | ✅ Yes         | ❌ No           | Specific widget rebuild |
+| **context.watch** | ✅ Yes (entire widget) | ✅ Yes         | ❌ No           | Simple cases            |
+| **context.read**  | ❌ No                  | ❌ No          | ✅ Yes          | Triggering actions      |
 
 **Examples**:
 
@@ -2029,6 +2055,7 @@ Selector<CartModel, int>(
 ```
 
 **When to use**:
+
 - Large model with many fields
 - Widget only needs specific field
 - Frequent updates to model
@@ -2036,6 +2063,7 @@ Selector<CartModel, int>(
 ### 💡 Tips & Best Practices - Provider Optimization
 
 **DO ✅:**
+
 - Use Consumer for targeted rebuilds
 - Use context.read in callbacks
 - Use Selector when model is large
@@ -2043,6 +2071,7 @@ Selector<CartModel, int>(
 - Keep models focused (single responsibility)
 
 **DON'T ❌:**
+
 - Don't use context.read inside build
 - Don't forget notifyListeners
 - Don't create Provider below MaterialApp (usually)
@@ -2051,15 +2080,18 @@ Selector<CartModel, int>(
 > ⚠️ **TROUBLESHOOTING - Advanced Provider**:
 >
 > **Problem**: "Bad state: No ChangeNotifierProvider found"
+>
 > - **Cause**: Using Provider context above MaterialApp
 > - **Fix**: Use Builder or separate widget
 >
 > **Problem**: "Too many rebuilds / Performance slow"
+>
 > - **Cause**: Using context.watch instead of Consumer
 > - **Fix**: Use Consumer for specific widgets
 > - **Or**: Use Selector for single fields
 >
 > **Problem**: "Selector not updating"
+>
 > - **Cause**: Selector returning same object reference
 > - **Fix**: Return primitive (int, String) or override `==`
 
@@ -2088,6 +2120,7 @@ Selector<CartModel, int>(
 ### 📝 Tugas Rumah - Shopping Cart Enhancement
 
 **WAJIB (70 points)**:
+
 1. ✓ Add to cart from product list
 2. ✓ Show cart items dengan quantity
 3. ✓ Update quantity (+/-)
@@ -2095,6 +2128,7 @@ Selector<CartModel, int>(
 5. ✓ Display total price correctly
 
 **BONUS (+30 points)**:
+
 1. **Search/Filter** (+10) - Search products by name
 2. **Categories** (+10) - Filter products by category
 3. **Checkout Page** (+10) - Order summary + form
@@ -2107,7 +2141,8 @@ Selector<CartModel, int>(
 
 ### Q1: Kapan pakai setState vs Provider?
 
-**A**: 
+**A**:
+
 - **setState** → State LOCAL ke 1 widget (form input, toggle, simple counter)
 - **Provider** → State SHARED antar >2 widgets (cart, user, theme)
 
@@ -2116,6 +2151,7 @@ Selector<CartModel, int>(
 ### Q2: Apa bedanya ChangeNotifier vs StreamController?
 
 **A**:
+
 - **ChangeNotifier** → For state management (simpler, recommended)
 - **StreamController** → For async data streams (complex events)
 
@@ -2124,6 +2160,7 @@ Provider uses ChangeNotifier internally (easier API).
 ### Q3: Kenapa Provider lebih baik dari InheritedWidget?
 
 **A**: Provider IS InheritedWidget + extra features:
+
 - ✅ Lazy loading
 - ✅ Dispose management
 - ✅ Better API (Consumer, watch, read)
@@ -2148,11 +2185,11 @@ MultiProvider(
 
 **A**:
 
-| | Consumer | watch | read |
-|---|---|---|---|
-| **Rebuild** | ✅ Specific widget | ✅ Entire widget | ❌ No |
-| **In build** | ✅ Yes | ✅ Yes | ❌ No |
-| **In callback** | ❌ No | ❌ No | ✅ Yes |
+|                 | Consumer           | watch            | read   |
+| --------------- | ------------------ | ---------------- | ------ |
+| **Rebuild**     | ✅ Specific widget | ✅ Entire widget | ❌ No  |
+| **In build**    | ✅ Yes             | ✅ Yes           | ❌ No  |
+| **In callback** | ❌ No              | ❌ No            | ✅ Yes |
 
 **Use**: Consumer (targeted), watch (simple), read (callbacks).
 
@@ -2189,11 +2226,12 @@ No need StatefulWidget untuk Provider!
 
 ### Q8: Apakah Provider cukup untuk app besar?
 
-**A**: 
+**A**:
 
 For **most apps** → YES! Provider sufficient.
 
 Consider alternatives when:
+
 - Very complex state logic → **Bloc**
 - Many async operations → **Riverpod**
 - Enterprise scale → **Bloc** + **Clean Architecture**
@@ -2227,6 +2265,7 @@ Consider alternatives when:
 ### Timeline Management (STRICT 150 min)
 
 **Cannot skip**:
+
 - Part 0: 10 min (quiz bisa shortened)
 - Part 1: 15 min (core concepts)
 - Part 2: 20 min (show the problem!)
@@ -2234,6 +2273,7 @@ Consider alternatives when:
 - Part 5: 50 min (main project)
 
 **Can adjust**:
+
 - Part 3: 10 min → 7 min (skip history)
 - Part 6: 15 min → 10 min (skip Selector)
 - Part 7: 5 min → 3 min (quick review)
@@ -2264,15 +2304,16 @@ Consider alternatives when:
 
 ### Grading Praktikum (100 points)
 
-| Kriteria | Weight | Details |
-|----------|--------|---------|
-| **CartModel** | 25% | ChangeNotifier, add/remove/update, getters, notifyListeners |
-| **Product List** | 20% | Display, add to cart, badge updates |
-| **Cart Page** | 25% | Show items, quantity controls, remove, total |
-| **Navigation** | 15% | Badge, navigate to cart, data persists |
-| **Code Quality** | 15% | Clean, no warnings, proper naming |
+| Kriteria         | Weight | Details                                                     |
+| ---------------- | ------ | ----------------------------------------------------------- |
+| **CartModel**    | 25%    | ChangeNotifier, add/remove/update, getters, notifyListeners |
+| **Product List** | 20%    | Display, add to cart, badge updates                         |
+| **Cart Page**    | 25%    | Show items, quantity controls, remove, total                |
+| **Navigation**   | 15%    | Badge, navigate to cart, data persists                      |
+| **Code Quality** | 15%    | Clean, no warnings, proper naming                           |
 
 **Bonus** (+20):
+
 - Clear cart (+5)
 - Search (+10)
 - Checkout flow (+5)
@@ -2286,12 +2327,14 @@ Consider alternatives when:
 ### Differentiation
 
 **Fast learners**:
+
 - Implement search/filter
 - Add product categories
 - Persistent cart (SharedPreferences)
 - Checkout with form
 
 **Struggling students**:
+
 - Provide skeleton code
 - Focus on add/remove only (skip quantity)
 - Pair programming
@@ -2302,5 +2345,3 @@ Consider alternatives when:
 **🎉 Pertemuan 4 Complete!**
 
 **Next**: Pertemuan 5 - Forms, Validasi & Debugging
-
-
