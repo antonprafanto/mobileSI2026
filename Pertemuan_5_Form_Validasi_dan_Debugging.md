@@ -266,7 +266,9 @@ class _LoginFormState extends State<LoginForm> {
     // validate() menjalankan semua validator dan menampilkan error
     if (_formKey.currentState!.validate()) {
       // Form valid! Proses data
-      _formKey.currentState!.save(); // Trigger onSaved callbacks
+      // Catatan: currentState!.save() berguna jika TextFormField Anda mendefinisikan
+      // callback onSaved: (val) { ... }. Jika tidak ada onSaved, baris ini bisa dilewati.
+      // _formKey.currentState!.save();
       debugPrint('Login: ${_emailController.text}');
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -747,11 +749,13 @@ class _DateTimePickerDemoState extends State<DateTimePickerDemo> {
       helpText: 'Pilih Tanggal Lahir',
       // locale: const Locale('id', 'ID'), // Aktifkan jika sudah setup flutter_localizations
       builder: (context, child) {
-        // Kustomisasi theme DatePicker
+        // Contoh kustomisasi warna DatePicker
+        // Ganti Colors.teal dengan warna brand aplikasi Anda
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: Theme.of(context).colorScheme.copyWith(
-              primary: Theme.of(context).colorScheme.primary,
+              primary: Colors.teal, // Warna header & tombol OK
+              onPrimary: Colors.white, // Warna teks di atas primary
             ),
           ),
           child: child!,
@@ -880,7 +884,9 @@ class _DateTimePickerDemoState extends State<DateTimePickerDemo> {
 Future<void> fetchData() async {
   try {
     // Operasi yang mungkin gagal
-    final response = await someHttpCall();
+    // 'response' tidak di-assign ke variabel agar tidak timbul lint 'unused_local_variable'.
+    // Pada kode nyata, olah return value-nya: final data = await someHttpCall();
+    await someHttpCall();
     // Process response...
   } on FormatException catch (e) {
     // Error spesifik: format data salah (misalnya JSON rusak)
@@ -1153,7 +1159,7 @@ Identifikasi widget yang tepat untuk setiap kasus:
 | Input teks      | `TextField`, `TextFormField`, `TextEditingController`           |
 | Pilihan         | `Checkbox`, `Radio`, `Switch`, `DropdownButtonFormField`        |
 | Nilai           | `Slider`, `RangeSlider`                                         |
-| Tanggal/Waktu   | `showDatePicker()`, `showTimePicker()`                          |
+| Tanggal/Waktu   | `showDatePicker()`, `showTimePicker()`, `showDateRangePicker()` |
 | Form & Validasi | `Form`, `GlobalKey<FormState>`, `validator`, `autovalidateMode` |
 | Fokus keyboard  | `FocusNode`, `FocusScope`, `TextInputAction`                    |
 | Error handling  | `try-catch-finally`, `on ExceptionType`                         |
