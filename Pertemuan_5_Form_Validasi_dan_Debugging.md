@@ -750,7 +750,7 @@ class _DateTimePickerDemoState extends State<DateTimePickerDemo> {
         // Kustomisasi theme DatePicker
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
+            colorScheme: Theme.of(context).colorScheme.copyWith(
               primary: Theme.of(context).colorScheme.primary,
             ),
           ),
@@ -932,7 +932,8 @@ void _processForm() {
     );
   } on RangeError catch (e) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(e.message.toString())),
+      // e.message bertipe Object? — gunakan toString() untuk konversi aman ke String
+      SnackBar(content: Text(e.message?.toString() ?? 'Nilai di luar rentang')),
     );
   }
 }
@@ -1023,8 +1024,11 @@ Widget Inspector membantu memahami struktur widget tree aplikasi Anda.
 
 ```dart
 // Debug print sederhana
+// print() bawaan Dart — cukup untuk log pendek
 print('Nilai x: $x');
-debugPrint('Pesan debug: $message'); // Lebih aman untuk pesan panjang
+// debugPrint() dari package:flutter/foundation.dart — lebih aman untuk pesan panjang
+// karena membatasi output agar tidak terpotong di console Android/iOS
+debugPrint('Pesan debug: $message');
 
 // Kondisional debug (assert body hanya dieksekusi di debug mode)
 assert(() {
