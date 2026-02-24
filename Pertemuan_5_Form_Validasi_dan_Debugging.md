@@ -295,7 +295,9 @@ class _LoginFormState extends State<LoginForm> {
               if (value == null || value.isEmpty) {
                 return 'Email tidak boleh kosong';
               }
-              if (!value.contains('@') || !value.contains('.')) {
+              // Gunakan RegExp untuk validasi email yang lebih akurat
+              final emailRegex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+              if (!emailRegex.hasMatch(value)) {
                 return 'Format email tidak valid';
               }
               return null; // null = valid
@@ -871,7 +873,7 @@ class _DateTimePickerDemoState extends State<DateTimePickerDemo> {
 ```dart
 // Contoh penanganan error di Flutter
 // Catatan: someHttpCall() dan showErrorDialog() adalah pseudocode.
-// Pada kode nyata, somkeHttpCall() bisa berupa http.get(), dio.get(), dsb.
+// Pada kode nyata, someHttpCall() bisa berupa http.get(), dio.get(), dsb.
 // import 'dart:io' show SocketException;
 // import 'dart:async' show TimeoutException;
 
@@ -910,6 +912,9 @@ Future<void> fetchData() async {
 ```dart
 void _processForm() {
   // Pola validasi berlapis
+  // (Pastikan controller sudah dideklarasikan di State class Anda)
+  // final _emailController = TextEditingController();
+  // final _ageController = TextEditingController();
   try {
     final email = _emailController.text.trim();
     final age = int.parse(_ageController.text); // Bisa throw FormatException
