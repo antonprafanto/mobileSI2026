@@ -128,13 +128,17 @@ TextField(
 
   // Batas jumlah karakter
   maxLength: 50,
-  maxLines: 1, // null untuk multiline
+  // Catatan: maxLines: 1 otomatis diberlakukan jika obscureText: true.
+  // Tidak perlu menulis maxLines secara eksplisit untuk field password.
+  maxLines: 1, // null untuk multiline (non-password)
 
   // Auto-complete dan koreksi
   autocorrect: false,
   enableSuggestions: false,
 
   // Kapitalisasi
+  // ⚠️ Catatan: textCapitalization TIDAK berpengaruh jika obscureText: true.
+  // Gunakan textCapitalization HANYA untuk field teks biasa (nama, alamat, dsb.).
   textCapitalization: TextCapitalization.words,
 
   // Callback
