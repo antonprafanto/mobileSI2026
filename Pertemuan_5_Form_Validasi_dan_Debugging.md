@@ -695,6 +695,12 @@ class _DropdownDemoState extends State<DropdownDemo> {
           onChanged: _selectedProvince != null
               ? (value) => setState(() => _selectedCity = value)
               : null,
+          validator: (value) {
+            if (_selectedProvince != null && value == null) {
+              return 'Pilih kota terlebih dahulu';
+            }
+            return null;
+          },
         ),
 
         if (_selectedProvince != null)
@@ -783,11 +789,24 @@ class _DateTimePickerDemoState extends State<DateTimePickerDemo> {
 
   // DateRange Picker untuk rentang tanggal
   Future<void> _pickDateRange() async {
+    // ⚠️ Gunakan date-only (tanpa jam) untuk firstDate agar tidak crash.
+    // DateTime.now() menyertakan jam:menit:detik sehingga bisa lebih besar
+    // dari initialDateRange.start yang tersimpan sebagai midnight (DateTime(y,m,d)).
+    final today = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    final lastDay = today.add(const Duration(days: 365));
+
+    // Pastikan initialDateRange tidak di luar [firstDate, lastDate]
+    final safeInitialRange = (_selectedRange != null &&
+            !_selectedRange!.start.isBefore(today) &&
+            !_selectedRange!.end.isAfter(lastDay))
+        ? _selectedRange
+        : null;
+
     final DateTimeRange? picked = await showDateRangePicker(
       context: context,
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(const Duration(days: 365)),
-      initialDateRange: _selectedRange,
+      firstDate: today,
+      lastDate: lastDay,
+      initialDateRange: safeInitialRange,
       helpText: 'Pilih Rentang Tanggal',
     );
 
