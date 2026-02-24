@@ -94,6 +94,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
     }
   }
 
+  // Reset autovalidate saat kembali ke step sebelumnya agar field
+  // tidak langsung menampilkan error sebelum user berinteraksi
+  void _prevStep(RegistrationProvider provider) {
+    setState(() => _autovalidate = AutovalidateMode.disabled);
+    provider.prevStep();
+  }
+
   void _showSnack(String msg, {bool isError = true}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -451,7 +458,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           if (provider.currentStep > 0) ...[
             Expanded(
               child: OutlinedButton(
-                onPressed: provider.prevStep,
+                onPressed: () => _prevStep(provider),
                 style: OutlinedButton.styleFrom(
                   minimumSize: const Size(0, 50),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

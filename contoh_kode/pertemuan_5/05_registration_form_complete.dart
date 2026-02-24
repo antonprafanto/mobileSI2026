@@ -5,7 +5,7 @@
 // - Step indicator/progress bar
 // - Validasi per langkah sebelum pindah ke berikutnya
 // - Kombinasi semua jenis input yang telah dipelajari
-// - State management dengan Provider (terintegrasi dari P4)
+// - State management menggunakan setState (self-contained, tanpa package tambahan)
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -369,14 +369,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 });
               }
             },
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Tanggal Lahir *',
-              prefixIcon: const Icon(Icons.cake_outlined),
-              suffixIcon: const Icon(Icons.calendar_today, size: 18),
+              prefixIcon: Icon(Icons.cake_outlined),
+              suffixIcon: Icon(Icons.calendar_today, size: 18),
               hintText: 'Klik untuk memilih',
-              errorText: _data.birthDate == null && _step1FormKey.currentState != null
-                  ? null // validator validasi di nextStep
-                  : null,
             ),
           ),
         ],
