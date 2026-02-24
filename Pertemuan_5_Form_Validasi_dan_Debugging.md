@@ -138,9 +138,9 @@ TextField(
   textCapitalization: TextCapitalization.words,
 
   // Callback
-  onChanged: (value) => print('Berubah: $value'),
-  onSubmitted: (value) => print('Submit: $value'),
-  onTap: () => print('Diklik'),
+  onChanged: (value) => debugPrint('Berubah: $value'),
+  onSubmitted: (value) => debugPrint('Submit: $value'),
+  onTap: () => debugPrint('TextField diklik'),
 
   // InputDecoration untuk styling
   decoration: InputDecoration(
@@ -267,7 +267,7 @@ class _LoginFormState extends State<LoginForm> {
     if (_formKey.currentState!.validate()) {
       // Form valid! Proses data
       _formKey.currentState!.save(); // Trigger onSaved callbacks
-      print('Login: ${_emailController.text}');
+      debugPrint('Login: ${_emailController.text}');
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Login berhasil!')),
@@ -390,6 +390,12 @@ String? strongPasswordValidator(String? value) {
 }
 
 // 5. Konfirmasi password
+// ⚠️ Fungsi ini punya 2 parameter, sehingga tidak bisa langsung dipakai sebagai validator.
+// Gunakan sebagai closure agar _passwordController bisa diakses:
+//
+//   TextFormField(
+//     validator: (v) => confirmPasswordValidator(v, _passwordController.text),
+//   )
 String? confirmPasswordValidator(String? value, String originalPassword) {
   if (value == null || value.isEmpty) return 'Konfirmasi password wajib diisi';
   if (value != originalPassword) return 'Password tidak cocok';
@@ -399,8 +405,9 @@ String? confirmPasswordValidator(String? value, String originalPassword) {
 // 6. Validasi URL
 String? urlValidator(String? value) {
   if (value == null || value.isEmpty) return null; // Opsional
-  final urlRegex = RegExp(r'^https?:\/\/.+');
-  if (!urlRegex.hasMatch(value)) {
+  // Regex lebih ketat: harus ada karakter non-spasi setelah '://'
+  final urlRegex = RegExp(r'^https?:\/\/[^\s]+\.[^\s]+');
+  if (!urlRegex.hasMatch(value.trim())) {
     return 'URL harus diawali dengan http:// atau https://';
   }
   return null;
@@ -443,7 +450,7 @@ class CheckboxDemo extends StatefulWidget {
 
 class _CheckboxDemoState extends State<CheckboxDemo> {
   bool _agreeTerms = false;
-  List<String> _selectedHobbies = [];
+  final List<String> _selectedHobbies = []; // final: list-nya tetap, isinya yang berubah
   final List<String> _hobbies = ['Membaca', 'Gaming', 'Memasak', 'Olahraga', 'Musik'];
 
   @override
@@ -496,7 +503,8 @@ class RadioDemo extends StatefulWidget {
 }
 
 class _RadioDemoState extends State<RadioDemo> {
-  String _gender = 'male';
+  // Gunakan nilai yang sama dengan label agar output konsisten (misal: 'Laki-laki', bukan 'male')
+  String _gender = 'Laki-laki';
   String _education = 'S1';
 
   @override
@@ -508,14 +516,14 @@ class _RadioDemoState extends State<RadioDemo> {
         Row(
           children: [
             Radio<String>(
-              value: 'male',
+              value: 'Laki-laki',
               groupValue: _gender,
               onChanged: (value) => setState(() => _gender = value!),
             ),
             const Text('Laki-laki'),
             const SizedBox(width: 16),
             Radio<String>(
-              value: 'female',
+              value: 'Perempuan',
               groupValue: _gender,
               onChanged: (value) => setState(() => _gender = value!),
             ),
@@ -555,7 +563,6 @@ class _SwitchSliderDemoState extends State<SwitchSliderDemo> {
   bool _notifications = true;
   bool _darkMode = false;
   double _volume = 50.0;
-  double _brightness = 0.7;
   RangeValues _priceRange = const RangeValues(100000, 500000);
 
   @override
@@ -721,11 +728,20 @@ class _DateTimePickerDemoState extends State<DateTimePickerDemo> {
 
   // Menampilkan DatePicker
   Future<void> _pickDate() async {
+    // Clamp initialDate agar selalu dalam range [firstDate, lastDate]
+    final firstDate = DateTime(2000);
+    final lastDate = DateTime(2100);
+    final initialDate = (_selectedDate != null &&
+            !_selectedDate!.isBefore(firstDate) &&
+            !_selectedDate!.isAfter(lastDate))
+        ? _selectedDate!
+        : DateTime.now();
+
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: _selectedDate ?? DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2100),
+      initialDate: initialDate,
+      firstDate: firstDate,
+      lastDate: lastDate,
       helpText: 'Pilih Tanggal Lahir',
       // locale: const Locale('id', 'ID'), // Aktifkan jika sudah setup flutter_localizations
       builder: (context, child) {
@@ -854,6 +870,10 @@ class _DateTimePickerDemoState extends State<DateTimePickerDemo> {
 
 ```dart
 // Contoh penanganan error di Flutter
+// Catatan: someHttpCall() dan showErrorDialog() adalah pseudocode.
+// Pada kode nyata, somkeHttpCall() bisa berupa http.get(), dio.get(), dsb.
+// import 'dart:io' show SocketException;
+// import 'dart:async' show TimeoutException;
 
 Future<void> fetchData() async {
   try {
@@ -862,24 +882,24 @@ Future<void> fetchData() async {
     // Process response...
   } on FormatException catch (e) {
     // Error spesifik: format data salah (misalnya JSON rusak)
-    print('Format error: $e');
+    debugPrint('Format error: $e');
     showErrorDialog('Data tidak valid');
   } on SocketException catch (e) {
     // Error spesifik: masalah jaringan / tidak ada koneksi
-    // (butuh: import 'dart:io';)
-    print('Network error: $e');
+    debugPrint('Network error: $e');
     showErrorDialog('Tidak ada koneksi internet');
   } on TimeoutException catch (e) {
     // Error spesifik: request terlalu lama
-    print('Timeout: $e');
+    debugPrint('Timeout: $e');
     showErrorDialog('Koneksi timeout, coba lagi');
   } catch (e, stackTrace) {
     // Error umum (catch-all)
-    print('Error tidak terduga: $e');
-    print('Stack trace: $stackTrace');
+    debugPrint('Error tidak terduga: $e');
+    debugPrint('Stack trace: $stackTrace');
     showErrorDialog('Terjadi kesalahan: $e');
   } finally {
     // Selalu dijalankan, baik sukses maupun error
+    // setState hanya bisa dipanggil di dalam State class
     setState(() => _isLoading = false);
   }
 }
@@ -899,7 +919,7 @@ void _processForm() {
     }
 
     // Lanjut proses...
-    print('Data valid: $email, $age tahun');
+    debugPrint('Data valid: $email, $age tahun');
 
   } on FormatException {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -1001,9 +1021,9 @@ Widget Inspector membantu memahami struktur widget tree aplikasi Anda.
 print('Nilai x: $x');
 debugPrint('Pesan debug: $message'); // Lebih aman untuk pesan panjang
 
-// Kondisional debug
+// Kondisional debug (assert body hanya dieksekusi di debug mode)
 assert(() {
-  print('Ini hanya tampil di debug mode');
+  debugPrint('Ini hanya tampil di debug mode');
   return true;
 }());
 
