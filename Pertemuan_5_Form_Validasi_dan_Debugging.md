@@ -413,8 +413,10 @@ String? confirmPasswordValidator(String? value, String originalPassword) {
 // 6. Validasi URL
 String? urlValidator(String? value) {
   if (value == null || value.isEmpty) return null; // Opsional
-  // Regex lebih ketat: harus ada karakter non-spasi setelah '://'
-  final urlRegex = RegExp(r'^https?:\/\/[^\s]+\.[^\s]+');
+  // Regex dengan '$' di akhir agar seluruh string harus cocok (bukan hanya prefix).
+  // Tanpa '$', input 'https://a.b teks-sampah' masih lolos karena hasMatch()
+  // hanya memeriksa apakah ada BAGIAN string yang cocok, bukan keseluruhan string.
+  final urlRegex = RegExp(r'^https?:\/\/[^\s]+\.[^\s]+$');
   if (!urlRegex.hasMatch(value.trim())) {
     return 'URL harus diawali dengan http:// atau https://';
   }
