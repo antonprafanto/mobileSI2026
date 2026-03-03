@@ -1034,8 +1034,13 @@ Flutter menyediakan dialog bawaan yang cantik untuk memilih tanggal dan waktu:
 
 ### 🎯 EKSPERIMEN 4: DatePicker & TimePicker (7 menit)
 
+**Create new file**: `lib/pages/date_page.dart`
+
 ```dart
-// Contoh penggunaan DatePicker
+// lib/pages/date_page.dart
+import 'package:flutter/material.dart';
+
+// Contoh penggunaan DatePicker & TimePicker (PART 4 - Pertemuan 5)
 class DateTimePickerDemo extends StatefulWidget {
   const DateTimePickerDemo({super.key});
 
@@ -1095,7 +1100,8 @@ class _DateTimePickerDemoState extends State<DateTimePickerDemo> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Date Picker
+            // === DATE PICKER ===
+            _buildSectionTitle('📅 Date Picker'),
             ListTile(
               leading: const Icon(Icons.calendar_today, color: Colors.blue),
               title: const Text('Tanggal Lahir'),
@@ -1113,7 +1119,8 @@ class _DateTimePickerDemoState extends State<DateTimePickerDemo> {
             ),
             const SizedBox(height: 16),
 
-            // Time Picker
+            // === TIME PICKER ===
+            _buildSectionTitle('⏰ Time Picker'),
             ListTile(
               leading: const Icon(Icons.access_time, color: Colors.orange),
               title: const Text('Waktu'),
@@ -1129,8 +1136,40 @@ class _DateTimePickerDemoState extends State<DateTimePickerDemo> {
                 side: BorderSide(color: Colors.grey.shade300),
               ),
             ),
+            const SizedBox(height: 24),
+
+            // === SUMMARY ===
+            _buildSectionTitle('📊 Summary'),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '📅 Tanggal: ${_selectedDate != null ? _formatDate(_selectedDate!) : "Belum dipilih"}',
+                  ),
+                  Text(
+                    '⏰ Waktu: ${_selectedTime != null ? _selectedTime!.format(context) : "Belum dipilih"}',
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8, bottom: 8),
+      child: Text(
+        title,
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
     );
   }
