@@ -894,7 +894,7 @@ class _InputWidgetsPageState extends State<InputWidgetsPage> {
             // === DROPDOWN ===
             _buildSectionTitle('📋 DropdownButtonFormField'),
             DropdownButtonFormField<String>(
-              value: _selectedProdi,
+              initialValue: _selectedProdi,
               decoration: const InputDecoration(
                 labelText: 'Program Studi',
                 prefixIcon: Icon(Icons.school),
@@ -1704,7 +1704,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
               // === PROGRAM STUDI (Dropdown) ===
               DropdownButtonFormField<String>(
-                value: _selectedProdi,
+                initialValue: _selectedProdi,
                 decoration: const InputDecoration(
                   labelText: 'Program Studi *',
                   prefixIcon: Icon(Icons.school),

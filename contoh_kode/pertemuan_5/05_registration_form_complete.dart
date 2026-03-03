@@ -287,7 +287,7 @@ class _RegistrationFormPageState extends State<RegistrationFormPage> {
 
             // Prodi
             DropdownButtonFormField<String>(
-              value: _prodi,
+              initialValue: _prodi,
               decoration: const InputDecoration(labelText: 'Program Studi *', prefixIcon: Icon(Icons.school), border: OutlineInputBorder()),
               hint: const Text('Pilih Program Studi'),
               items: _prodiList.map((p) => DropdownMenuItem(value: p, child: Text(p))).toList(),

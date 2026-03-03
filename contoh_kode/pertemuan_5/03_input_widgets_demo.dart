@@ -250,7 +250,7 @@ class _InputWidgetsPageState extends State<InputWidgetsPage> {
             _buildSectionHeader('📋 Dropdown', 'Pilih dari daftar'),
 
             DropdownButtonFormField<String>(
-              value: _selectedProdi,
+              initialValue: _selectedProdi,
               decoration: const InputDecoration(
                 labelText: 'Program Studi',
                 prefixIcon: Icon(Icons.school),
@@ -266,7 +266,7 @@ class _InputWidgetsPageState extends State<InputWidgetsPage> {
             const SizedBox(height: 16),
 
             DropdownButtonFormField<String>(
-              value: _selectedSemester,
+              initialValue: _selectedSemester,
               decoration: const InputDecoration(
                 labelText: 'Semester',
                 prefixIcon: Icon(Icons.calendar_month),
