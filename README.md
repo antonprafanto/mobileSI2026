@@ -16,7 +16,7 @@
 |     2     | [Widget, Layout, dan Theming](Pertemuan_2_Widget_Layout_dan_Theming.md)             |   ✅   |
 |     3     | [ListView, GridView, dan Navigasi](Pertemuan_3_ListView_GridView_dan_Navigasi.md)   |   ✅   |
 |     4     | [State Management dengan Provider](Pertemuan_4_State_Management_dengan_Provider.md) |   ✅   |
-|     5     | Form dan Validasi Input                                                             |   🔜   |
+|     5     | [Form, Validasi, dan Debugging](Pertemuan_5_Form_Validasi_dan_Debugging.md)         |   ✅   |
 |     6     | Networking dan API                                                                  |   🔜   |
 |     7     | Local Storage                                                                       |   🔜   |
 |     8     | UTS                                                                                 |   📝   |
@@ -42,6 +42,7 @@ Potongan kode per topik, cocok untuk referensi cepat.
 | [`contoh_kode/pertemuan_2/`](contoh_kode/pertemuan_2/) | StatefulWidget, Layout, Theming          |
 | [`contoh_kode/pertemuan_3/`](contoh_kode/pertemuan_3/) | ListView, GridView, Navigation (7 demos) |
 | [`contoh_kode/pertemuan_4/`](contoh_kode/pertemuan_4/) | State Management & Provider (6 demos)    |
+| [`contoh_kode/pertemuan_5/`](contoh_kode/pertemuan_5/) | Form, Validasi & Debugging (7 demos)     |
 
 ### 🚀 Full Flutter Projects (`contoh_proyek/`)
 
@@ -52,6 +53,7 @@ Project Flutter lengkap yang bisa langsung di-run.
 | [`contoh_proyek/pertemuan_2_demo/`](contoh_proyek/pertemuan_2_demo/)                   | Widget, Layout & Theming        | `flutter run`                    |
 | [`contoh_proyek/pertemuan_3_catalog/`](contoh_proyek/pertemuan_3_catalog/)             | ListView, GridView & Navigation | `flutter run`                    |
 | [`contoh_proyek/pertemuan_4_shopping_cart/`](contoh_proyek/pertemuan_4_shopping_cart/) | State Management & Provider     | `flutter pub get && flutter run` |
+| [`contoh_proyek/pertemuan_5_registration/`](contoh_proyek/pertemuan_5_registration/)   | Form, Validasi & Debugging      | `flutter pub get && flutter run` |
 
 ---
 
