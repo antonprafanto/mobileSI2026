@@ -21,6 +21,7 @@ flutter run
 - ✅ Pertemuan 2: 7 demo files
 - ✅ Pertemuan 3: 7 demo files (with README)
 - ✅ Pertemuan 4: 6 demo files (with README)
+- ✅ Pertemuan 5: 7 demo files (with README)
 
 ### 2. `contoh_proyek/` - Full Flutter Projects
 
@@ -37,12 +38,13 @@ flutter run
 **Tersedia untuk:**
 
 - ✅ Pertemuan 2: `pertemuan_2_demo/` (interactive demo app)
-- ⏰ Pertemuan 3: Coming soon (Catalog App)
-- ⏰ Pertemuan 4: Coming soon (Shopping Cart App)
+- ✅ Pertemuan 3: `pertemuan_3_catalog/` (Catalog App)
+- ✅ Pertemuan 4: `pertemuan_4_shopping_cart/` (Shopping Cart App)
+- ✅ Pertemuan 5: `pertemuan_5_registration/` (Registration Form App)
 
 ---
 
-## 🎯 Untuk Pertemuan 3 & 4
+## 🎯 Detail Per Pertemuan
 
 ### Pertemuan 3 - ListView, GridView, Navigasi
 
@@ -54,12 +56,6 @@ flutter run
 - Step-by-step ada di materi [Pertemuan_3_ListView_GridView_dan_Navigasi.md](../Pertemuan_3_ListView_GridView_dan_Navigasi.md) Part 5
 - Reference solution bisa dibuat di `07_catalog_app_complete.dart`
 
-**Kenapa tidak ada full project?**
-
-- Praktikum dirancang untuk dibangun dari scratch (learning by doing)
-- Material sudah sangat detail dengan step-by-step
-- Student build sendiri = better understanding
-
 ### Pertemuan 4 - State Management dengan Provider
 
 **Status**: Demo files tersedia di `contoh_kode/pertemuan_4/`
@@ -69,43 +65,36 @@ flutter run
 - **Shopping Cart App** dibangun step-by-step dalam material
 - Full code ada di materi [Pertemuan_4_State_Management_dengan_Provider.md](../Pertemuan_4_State_Management_dengan_Provider.md) Part 5
 - Complete implementation ~500 lines dengan semua features
-- Reference solution bisa dibuat di `04_shopping_cart_complete.dart`
 
-**Kenapa tidak ada full project?**
+### Pertemuan 5 - Form, Validasi & Debugging
 
-- Material Part 5 sudah berisi COMPLETE working code
-- Shopping cart di-build incrementally (Step 1-6)
-- Student bisa follow along dan build sendiri
-- Lebih baik daripada copy-paste full project
+**Status**: Demo files tersedia di `contoh_kode/pertemuan_5/`
+
+**Praktikum Project**:
+
+- **Registration Form App** full Flutter project di `contoh_proyek/pertemuan_5_registration/`
+- Features: Form with validation, Provider, multi-page (form → list → detail)
+- Dependencies: `provider`
+- Reusable widgets: CustomTextField, StepIndicator, SummaryCard
 
 ---
 
 ## 💡 Recommendation untuk Instructor
 
-**Option 1: Keep as-is** ✅ (Recommended)
-
-- Demo files di `contoh_kode/` sudah cukup
-- Material lengkap dengan step-by-step
+- Demo files di `contoh_kode/` untuk quick testing
+- Full projects di `contoh_proyek/` untuk reference solution
+- Material lengkap dengan step-by-step di markdown modules
 - Student build praktikum sendiri = better learning
-- Less clutter di repository
-
-**Option 2: Create Full Projects**
-
-- Buat `contoh_proyek/pertemuan_3_catalog/`
-- Buat `contoh_proyek/pertemuan_4_shopping_cart/`
-- Pros: Reference solution lengkap
-- Cons: Student mungkin langsung copy-paste tanpa paham
-
-**Keputusan**: Untuk sekarang, **Option 1** sudah optimal. Full projects bisa ditambahkan later kalau dibutuhkan untuk grading/demo purposes.
 
 ---
 
 ## 📝 Summary
 
-| Pertemuan | Demo Files          | Full Project         | Notes                                      |
-| --------- | ------------------- | -------------------- | ------------------------------------------ |
-| 2         | ✅ 7 files          | ✅ pertemuan_2_demo  | Interactive demo app                       |
-| 3         | ✅ 7 files (README) | ⏰ Build as exercise | Material has complete step-by-step         |
-| 4         | ✅ 6 files (README) | ⏰ Build as exercise | Material Part 5 has full code (~500 lines) |
+| Pertemuan | Demo Files          | Full Project                 | Notes                           |
+| --------- | ------------------- | ---------------------------- | ------------------------------- |
+| 2         | ✅ 7 files          | ✅ pertemuan_2_demo          | Interactive demo app            |
+| 3         | ✅ 7 files (README) | ✅ pertemuan_3_catalog       | Catalog App                     |
+| 4         | ✅ 6 files (README) | ✅ pertemuan_4_shopping_cart | Shopping Cart App with Provider |
+| 5         | ✅ 7 files (README) | ✅ pertemuan_5_registration  | Registration Form App           |
 
 **Semua code yang dibutuhkan sudah ada di material!** Demo files untuk quick testing, material untuk full implementation.

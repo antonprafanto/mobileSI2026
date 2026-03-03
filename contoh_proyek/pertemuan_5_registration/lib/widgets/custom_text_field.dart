@@ -1,72 +1,57 @@
 import 'package:flutter/material.dart';
 
-/// Widget TextField yang sudah dikonfigurasi untuk konsistensi tampilan
 class CustomTextField extends StatelessWidget {
-  final TextEditingController? controller;
+  final TextEditingController controller;
   final String label;
-  final IconData prefixIcon;
-  final IconData? suffixIcon;
-  final TextInputType keyboardType;
-  final TextCapitalization textCapitalization;
+  final String? hint;
+  final IconData? prefixIcon;
+  final Widget? suffixIcon;
   final bool obscureText;
+  final TextInputType? keyboardType;
+  final TextCapitalization textCapitalization;
   final bool readOnly;
-  final int? maxLines;
-  final int? maxLength;
-  final String? hintText;
-  final String? helperText;
+  final VoidCallback? onTap;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
-  final VoidCallback? onTap;
-  final String? Function(String?)? onSaved;
-  final TextInputAction? textInputAction;
-  final VoidCallback? onEditingComplete;
+  final int maxLines;
 
   const CustomTextField({
     super.key,
-    this.controller,
+    required this.controller,
     required this.label,
-    required this.prefixIcon,
+    this.hint,
+    this.prefixIcon,
     this.suffixIcon,
-    this.keyboardType = TextInputType.text,
-    this.textCapitalization = TextCapitalization.none,
     this.obscureText = false,
+    this.keyboardType,
+    this.textCapitalization = TextCapitalization.none,
     this.readOnly = false,
-    this.maxLines = 1,
-    this.maxLength,
-    this.hintText,
-    this.helperText,
+    this.onTap,
     this.validator,
     this.onChanged,
-    this.onTap,
-    this.onSaved,
-    this.textInputAction,
-    this.onEditingComplete,
+    this.maxLines = 1,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      keyboardType: keyboardType,
-      textCapitalization: textCapitalization,
-      obscureText: obscureText,
-      readOnly: readOnly,
-      maxLines: maxLines,
-      maxLength: maxLength,
-      textInputAction: textInputAction,
-      onChanged: onChanged,
-      onTap: onTap,
-      onSaved: onSaved,
-      onEditingComplete: onEditingComplete,
-      validator: validator,
       decoration: InputDecoration(
         labelText: label,
-        hintText: hintText,
-        helperText: helperText,
-        prefixIcon: Icon(prefixIcon),
-        suffixIcon: suffixIcon != null ? Icon(suffixIcon, size: 18) : null,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        hintText: hint,
+        prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
+        suffixIcon: suffixIcon,
+        border: const OutlineInputBorder(),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
+      obscureText: obscureText,
+      keyboardType: keyboardType,
+      textCapitalization: textCapitalization,
+      readOnly: readOnly,
+      onTap: onTap,
+      validator: validator,
+      onChanged: onChanged,
+      maxLines: maxLines,
     );
   }
 }

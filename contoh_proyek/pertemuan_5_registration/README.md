@@ -1,79 +1,66 @@
-# Proyek Pertemuan 5: Form Registrasi Event Multi-Step
+# Pertemuan 5 - Registration Form with Provider
 
-Aplikasi Flutter untuk pendaftaran **Tech Summit 2026** yang mendemonstrasikan berbagai jenis input widget, validasi form multi-step, dan state management dengan Provider.
+Full Flutter project demonstrating **Form, Validasi & Debugging**.
 
-## 📱 Fitur Aplikasi
+## 🎯 Features
 
-- **Form 3 langkah** (Multi-Step Wizard):
-  - Step 1: Informasi Pribadi (nama, email, telepon, tanggal lahir, jenis kelamin)
-  - Step 2: Preferensi Acara (tiket, sesi, kota, minat, vegetarian, jumlah tamu)
-  - Step 3: Konfirmasi & Submit
-- **Validasi per step** — tidak bisa lanjut jika ada field tidak valid
-- **DatePicker** untuk tanggal lahir
-- **RadioListTile** untuk jenis tiket dan jenis kelamin
-- **DropdownButtonFormField** untuk sesi dan kota
-- **FilterChip** untuk topik minat (multi-select)
-- **Slider** untuk jumlah tamu
-- **SwitchListTile** untuk opsi vegetarian
-- **Step Indicator** visual progress
-- **Halaman sukses** dengan "kartu tiket" bergradien
-- **State management** dengan Provider
+- ✅ Registration form with real-time validation
+- ✅ Multiple input types: TextFormField, Radio, Dropdown, DatePicker, Checkbox
+- ✅ Provider for state management (registrant list)
+- ✅ Registrant list page with delete functionality
+- ✅ Registrant detail page with summary card
+- ✅ Reusable widgets (CustomTextField, StepIndicator, SummaryCard)
+- ✅ Error handling & email duplicate check
 
-## 🗂️ Struktur Proyek
+## 📂 Project Structure
 
 ```
 lib/
-├── main.dart                          # Entry point & setup Provider + Theme
+├── main.dart                        # App with Provider setup
 ├── models/
-│   └── registrant_model.dart          # Data model pendaftar + helpers
+│   └── registrant_model.dart        # Registrant data model
 ├── providers/
-│   └── registration_provider.dart     # State management form
+│   └── registration_provider.dart   # ChangeNotifier for registrants
 ├── pages/
-│   ├── registration_page.dart         # Halaman form 3 langkah
-│   └── success_page.dart              # Halaman konfirmasi sukses
+│   ├── registration_page.dart       # Main registration form
+│   ├── registrant_list_page.dart    # List of registrants
+│   └── registrant_detail_page.dart  # Registrant detail view
 └── widgets/
-    ├── custom_text_field.dart         # TextFormField reusable
-    └── step_indicator.dart            # Progress indicator widget
+    ├── custom_text_field.dart       # Reusable text field
+    ├── step_indicator.dart          # Step indicator for multi-step
+    └── summary_card.dart            # Summary display card
 ```
 
-## 🚀 Cara Menjalankan
+## 🚀 How to Run
 
 ```bash
-# Install dependencies
+cd contoh_proyek/pertemuan_5_registration
 flutter pub get
-
-# Jalankan di emulator/device
 flutter run
-
-# Build APK debug
-flutter build apk --debug
 ```
 
-## 🧩 Widget yang Digunakan
+## 📖 What You'll Learn
 
-| Widget                          | Digunakan Di                |
-| ------------------------------- | --------------------------- |
-| `TextFormField`                 | Semua input teks            |
-| `RadioListTile`                 | Jenis tiket, jenis kelamin  |
-| `DropdownButtonFormField`       | Sesi, kota asal             |
-| `FilterChip`                    | Topik minat (multi-select)  |
-| `Slider`                        | Jumlah tamu                 |
-| `SwitchListTile`                | Pilihan vegetarian          |
-| `showDatePicker()`              | Tanggal lahir               |
-| `Form` + `GlobalKey<FormState>` | Validasi per step           |
-| `AnimatedSwitcher`              | Animasi transisi antar step |
+- ✅ Form widget with GlobalKey
+- ✅ TextFormField validation (real-time + on-submit)
+- ✅ Various input widgets (Radio, Dropdown, DatePicker, Checkbox)
+- ✅ Provider for managing form data across pages
+- ✅ Reusable widget patterns
+- ✅ Error handling
 
-## 📚 Konsep yang Dipraktikkan
+## 🎓 Learning Path
 
-- `Form` widget dan `GlobalKey<FormState>`
-- Validator function pattern
-- `AutovalidateMode`
-- `TextEditingController` & `FocusNode`
-- `showDatePicker()` dengan kustomisasi tema
-- Provider + `ChangeNotifier` untuk state form
-- Pemisahan logika (provider) dari tampilan (page)
-- Reusable widget dengan parameter
+1. **Registration Page**: Fill form with validation
+2. **Submit**: See success dialog
+3. **List Page**: View all registrants
+4. **Detail Page**: See full registrant info
+5. **Delete**: Remove registrants
 
-## 🔗 Materi Terkait
+## 📝 Related Material
 
-Lihat `Pertemuan_5_Form_Validasi_dan_Debugging.md` di root repositori untuk penjelasan konsep lengkap.
+See [Pertemuan_5_Form_Validasi_dan_Debugging.md](../../Pertemuan_5_Form_Validasi_dan_Debugging.md)
+
+---
+
+**Dependencies**: provider ^6.1.0
+**Topic**: Pertemuan 5 - Form, Validasi & Debugging

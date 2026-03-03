@@ -1,17 +1,20 @@
-# 🔑 KUNCI JAWABAN RAHASIA — Pertemuan 5: Form, Validasi & Debugging
+# 🔐 Kunci Jawaban Pertemuan 5 — Form, Validasi & Debugging
 
-> ⚠️ DOKUMEN INI HANYA UNTUK DOSEN. Jangan dibagikan ke mahasiswa sebelum nilai diumumkan.
+> ⚠️ **RAHASIA — HANYA UNTUK INSTRUKTUR**
+>
+> Jangan dibagikan ke mahasiswa!
 
 ---
 
-## 📝 Latihan Mandiri — Jawaban
-
-### Latihan 1: Form Login Sederhana — Kunci Jawaban
+## Latihan 1: Form Login Sederhana
 
 ```dart
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MaterialApp(home: LoginPage()));
+void main() => runApp(const MaterialApp(
+  debugShowCheckedModeBanner: false,
+  home: LoginPage(),
+));
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -21,32 +24,24 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  bool _obscurePassword = true;
-  bool _isLoading = false;
+  final _emailCtrl = TextEditingController();
+  final _passCtrl = TextEditingController();
+  bool _obscure = true;
+  bool _rememberMe = false;
 
   @override
   void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
+    _emailCtrl.dispose();
+    _passCtrl.dispose();
     super.dispose();
   }
 
-  Future<void> _login() async {
-    setState(() => _isLoading = true);
-    // Aktifkan autovalidate setelah tombol ditekan
-    if (!_formKey.currentState!.validate()) {
-      setState(() => _isLoading = false);
-      return;
-    }
-    // Simulasi proses login
-    await Future.delayed(const Duration(seconds: 1));
-    if (mounted) {
-      setState(() => _isLoading = false);
+  void _login() {
+    if (_formKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Login berhasil! Selamat datang, ${_emailController.text}'),
+          content: Text('Login berhasil: ${_emailCtrl.text}\n'
+              'Remember me: $_rememberMe'),
           backgroundColor: Colors.green,
         ),
       );
@@ -57,66 +52,81 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Login')),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Form(
           key: _formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              const Icon(Icons.lock_person, size: 80, color: Colors.blue),
+              const SizedBox(height: 32),
+
+              // Email
               TextFormField(
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
+                controller: _emailCtrl,
                 decoration: const InputDecoration(
                   labelText: 'Email',
-                  prefixIcon: Icon(Icons.email_outlined),
+                  prefixIcon: Icon(Icons.email),
                   border: OutlineInputBorder(),
                 ),
+                keyboardType: TextInputType.emailAddress,
                 validator: (v) {
                   if (v == null || v.isEmpty) return 'Email wajib diisi';
-                  if (!RegExp(r'^[\w\-.]+@[\w\-]+\.\w{2,}$').hasMatch(v)) {
+                  if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(v)) {
                     return 'Format email tidak valid';
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 16),
+
+              // Password
               TextFormField(
-                controller: _passwordController,
-                obscureText: _obscurePassword,
+                controller: _passCtrl,
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  prefixIcon: const Icon(Icons.lock_outline),
+                  prefixIcon: const Icon(Icons.lock),
                   border: const OutlineInputBorder(),
                   suffixIcon: IconButton(
-                    icon: Icon(_obscurePassword
-                        ? Icons.visibility_outlined
-                        : Icons.visibility_off_outlined),
-                    onPressed: () =>
-                        setState(() => _obscurePassword = !_obscurePassword),
-                    tooltip: 'Tampilkan/Sembunyikan Password',
+                    icon: Icon(_obscure ? Icons.visibility_off : Icons.visibility),
+                    onPressed: () => setState(() => _obscure = !_obscure),
                   ),
                 ),
+                obscureText: _obscure,
                 validator: (v) {
                   if (v == null || v.isEmpty) return 'Password wajib diisi';
-                  if (v.length < 6) return 'Password minimal 6 karakter';
+                  if (v.length < 8) return 'Minimal 8 karakter';
+                  if (!v.contains(RegExp(r'[A-Z]'))) return 'Harus ada huruf besar';
+                  if (!v.contains(RegExp(r'[0-9]'))) return 'Harus ada angka';
                   return null;
                 },
-                onFieldSubmitted: (_) => _login(),
               ),
-              const SizedBox(height: 24),
-              SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: _isLoading ? null : _login,
-                  child: _isLoading
-                      ? const SizedBox(
-                          width: 20, height: 20,
-                          child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
-                        )
-                      : const Text('Login', style: TextStyle(fontSize: 16)),
+              const SizedBox(height: 8),
+
+              // Remember Me
+              CheckboxListTile(
+                title: const Text('Ingat Saya'),
+                value: _rememberMe,
+                onChanged: (v) => setState(() => _rememberMe = v ?? false),
+                controlAffinity: ListTileControlAffinity.leading,
+                contentPadding: EdgeInsets.zero,
+              ),
+              const SizedBox(height: 16),
+
+              // Login Button
+              ElevatedButton(
+                onPressed: _login,
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
+                child: const Text('LOGIN', style: TextStyle(fontSize: 16)),
+              ),
+              const SizedBox(height: 8),
+              TextButton(
+                onPressed: () {/* Navigate to register */},
+                child: const Text('Belum punya akun? Register'),
               ),
             ],
           ),
@@ -129,192 +139,158 @@ class _LoginPageState extends State<LoginPage> {
 
 ---
 
-### Latihan 2: Form Profil Pengguna — Kunci Jawaban
+## Latihan 2: Form Survey
 
 ```dart
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MaterialApp(home: ProfilePage()));
+void main() => runApp(const MaterialApp(
+  debugShowCheckedModeBanner: false,
+  home: SurveyPage(),
+));
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class SurveyPage extends StatefulWidget {
+  const SurveyPage({super.key});
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<SurveyPage> createState() => _SurveyPageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _SurveyPageState extends State<SurveyPage> {
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _birthDateController = TextEditingController();
-  final _bioController = TextEditingController();
+  final _nameCtrl = TextEditingController();
+  final _saranCtrl = TextEditingController();
 
   String _gender = 'Laki-laki';
-  DateTime? _birthDate;
+  String? _semester;
+  double _satisfaction = 5;
+
+  // Checkbox multiple
+  Map<String, bool> _interests = {
+    'Mobile': false,
+    'Web': false,
+    'AI': false,
+    'Database': false,
+  };
+
+  bool _submitted = false;
 
   @override
   void dispose() {
-    _nameController.dispose();
-    _emailController.dispose();
-    _phoneController.dispose();
-    _birthDateController.dispose();
-    _bioController.dispose();
+    _nameCtrl.dispose();
+    _saranCtrl.dispose();
     super.dispose();
   }
 
-  String _formatDate(DateTime d) {
-    const months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun',
-                    'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
-    return '${d.day} ${months[d.month]} ${d.year}';
-  }
-
-  Future<void> _pickDate() async {
-    final picked = await showDatePicker(
-      context: context,
-      initialDate: _birthDate ?? DateTime(2000),
-      firstDate: DateTime(1940),
-      lastDate: DateTime.now(),
-    );
-    if (picked != null) {
-      setState(() {
-        _birthDate = picked;
-        _birthDateController.text = _formatDate(picked);
-      });
+  void _submit() {
+    if (_formKey.currentState!.validate()) {
+      setState(() => _submitted = true);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Survey berhasil disubmit!'), backgroundColor: Colors.green),
+      );
     }
-  }
-
-  void _save() {
-    if (!_formKey.currentState!.validate()) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('✅ Profil berhasil disimpan!'),
-        backgroundColor: Colors.green,
-      ),
-    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Edit Profil')),
+      appBar: AppBar(title: const Text('Survey Mahasiswa')),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16),
         child: Form(
           key: _formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               // Nama
               TextFormField(
-                controller: _nameController,
-                textCapitalization: TextCapitalization.words,
+                controller: _nameCtrl,
                 decoration: const InputDecoration(
-                  labelText: 'Nama Lengkap *',
-                  prefixIcon: Icon(Icons.person_outline),
-                  border: OutlineInputBorder(),
+                  labelText: 'Nama *', border: OutlineInputBorder(),
                 ),
-                validator: (v) {
-                  if (v == null || v.trim().isEmpty) return 'Nama wajib diisi';
-                  if (v.trim().length < 3) return 'Nama minimal 3 karakter';
-                  return null;
-                },
+                validator: (v) => (v == null || v.isEmpty) ? 'Wajib diisi' : null,
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 16),
 
-              // Email
-              TextFormField(
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
+              // Gender (Radio)
+              const Text('Jenis Kelamin:', style: TextStyle(fontWeight: FontWeight.bold)),
+              Row(children: [
+                Expanded(child: RadioListTile<String>(
+                  title: const Text('L'), value: 'Laki-laki',
+                  groupValue: _gender, onChanged: (v) => setState(() => _gender = v!),
+                )),
+                Expanded(child: RadioListTile<String>(
+                  title: const Text('P'), value: 'Perempuan',
+                  groupValue: _gender, onChanged: (v) => setState(() => _gender = v!),
+                )),
+              ]),
+
+              // Semester (Dropdown)
+              DropdownButtonFormField<String>(
+                value: _semester,
                 decoration: const InputDecoration(
-                  labelText: 'Email *',
-                  prefixIcon: Icon(Icons.email_outlined),
-                  border: OutlineInputBorder(),
+                  labelText: 'Semester *', border: OutlineInputBorder(),
                 ),
-                validator: (v) {
-                  if (v == null || v.isEmpty) return 'Email wajib diisi';
-                  final emailRegex = RegExp(r'^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$');
-                  if (!emailRegex.hasMatch(v)) return 'Format email tidak valid';
-                  return null;
-                },
+                items: List.generate(8, (i) => '${i + 1}')
+                    .map((s) => DropdownMenuItem(value: s, child: Text('Semester $s')))
+                    .toList(),
+                onChanged: (v) => setState(() => _semester = v),
+                validator: (v) => v == null ? 'Pilih semester' : null,
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 16),
 
-              // No HP (opsional)
-              TextFormField(
-                controller: _phoneController,
-                keyboardType: TextInputType.phone,
-                decoration: const InputDecoration(
-                  labelText: 'Nomor HP (opsional)',
-                  prefixIcon: Icon(Icons.phone_outlined),
-                  border: OutlineInputBorder(),
-                  hintText: '081234567890',
-                ),
-                validator: (v) {
-                  if (v == null || v.isEmpty) return null; // opsional
-                  final phoneRegex = RegExp(r'^(\+62|62|0)[0-9]{8,12}$');
-                  if (!phoneRegex.hasMatch(v.replaceAll(RegExp(r'[\s\-]'), ''))) {
-                    return 'Format tidak valid (cth: 081234567890)';
-                  }
-                  return null;
-                },
+              // Kepuasan (Slider)
+              Text('Tingkat Kepuasan: ${_satisfaction.round()}/10',
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+              Slider(
+                value: _satisfaction, min: 0, max: 10, divisions: 10,
+                label: '${_satisfaction.round()}',
+                onChanged: (v) => setState(() => _satisfaction = v),
               ),
-              const SizedBox(height: 14),
 
-              // Tanggal Lahir via DatePicker
+              // Bidang Minat (Checkbox multiple)
+              const Text('Bidang Minat:', style: TextStyle(fontWeight: FontWeight.bold)),
+              ..._interests.entries.map((e) => CheckboxListTile(
+                title: Text(e.key),
+                value: e.value,
+                onChanged: (v) => setState(() => _interests[e.key] = v ?? false),
+                controlAffinity: ListTileControlAffinity.leading,
+                dense: true,
+              )),
+              const SizedBox(height: 8),
+
+              // Saran (multiline)
               TextFormField(
-                controller: _birthDateController,
-                readOnly: true,
-                onTap: _pickDate,
+                controller: _saranCtrl,
                 decoration: const InputDecoration(
-                  labelText: 'Tanggal Lahir',
-                  prefixIcon: Icon(Icons.cake_outlined),
-                  suffixIcon: Icon(Icons.calendar_today, size: 18),
-                  border: OutlineInputBorder(),
-                  hintText: 'Klik untuk memilih',
-                ),
-              ),
-              const SizedBox(height: 14),
-
-              // Jenis Kelamin — Radio Button
-              const Text('Jenis Kelamin *',
-                  style: TextStyle(fontWeight: FontWeight.w600)),
-              ...['Laki-laki', 'Perempuan', 'Tidak disebutkan']
-                  .map((g) => RadioListTile<String>(
-                        title: Text(g),
-                        value: g,
-                        groupValue: _gender,
-                        onChanged: (v) => setState(() => _gender = v!),
-                        contentPadding: EdgeInsets.zero,
-                        dense: true,
-                      )),
-              const SizedBox(height: 14),
-
-              // Bio — Multiline, opsional, max 200 karakter
-              TextFormField(
-                controller: _bioController,
-                maxLines: 4,
-                maxLength: 200,
-                decoration: const InputDecoration(
-                  labelText: 'Bio (opsional)',
-                  prefixIcon: Icon(Icons.notes),
-                  border: OutlineInputBorder(),
-                  hintText: 'Ceritakan sedikit tentang diri Anda...',
+                  labelText: 'Saran', border: OutlineInputBorder(),
                   alignLabelWithHint: true,
                 ),
+                maxLines: 3,
+                maxLength: 500,
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
 
-              SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton.icon(
-                  onPressed: _save,
-                  icon: const Icon(Icons.save_outlined),
-                  label: const Text('Simpan Profil',
-                      style: TextStyle(fontSize: 16)),
-                ),
-              ),
+              ElevatedButton(onPressed: _submit, child: const Text('SUBMIT')),
+
+              // Summary
+              if (_submitted) ...[
+                const Divider(height: 32),
+                const Text('📊 Hasil Survey:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                Card(child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Nama: ${_nameCtrl.text}'),
+                      Text('Gender: $_gender'),
+                      Text('Semester: $_semester'),
+                      Text('Kepuasan: ${_satisfaction.round()}/10'),
+                      Text('Minat: ${_interests.entries.where((e) => e.value).map((e) => e.key).join(", ")}'),
+                      Text('Saran: ${_saranCtrl.text.isEmpty ? "-" : _saranCtrl.text}'),
+                    ],
+                  ),
+                )),
+              ],
             ],
           ),
         ),
@@ -326,170 +302,207 @@ class _ProfilePageState extends State<ProfilePage> {
 
 ---
 
-### Latihan 3: Quiz Widget
-
-| Kasus                             | Widget yang Tepat                              | Alasan                                              |
-| --------------------------------- | ---------------------------------------------- | --------------------------------------------------- |
-| Input kata sandi                  | `TextField(obscureText: true)`                 | Menyembunyikan karakter yang diketik                |
-| Pilih **satu** dari banyak opsi   | `Radio` / `RadioListTile`                      | Hanya boleh satu terpilih dalam satu group          |
-| Pilih **banyak** dari banyak opsi | `Checkbox` / `CheckboxListTile` / `FilterChip` | Bisa memilih lebih dari satu                        |
-| Toggle on/off                     | `Switch` / `SwitchListTile`                    | Boolean state, visual toggle                        |
-| Pilih nilai dari rentang          | `Slider`                                       | Nilai kontinu antara min dan max                    |
-| Pilih tanggal                     | `showDatePicker()`                             | Dialog bawaan Material Design untuk memilih tanggal |
-
----
-
-## 🏠 Tugas — Rubrik Penilaian Detail
-
-### Kriteria Wajib (80 poin)
-
-| No  | Kriteria                                | Poin | Indikator                                                             |
-| --- | --------------------------------------- | ---- | --------------------------------------------------------------------- |
-| 1   | Minimal 6 jenis input widget berbeda    | 30   | `TextField`, `Checkbox/Radio/Switch`, `Dropdown`, `Slider/DatePicker` |
-| 2   | Validasi lengkap pada semua field wajib | 20   | `validator` return String saat error, null saat valid                 |
-| 3   | Tampilan pesan error informatif         | 10   | Teks error jelas, tidak hanya "field tidak valid"                     |
-| 4   | Halaman konfirmasi setelah submit       | 10   | Menampilkan data yang diinput oleh pengguna                           |
-| 5   | Kode bersih & terstruktur               | 10   | `dispose()` controller, naming convention, tidak ada kode duplikat    |
-
-### Kriteria Bonus (20 poin)
-
-| Bonus                    | Poin | Indikator                                            |
-| ------------------------ | ---- | ---------------------------------------------------- |
-| Form multi-step (wizard) | +10  | Min 2 step dengan validasi per step                  |
-| Animasi transisi         | +5   | `AnimatedSwitcher` atau `PageView` antar bagian form |
-| SharedPreferences        | +5   | Menyimpan data form ke storage lokal                 |
-
----
-
-## 🔍 Poin Rawan Kesalahan Mahasiswa
-
-### 1. Lupa dispose() controller
+## Latihan 3: Form Multi-Step (Bonus)
 
 ```dart
-// ❌ SALAH — Memory Leak!
-class _MyState extends State<MyWidget> {
-  final controller = TextEditingController();
-  // Tidak ada dispose!
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MaterialApp(
+  debugShowCheckedModeBanner: false,
+  home: MultiStepFormPage(),
+));
+
+class MultiStepFormPage extends StatefulWidget {
+  const MultiStepFormPage({super.key});
+  @override
+  State<MultiStepFormPage> createState() => _MultiStepFormPageState();
 }
 
-// ✅ BENAR
-class _MyState extends State<MyWidget> {
-  final controller = TextEditingController();
+class _MultiStepFormPageState extends State<MultiStepFormPage> {
+  int _currentStep = 0;
+
+  // Step 1 controllers
+  final _nameCtrl = TextEditingController();
+  final _emailCtrl = TextEditingController();
+
+  // Step 2
+  String? _prodi;
+  String? _semester;
+  final _ipkCtrl = TextEditingController();
+
+  // Form keys per step
+  final _step1Key = GlobalKey<FormState>();
+  final _step2Key = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    controller.dispose();
+    _nameCtrl.dispose();
+    _emailCtrl.dispose();
+    _ipkCtrl.dispose();
     super.dispose();
+  }
+
+  bool _validateCurrentStep() {
+    switch (_currentStep) {
+      case 0: return _step1Key.currentState?.validate() ?? false;
+      case 1: return _step2Key.currentState?.validate() ?? false;
+      default: return true;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Form Multi-Step')),
+      body: Stepper(
+        currentStep: _currentStep,
+        type: StepperType.vertical,
+        onStepContinue: () {
+          if (_currentStep < 2) {
+            if (_validateCurrentStep()) {
+              setState(() => _currentStep++);
+            }
+          } else {
+            // Submit final
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('✅ Form submitted!'), backgroundColor: Colors.green),
+            );
+          }
+        },
+        onStepCancel: () {
+          if (_currentStep > 0) setState(() => _currentStep--);
+        },
+        onStepTapped: (step) {
+          if (step < _currentStep) setState(() => _currentStep = step);
+        },
+        steps: [
+          // STEP 1: Data Diri
+          Step(
+            title: const Text('Data Diri'),
+            subtitle: _currentStep > 0 ? Text(_nameCtrl.text) : null,
+            isActive: _currentStep >= 0,
+            state: _currentStep > 0 ? StepState.complete : StepState.indexed,
+            content: Form(
+              key: _step1Key,
+              child: Column(children: [
+                TextFormField(
+                  controller: _nameCtrl,
+                  decoration: const InputDecoration(labelText: 'Nama *', border: OutlineInputBorder()),
+                  validator: (v) => (v == null || v.isEmpty) ? 'Wajib' : null,
+                ),
+                const SizedBox(height: 12),
+                TextFormField(
+                  controller: _emailCtrl,
+                  decoration: const InputDecoration(labelText: 'Email *', border: OutlineInputBorder()),
+                  validator: (v) {
+                    if (v == null || v.isEmpty) return 'Wajib';
+                    if (!v.contains('@')) return 'Email tidak valid';
+                    return null;
+                  },
+                ),
+              ]),
+            ),
+          ),
+
+          // STEP 2: Akademik
+          Step(
+            title: const Text('Akademik'),
+            subtitle: _currentStep > 1 ? Text('$_prodi, Smt $_semester') : null,
+            isActive: _currentStep >= 1,
+            state: _currentStep > 1 ? StepState.complete : StepState.indexed,
+            content: Form(
+              key: _step2Key,
+              child: Column(children: [
+                DropdownButtonFormField<String>(
+                  value: _prodi,
+                  decoration: const InputDecoration(labelText: 'Program Studi *', border: OutlineInputBorder()),
+                  items: ['Teknik Informatika', 'Sistem Informasi', 'Data Science']
+                      .map((p) => DropdownMenuItem(value: p, child: Text(p))).toList(),
+                  onChanged: (v) => setState(() => _prodi = v),
+                  validator: (v) => v == null ? 'Pilih prodi' : null,
+                ),
+                const SizedBox(height: 12),
+                DropdownButtonFormField<String>(
+                  value: _semester,
+                  decoration: const InputDecoration(labelText: 'Semester *', border: OutlineInputBorder()),
+                  items: List.generate(8, (i) => '${i + 1}')
+                      .map((s) => DropdownMenuItem(value: s, child: Text('Semester $s'))).toList(),
+                  onChanged: (v) => setState(() => _semester = v),
+                  validator: (v) => v == null ? 'Pilih semester' : null,
+                ),
+                const SizedBox(height: 12),
+                TextFormField(
+                  controller: _ipkCtrl,
+                  decoration: const InputDecoration(labelText: 'IPK', border: OutlineInputBorder()),
+                  keyboardType: TextInputType.number,
+                  validator: (v) {
+                    if (v != null && v.isNotEmpty) {
+                      final ipk = double.tryParse(v);
+                      if (ipk == null || ipk < 0 || ipk > 4) return 'IPK 0.0 - 4.0';
+                    }
+                    return null;
+                  },
+                ),
+              ]),
+            ),
+          ),
+
+          // STEP 3: Review
+          Step(
+            title: const Text('Review & Submit'),
+            isActive: _currentStep >= 2,
+            content: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('📋 Review Data:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                    const Divider(),
+                    Text('Nama: ${_nameCtrl.text}'),
+                    Text('Email: ${_emailCtrl.text}'),
+                    Text('Program Studi: ${_prodi ?? "-"}'),
+                    Text('Semester: ${_semester ?? "-"}'),
+                    Text('IPK: ${_ipkCtrl.text.isEmpty ? "-" : _ipkCtrl.text}'),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 ```
 
-### 2. validator return terbalik
-
-```dart
-// ❌ SALAH — null saat error, String saat valid
-validator: (v) {
-  if (v!.isNotEmpty) return null;  // Ini valid
-  return 'Wajib diisi';            // Ini error
-}
-
-// ✅ BENAR — null = valid, String = pesan error
-validator: (v) {
-  if (v == null || v.isEmpty) return 'Wajib diisi';  // Error
-  return null;  // Valid
-}
-```
-
-### 3. setState setelah async tanpa mounted check
-
-```dart
-// ❌ Bisa crash jika user navigasi saat loading
-Future<void> loadData() async {
-  await Future.delayed(Duration(seconds: 2));
-  setState(() => _data = 'done'); // Berbahaya!
-}
-
-// ✅ Aman
-Future<void> loadData() async {
-  await Future.delayed(Duration(seconds: 2));
-  if (mounted) setState(() => _data = 'done');
-}
-```
-
-### 4. GlobalKey tidak dibuat dengan `final`
-
-```dart
-// ❌ SALAH — GlobalKey harus persist, jangan dibuat ulang di build()
-Widget build(BuildContext context) {
-  final formKey = GlobalKey<FormState>(); // Dibuat ulang setiap rebuild!
-  return Form(key: formKey, ...);
-}
-
-// ✅ BENAR — Deklarasi sebagai field class
-class _MyFormState extends State<MyForm> {
-  final _formKey = GlobalKey<FormState>();
-}
-```
-
-### 5. Dropdown value tidak ada di items
-
-```dart
-// ❌ Error: value 'Bandung' tidak ada di items
-DropdownButtonFormField<String>(
-  value: 'Bandung',          // value ini harus ada di items!
-  items: ['Jakarta', 'Surabaya']
-      .map((c) => DropdownMenuItem(value: c, child: Text(c)))
-      .toList(),
-)
-
-// ✅ Pastikan value ada di items, atau gunakan null sebagai default
-DropdownButtonFormField<String>(
-  value: null,               // null = belum dipilih (gunakan hint)
-  hint: Text('Pilih kota'),
-  items: ['Bandung', 'Jakarta', 'Surabaya']
-      .map((c) => DropdownMenuItem(value: c, child: Text(c)))
-      .toList(),
-  onChanged: (v) => ...,
-)
-```
-
 ---
 
-## 📊 Distribusi Nilai yang Diharapkan
+## Praktikum: Form Pendaftaran Event
 
-| Rentang | Kategori    | Perkiraan Persentase |
-| ------- | ----------- | -------------------- |
-| 90-100  | Sangat Baik | 10%                  |
-| 75-89   | Baik        | 40%                  |
-| 60-74   | Cukup       | 35%                  |
-| < 60    | Kurang      | 15%                  |
+> Reference solution ada di `contoh_kode/pertemuan_5/05_registration_form_complete.dart`
+> dan project lengkap di `contoh_proyek/pertemuan_5_registration/`
 
----
+### Poin Penilaian
 
-## 💡 Pertanyaan Diskusi untuk Kelas
+| Kriteria                         | Poin | Cek                                                                                           |
+| -------------------------------- | ---- | --------------------------------------------------------------------------------------------- |
+| Min 5 field berbeda jenis        | 25   | nama, email, password, gender(radio), prodi(dropdown), dob(datepicker), agree(checkbox) = 7 ✓ |
+| Validasi real-time               | 25   | autovalidateMode.onUserInteraction ✓                                                          |
+| Min 2 input selain TextFormField | —    | Radio + Dropdown + DatePicker + Checkbox = 4 ✓                                                |
+| Provider untuk state             | 20   | RegistrationProvider extends ChangeNotifier ✓                                                 |
+| Halaman list pendaftar           | —    | RegistrantListPage ✓                                                                          |
+| Error handling try-catch         | 15   | Di getById() dan parsing ✓                                                                    |
+| Reset form setelah submit        | —    | \_resetForm() ✓                                                                               |
+| Code quality                     | 15   | Dispose, naming, structure ✓                                                                  |
 
-1. **Mengapa** kita harus selalu memanggil `dispose()` pada `TextEditingController` dan `FocusNode`?
+### Common Issues & Grading Notes
 
-   **Jawaban**: Karena controller dan FocusNode menggunakan resource (listener, streams) yang harus dilepas ketika widget sudah tidak digunakan untuk mencegah _memory leak_. `dispose()` dipanggil saat widget dihapus dari widget tree.
-
-2. Apa perbedaan antara `TextField` dan `TextFormField`?
-
-   **Jawaban**: `TextFormField` adalah `TextField` yang terintegrasi dengan `Form` widget. `TextFormField` mendukung properti `validator`, `onSaved`, dan berpartisipasi dalam validasi otomatis `Form`. `TextField` hanya widget input biasa tanpa integrasi `Form`.
-
-3. Kapan sebaiknya menggunakan `autovalidateMode: AutovalidateMode.onUserInteraction`?
-
-   **Jawaban**: Sebaiknya digunakan **setelah** pengguna mencoba submit pertama kali. Jika diaktifkan dari awal, pengguna langsung melihat error di field yang belum pernah disentuh, yang bisa membingungkan. Pola umum: set ke `disabled` awal, ganti ke `onUserInteraction` saat tombol Submit ditekan.
-
-4. Apa itu `GlobalKey<FormState>` dan mengapa tidak boleh dibuat di dalam fungsi `build()`?
-
-   **Jawaban**: `GlobalKey<FormState>` adalah kunci unik yang mengidentifikasi widget `Form` dan memberi akses ke state-nya (untuk memanggil `validate()`, `save()`, `reset()`). Tidak boleh dibuat di `build()` karena `build()` bisa dipanggil berkali-kali, dan setiap pembuatan key baru akan "memutus" referensi ke Form yang sudah ada.
-
----
-
-## 🗓️ Timeline Koreksi
-
-| Hari        | Kegiatan                                    |
-| ----------- | ------------------------------------------- |
-| H+1 s/d H+5 | Koreksi tugas (gunakan rubrik di atas)      |
-| H+6         | Input nilai ke LMS                          |
-| H+7         | Umumkan nilai + feedback umum di grup kelas |
+- **-5** jika lupa dispose controllers
+- **-5** jika pakai TextField bukan TextFormField
+- **-3** jika tidak ada `autovalidateMode`
+- **-3** jika dropdown initial value error
+- **-2** jika DatePicker tidak handle null (cancel)
+- **Bonus +10** jika pakai Stepper multi-step
+- **Bonus +5** jika ada edit functionality
+- **Bonus +5** jika ada search/filter

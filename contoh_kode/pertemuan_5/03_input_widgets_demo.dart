@@ -1,13 +1,20 @@
-// DEMO 03: Input Widget Lanjutan
+// =====================================================
+// PERTEMUAN 5 - DEMO 03: Input Widgets Showcase
+// =====================================================
+// File: 03_input_widgets_demo.dart
 //
-// Topik yang dibahas:
-// - Checkbox & CheckboxListTile (pilihan ganda)
-// - Radio & RadioListTile (pilihan tunggal)
-// - Switch & SwitchListTile (toggle on/off)
-// - Slider (nilai dalam rentang)
-// - RangeSlider (dua nilai, min dan maks)
-// - DropdownButton & DropdownButtonFormField
-// - Dropdown berantai (kota bergantung pada provinsi)
+// CARA PAKAI:
+// 1. Buat Flutter project baru: flutter create demo_app
+// 2. Replace isi lib/main.dart dengan code ini
+// 3. Run: flutter run
+//
+// TOPIK:
+// - Checkbox / CheckboxListTile
+// - Radio / RadioListTile
+// - Switch / SwitchListTile
+// - Slider
+// - DropdownButtonFormField
+// =====================================================
 
 import 'package:flutter/material.dart';
 
@@ -24,404 +31,306 @@ class MyApp extends StatelessWidget {
       title: 'Input Widgets Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
         useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
       ),
-      home: const InputWidgetsDemoPage(),
+      home: const InputWidgetsPage(),
     );
   }
 }
 
-class InputWidgetsDemoPage extends StatefulWidget {
-  const InputWidgetsDemoPage({super.key});
+class InputWidgetsPage extends StatefulWidget {
+  const InputWidgetsPage({super.key});
 
   @override
-  State<InputWidgetsDemoPage> createState() => _InputWidgetsDemoPageState();
+  State<InputWidgetsPage> createState() => _InputWidgetsPageState();
 }
 
-class _InputWidgetsDemoPageState extends State<InputWidgetsDemoPage> {
-  // ============================================================
-  // STATE VARIABLES
-  // ============================================================
-
+class _InputWidgetsPageState extends State<InputWidgetsPage> {
   // Checkbox
   bool _agreeTerms = false;
-  final List<String> _allSkills = ['Flutter', 'Dart', 'React Native', 'Android', 'iOS', 'Firebase'];
-  final List<String> _selectedSkills = [];
+  bool _subscribeNewsletter = false;
+  bool _shareData = false;
 
   // Radio
-  String _gender = 'Tidak disebutkan';
-  String _shirtSize = 'M';
+  String _selectedGender = 'Laki-laki';
+  String _selectedPriority = 'Medium';
 
   // Switch
-  bool _emailNotif = true;
-  bool _smsNotif = false;
-  bool _pushNotif = true;
+  bool _darkMode = false;
+  bool _notifications = true;
+  bool _locationAccess = false;
 
   // Slider
-  double _experience = 1.0;
-  RangeValues _salaryRange = const RangeValues(5000000, 15000000);
+  double _satisfaction = 5.0;
+  double _fontSize = 16.0;
+  RangeValues _ageRange = const RangeValues(18, 30);
 
   // Dropdown
-  String? _selectedProvince;
-  String? _selectedCity;
-  String? _selectedRole = 'Mahasiswa';
+  String? _selectedProdi;
+  String? _selectedSemester;
 
-  final Map<String, List<String>> _citiesByProvince = {
-    'Jawa Barat': ['Bandung', 'Bekasi', 'Bogor', 'Depok', 'Cimahi', 'Tasikmalaya'],
-    'DKI Jakarta': ['Jakarta Pusat', 'Jakarta Barat', 'Jakarta Timur', 'Jakarta Selatan', 'Jakarta Utara'],
-    'Jawa Tengah': ['Semarang', 'Solo', 'Magelang', 'Salatiga', 'Purwokerto'],
-    'Jawa Timur': ['Surabaya', 'Malang', 'Kediri', 'Blitar', 'Madiun'],
-  };
+  final List<String> _prodiList = [
+    'Teknik Informatika',
+    'Sistem Informasi',
+    'Teknik Komputer',
+    'Data Science',
+    'Desain Komunikasi Visual',
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Demo 03: Input Widgets Lanjutan'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text('🎛️ Input Widgets Showcase'),
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ========================================
+            // ==========================================
             // 1. CHECKBOX
-            // ========================================
-            _sectionCard(
-              title: '1. Checkbox',
-              color: Colors.orange,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Single checkbox
-                  CheckboxListTile(
-                    title: const Text('Saya setuju dengan Syarat & Ketentuan'),
-                    subtitle: const Text('Wajib disetujui untuk melanjutkan'),
-                    value: _agreeTerms,
-                    onChanged: (val) => setState(() => _agreeTerms = val ?? false),
-                    controlAffinity: ListTileControlAffinity.leading,
-                    activeColor: Colors.orange,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                  ),
-                  const Divider(),
-                  // Multiple checkbox
-                  const Text('Pilih keahlian Anda (boleh lebih dari satu):',
-                      style: TextStyle(fontWeight: FontWeight.w500)),
-                  Wrap(
-                    children: _allSkills.map((skill) {
-                      final isSelected = _selectedSkills.contains(skill);
-                      return FilterChip(
-                        label: Text(skill),
-                        selected: isSelected,
-                        onSelected: (selected) {
-                          setState(() {
-                            if (selected) {
-                              _selectedSkills.add(skill);
-                            } else {
-                              _selectedSkills.remove(skill);
-                            }
-                          });
-                        },
-                        selectedColor: Colors.orange.shade100,
-                        checkmarkColor: Colors.orange.shade800,
-                      );
-                    }).toList(),
-                  ),
-                  if (_selectedSkills.isNotEmpty)
-                    Text('✅ Dipilih: ${_selectedSkills.join(', ')}',
-                        style: const TextStyle(color: Colors.green)),
-                ],
-              ),
-            ),
+            // ==========================================
+            _buildSectionHeader('☑️ Checkbox', 'Boolean ya/tidak'),
 
-            // ========================================
-            // 2. RADIO BUTTON
-            // ========================================
-            _sectionCard(
-              title: '2. Radio Button',
-              color: Colors.blue,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Gender — pakai Row
-                  const Text('Jenis Kelamin:', style: TextStyle(fontWeight: FontWeight.w500)),
-                  Row(
-                    children: ['Laki-laki', 'Perempuan', 'Tidak disebutkan'].map((g) {
-                      return Expanded(
-                        child: RadioListTile<String>(
-                          title: Text(g, style: const TextStyle(fontSize: 12)),
-                          value: g,
-                          groupValue: _gender,
-                          onChanged: (val) => setState(() => _gender = val!),
-                          contentPadding: EdgeInsets.zero,
-                          dense: true,
-                          activeColor: Colors.blue,
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                  const Divider(),
-                  // Ukuran baju — pakai column
-                  const Text('Ukuran Kaos:', style: TextStyle(fontWeight: FontWeight.w500)),
-                  Wrap(
-                    children: ['XS', 'S', 'M', 'L', 'XL', 'XXL'].map((size) {
-                      return SizedBox(
-                        width: 80,
-                        child: RadioListTile<String>(
-                          title: Text(size),
-                          value: size,
-                          groupValue: _shirtSize,
-                          onChanged: (val) => setState(() => _shirtSize = val!),
-                          contentPadding: EdgeInsets.zero,
-                          dense: true,
-                          activeColor: Colors.blue,
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                  Text('Dipilih: $_gender | Ukuran: $_shirtSize',
-                      style: const TextStyle(color: Colors.blue)),
-                ],
-              ),
+            CheckboxListTile(
+              title: const Text('Saya setuju dengan syarat & ketentuan'),
+              subtitle: const Text('Wajib'),
+              value: _agreeTerms,
+              onChanged: (v) => setState(() => _agreeTerms = v ?? false),
+              controlAffinity: ListTileControlAffinity.leading,
+              activeColor: Colors.green,
             ),
+            CheckboxListTile(
+              title: const Text('Berlangganan newsletter'),
+              subtitle: const Text('Opsional'),
+              value: _subscribeNewsletter,
+              onChanged: (v) => setState(() => _subscribeNewsletter = v ?? false),
+              controlAffinity: ListTileControlAffinity.leading,
+            ),
+            CheckboxListTile(
+              title: const Text('Izinkan berbagi data anonim'),
+              value: _shareData,
+              onChanged: (v) => setState(() => _shareData = v ?? false),
+              controlAffinity: ListTileControlAffinity.leading,
+            ),
+            const Divider(height: 32),
 
-            // ========================================
+            // ==========================================
+            // 2. RADIO
+            // ==========================================
+            _buildSectionHeader('🔘 Radio', 'Pilih SATU dari beberapa opsi'),
+
+            const Text('Jenis Kelamin:', style: TextStyle(fontWeight: FontWeight.w500)),
+            Row(
+              children: [
+                Expanded(
+                  child: RadioListTile<String>(
+                    title: const Text('Laki-laki'),
+                    value: 'Laki-laki',
+                    groupValue: _selectedGender,
+                    onChanged: (v) => setState(() => _selectedGender = v!),
+                  ),
+                ),
+                Expanded(
+                  child: RadioListTile<String>(
+                    title: const Text('Perempuan'),
+                    value: 'Perempuan',
+                    groupValue: _selectedGender,
+                    onChanged: (v) => setState(() => _selectedGender = v!),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+
+            const Text('Prioritas:', style: TextStyle(fontWeight: FontWeight.w500)),
+            Wrap(
+              children: ['Low', 'Medium', 'High', 'Critical'].map((p) {
+                return SizedBox(
+                  width: 150,
+                  child: RadioListTile<String>(
+                    title: Text(p),
+                    value: p,
+                    groupValue: _selectedPriority,
+                    onChanged: (v) => setState(() => _selectedPriority = v!),
+                    dense: true,
+                    contentPadding: EdgeInsets.zero,
+                  ),
+                );
+              }).toList(),
+            ),
+            const Divider(height: 32),
+
+            // ==========================================
             // 3. SWITCH
-            // ========================================
-            _sectionCard(
-              title: '3. Switch',
-              color: Colors.green,
-              child: Column(
-                children: [
-                  SwitchListTile(
-                    title: const Text('Notifikasi Email'),
-                    subtitle: const Text('Terima update via email'),
-                    value: _emailNotif,
-                    onChanged: (val) => setState(() => _emailNotif = val),
-                    activeColor: Colors.green,
-                    secondary: const Icon(Icons.email),
-                  ),
-                  SwitchListTile(
-                    title: const Text('Notifikasi SMS'),
-                    subtitle: const Text('Terima update via SMS'),
-                    value: _smsNotif,
-                    onChanged: (val) => setState(() => _smsNotif = val),
-                    activeColor: Colors.green,
-                    secondary: const Icon(Icons.sms),
-                  ),
-                  SwitchListTile(
-                    title: const Text('Push Notification'),
-                    subtitle: const Text('Notifikasi di aplikasi'),
-                    value: _pushNotif,
-                    onChanged: (val) => setState(() => _pushNotif = val),
-                    activeColor: Colors.green,
-                    secondary: const Icon(Icons.notifications),
-                  ),
-                ].map((tile) => Column(children: [tile, const Divider(height: 0)])).toList().expand((x) => x).toList()..removeLast(),
-              ),
-            ),
+            // ==========================================
+            _buildSectionHeader('🔀 Switch', 'Toggle on/off'),
 
-            // ========================================
+            SwitchListTile(
+              title: const Text('Dark Mode'),
+              subtitle: Text(_darkMode ? 'Aktif' : 'Nonaktif'),
+              value: _darkMode,
+              onChanged: (v) => setState(() => _darkMode = v),
+              secondary: Icon(_darkMode ? Icons.dark_mode : Icons.light_mode),
+            ),
+            SwitchListTile(
+              title: const Text('Notifikasi Push'),
+              subtitle: Text(_notifications ? 'Aktif' : 'Nonaktif'),
+              value: _notifications,
+              onChanged: (v) => setState(() => _notifications = v),
+              secondary: const Icon(Icons.notifications),
+            ),
+            SwitchListTile(
+              title: const Text('Akses Lokasi'),
+              subtitle: Text(_locationAccess ? 'Diizinkan' : 'Ditolak'),
+              value: _locationAccess,
+              onChanged: (v) => setState(() => _locationAccess = v),
+              secondary: const Icon(Icons.location_on),
+            ),
+            const Divider(height: 32),
+
+            // ==========================================
             // 4. SLIDER
-            // ========================================
-            _sectionCard(
-              title: '4. Slider & RangeSlider',
-              color: Colors.red,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Single Slider
-                  Text(
-                    'Pengalaman: ${_experience.round()} tahun',
-                    style: const TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                  Slider(
-                    value: _experience,
-                    min: 0,
-                    max: 10,
-                    divisions: 10,
-                    label: '${_experience.round()} thn',
-                    activeColor: Colors.red,
-                    onChanged: (val) => setState(() => _experience = val),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text('0 thn', style: TextStyle(fontSize: 12)),
-                      Text('Fresh Graduate', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                      Text('10 thn', style: TextStyle(fontSize: 12)),
-                    ],
-                  ),
-                  const Divider(),
+            // ==========================================
+            _buildSectionHeader('🎚️ Slider', 'Pilih nilai dari range'),
 
-                  // Range Slider
-                  Text(
-                    'Ekspektasi Gaji: Rp ${_formatRupiah(_salaryRange.start)} - Rp ${_formatRupiah(_salaryRange.end)}',
-                    style: const TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                  RangeSlider(
-                    values: _salaryRange,
-                    min: 3000000,
-                    max: 30000000,
-                    divisions: 27,
-                    labels: RangeLabels(
-                      'Rp ${_formatRupiah(_salaryRange.start)}',
-                      'Rp ${_formatRupiah(_salaryRange.end)}',
-                    ),
-                    activeColor: Colors.red,
-                    onChanged: (vals) => setState(() => _salaryRange = vals),
-                  ),
-                ],
+            const Text('Tingkat Kepuasan:'),
+            Slider(
+              value: _satisfaction,
+              min: 0,
+              max: 10,
+              divisions: 10,
+              label: '${_satisfaction.round()}',
+              onChanged: (v) => setState(() => _satisfaction = v),
+            ),
+            Text('Nilai: ${_satisfaction.round()}/10',
+                style: const TextStyle(fontSize: 16)),
+            const SizedBox(height: 16),
+
+            const Text('Preview Font Size:'),
+            Slider(
+              value: _fontSize,
+              min: 10,
+              max: 36,
+              divisions: 26,
+              label: '${_fontSize.round()}px',
+              onChanged: (v) => setState(() => _fontSize = v),
+            ),
+            Container(
+              padding: const EdgeInsets.all(8),
+              color: Colors.grey.shade100,
+              child: Text(
+                'The quick brown fox jumps over the lazy dog',
+                style: TextStyle(fontSize: _fontSize),
               ),
             ),
+            const SizedBox(height: 16),
 
-            // ========================================
+            const Text('Range Usia Target:'),
+            RangeSlider(
+              values: _ageRange,
+              min: 10,
+              max: 60,
+              divisions: 50,
+              labels: RangeLabels(
+                '${_ageRange.start.round()} thn',
+                '${_ageRange.end.round()} thn',
+              ),
+              onChanged: (v) => setState(() => _ageRange = v),
+            ),
+            Text('${_ageRange.start.round()} - ${_ageRange.end.round()} tahun'),
+            const Divider(height: 32),
+
+            // ==========================================
             // 5. DROPDOWN
-            // ========================================
-            _sectionCard(
-              title: '5. Dropdown & Dropdown Berantai',
-              color: Colors.teal,
-              child: Column(
-                children: [
-                  // Simple dropdown
-                  DropdownButtonFormField<String>(
-                    value: _selectedRole,
-                    decoration: const InputDecoration(
-                      labelText: 'Peran',
-                      prefixIcon: Icon(Icons.work),
-                      border: OutlineInputBorder(),
-                    ),
-                    items: ['Mahasiswa', 'Dosen', 'Profesional', 'Wirausaha']
-                        .map((r) => DropdownMenuItem(value: r, child: Text(r)))
-                        .toList(),
-                    onChanged: (val) => setState(() => _selectedRole = val),
-                  ),
-                  const SizedBox(height: 12),
+            // ==========================================
+            _buildSectionHeader('📋 Dropdown', 'Pilih dari daftar'),
 
-                  // Dropdown berantai: Provinsi → Kota
-                  DropdownButtonFormField<String>(
-                    value: _selectedProvince,
-                    decoration: const InputDecoration(
-                      labelText: 'Provinsi',
-                      prefixIcon: Icon(Icons.map),
-                      border: OutlineInputBorder(),
-                    ),
-                    hint: const Text('Pilih provinsi'),
-                    items: _citiesByProvince.keys
-                        .map((p) => DropdownMenuItem(value: p, child: Text(p)))
-                        .toList(),
-                    onChanged: (val) {
-                      setState(() {
-                        _selectedProvince = val;
-                        _selectedCity = null; // Reset kota
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 12),
+            DropdownButtonFormField<String>(
+              value: _selectedProdi,
+              decoration: const InputDecoration(
+                labelText: 'Program Studi',
+                prefixIcon: Icon(Icons.school),
+                border: OutlineInputBorder(),
+              ),
+              hint: const Text('Pilih Program Studi'),
+              items: _prodiList.map((prodi) {
+                return DropdownMenuItem(value: prodi, child: Text(prodi));
+              }).toList(),
+              onChanged: (v) => setState(() => _selectedProdi = v),
+              validator: (v) => v == null ? 'Wajib pilih' : null,
+            ),
+            const SizedBox(height: 16),
 
-                  DropdownButtonFormField<String>(
-                    key: ValueKey(_selectedProvince), // rebuilt saat provinsi berubah
-                    value: _selectedCity,
-                    decoration: InputDecoration(
-                      labelText: 'Kota/Kabupaten',
-                      prefixIcon: const Icon(Icons.location_city),
-                      border: const OutlineInputBorder(),
-                      fillColor: _selectedProvince == null ? Colors.grey.shade100 : null,
-                      filled: _selectedProvince == null,
-                    ),
-                    hint: Text(_selectedProvince == null
-                        ? 'Pilih provinsi dahulu'
-                        : 'Pilih kota'),
-                    items: _selectedProvince != null
-                        ? _citiesByProvince[_selectedProvince]!
-                            .map((c) => DropdownMenuItem(value: c, child: Text(c)))
-                            .toList()
-                        : [],
-                    onChanged: _selectedProvince != null
-                        ? (val) => setState(() => _selectedCity = val)
-                        : null,
-                  ),
+            DropdownButtonFormField<String>(
+              value: _selectedSemester,
+              decoration: const InputDecoration(
+                labelText: 'Semester',
+                prefixIcon: Icon(Icons.calendar_month),
+                border: OutlineInputBorder(),
+              ),
+              hint: const Text('Pilih Semester'),
+              items: List.generate(8, (i) => '${i + 1}').map((s) {
+                return DropdownMenuItem(value: s, child: Text('Semester $s'));
+              }).toList(),
+              onChanged: (v) => setState(() => _selectedSemester = v),
+            ),
+            const SizedBox(height: 24),
 
-                  if (_selectedCity != null)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8),
-                      child: Text(
-                        '📍 Lokasi: $_selectedCity, $_selectedProvince',
-                        style: const TextStyle(color: Colors.teal, fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                ],
+            // ==========================================
+            // SUMMARY
+            // ==========================================
+            _buildSectionHeader('📊 Ringkasan', 'Semua nilai input'),
+
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('☑️ Setuju T&C: $_agreeTerms'),
+                    Text('📧 Newsletter: $_subscribeNewsletter'),
+                    Text('📊 Share Data: $_shareData'),
+                    const Divider(),
+                    Text('👤 Gender: $_selectedGender'),
+                    Text('⚡ Priority: $_selectedPriority'),
+                    const Divider(),
+                    Text('🌙 Dark Mode: $_darkMode'),
+                    Text('🔔 Notifikasi: $_notifications'),
+                    Text('📍 Lokasi: $_locationAccess'),
+                    const Divider(),
+                    Text('⭐ Kepuasan: ${_satisfaction.round()}/10'),
+                    Text('📏 Font: ${_fontSize.round()}px'),
+                    Text('👥 Usia: ${_ageRange.start.round()}-${_ageRange.end.round()} thn'),
+                    const Divider(),
+                    Text('🎓 Prodi: ${_selectedProdi ?? "-"}'),
+                    Text('📅 Semester: ${_selectedSemester ?? "-"}'),
+                  ],
+                ),
               ),
             ),
-
-            const SizedBox(height: 20),
           ],
         ),
       ),
     );
   }
 
-  // Helper: card section
-  Widget _sectionCard({
-    required String title,
-    required Color color,
-    required Widget child,
-  }) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      decoration: BoxDecoration(
-        border: Border.all(color: color.withOpacity(0.3)),
-        borderRadius: BorderRadius.circular(12),
-      ),
+  Widget _buildSectionHeader(String title, String subtitle) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(12)),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 4,
-                  height: 18,
-                  decoration: BoxDecoration(
-                    color: color,
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: color.withOpacity(0.9),
-                    fontSize: 15,
-                  ),
-                ),
-              ],
-            ),
+          Text(
+            title,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: child,
-          ),
+          Text(subtitle, style: const TextStyle(color: Colors.grey)),
         ],
       ),
     );
-  }
-
-  String _formatRupiah(double value) {
-    if (value >= 1000000) {
-      return '${(value / 1000000).toStringAsFixed(1)}jt';
-    }
-    return value.toStringAsFixed(0);
   }
 }

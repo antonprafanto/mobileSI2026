@@ -1,12 +1,19 @@
-// DEMO 04: DatePicker & TimePicker
+// =====================================================
+// PERTEMUAN 5 - DEMO 04: DatePicker & TimePicker
+// =====================================================
+// File: 04_date_time_picker_demo.dart
 //
-// Topik yang dibahas:
-// - showDatePicker() — memilih tanggal
-// - showTimePicker() — memilih waktu
-// - showDateRangePicker() — memilih rentang tanggal
-// - Kustomisasi theme picker
-// - Format tampilan tanggal & waktu dalam Bahasa Indonesia
-// - Integrasi DatePicker ke dalam Form dengan TextFormField
+// CARA PAKAI:
+// 1. Buat Flutter project baru: flutter create demo_app
+// 2. Replace isi lib/main.dart dengan code ini
+// 3. Run: flutter run
+//
+// TOPIK:
+// - showDatePicker
+// - showTimePicker
+// - Format tanggal manual
+// - DatePicker di dalam Form (read-only TextFormField)
+// =====================================================
 
 import 'package:flutter/material.dart';
 
@@ -20,11 +27,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'DateTimePicker Demo',
+      title: 'DatePicker & TimePicker Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
         useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
       ),
       home: const DateTimePickerPage(),
     );
@@ -39,320 +46,321 @@ class DateTimePickerPage extends StatefulWidget {
 }
 
 class _DateTimePickerPageState extends State<DateTimePickerPage> {
-  // State untuk menyimpan hasil picker
+  // Date & Time values
   DateTime? _birthDate;
+  DateTime? _eventDate;
   TimeOfDay? _eventTime;
-  DateTimeRange? _tripRange;
-  DateTime? _meetingDateTime;
+  DateTimeRange? _dateRange;
 
-  // Controller untuk tampilan di TextField
-  final _birthDateController = TextEditingController();
-  final _eventTimeController = TextEditingController();
-  final _meetingController = TextEditingController();
-
-  // Nama bulan dalam Bahasa Indonesia
-  static const List<String> _months = [
-    '', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-  ];
-
-  static const List<String> _days = [
-    '', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'
-  ];
+  // For Form integration
+  final _formKey = GlobalKey<FormState>();
+  final _dateController = TextEditingController();
+  final _timeController = TextEditingController();
 
   @override
   void dispose() {
-    _birthDateController.dispose();
-    _eventTimeController.dispose();
-    _meetingController.dispose();
+    _dateController.dispose();
+    _timeController.dispose();
     super.dispose();
   }
 
-  // ① Format tanggal ke Bahasa Indonesia
+  // ==========================================
+  // FORMAT TANGGAL (tanpa package intl)
+  // ==========================================
   String _formatDate(DateTime date) {
-    return '${date.day} ${_months[date.month]} ${date.year}';
+    final months = [
+      '', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember',
+    ];
+    return '${date.day} ${months[date.month]} ${date.year}';
   }
 
-  // Format tanggal dengan hari
-  String _formatDateFull(DateTime date) {
-    return '${_days[date.weekday]}, ${date.day} ${_months[date.month]} ${date.year}';
+  String _formatDateShort(DateTime date) {
+    return '${date.day.toString().padLeft(2, '0')}/'
+        '${date.month.toString().padLeft(2, '0')}/'
+        '${date.year}';
   }
 
-  // Hitung umur dari tanggal lahir
-  int _calculateAge(DateTime birthDate) {
-    final today = DateTime.now();
-    int age = today.year - birthDate.year;
-    if (today.month < birthDate.month ||
-        (today.month == birthDate.month && today.day < birthDate.day)) {
-      age--;
-    }
-    return age;
-  }
-
-  // ② showDatePicker untuk tanggal lahir
+  // ==========================================
+  // DATE PICKER
+  // ==========================================
   Future<void> _pickBirthDate() async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      // Tanggal awal yang ditampilkan
-      initialDate: _birthDate ?? DateTime(2000, 1, 1),
-      // Batas terlama yang bisa dipilih
-      firstDate: DateTime(1940),
-      // Batas terakhir (tidak bisa pilih masa depan untuk tanggal lahir)
+      initialDate: _birthDate ?? DateTime(2004, 1, 1),
+      firstDate: DateTime(1990),
       lastDate: DateTime.now(),
       helpText: 'Pilih Tanggal Lahir',
       cancelText: 'Batal',
       confirmText: 'Pilih',
-      // Kustomisasi tampilan
-      builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
-              primary: Colors.indigo.shade600,
-              onPrimary: Colors.white,
-              surface: Colors.white,
-              onSurface: Colors.black87,
-            ),
-          ),
-          child: child!,
-        );
-      },
+      fieldLabelText: 'Tanggal',
+      fieldHintText: 'DD/MM/YYYY',
     );
-
     if (picked != null) {
-      setState(() {
-        _birthDate = picked;
-        _birthDateController.text = _formatDate(picked);
-      });
+      setState(() => _birthDate = picked);
     }
   }
 
-  // ③ showTimePicker untuk waktu acara
+  Future<void> _pickEventDate() async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _eventDate ?? DateTime.now().add(const Duration(days: 7)),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
+      helpText: 'Pilih Tanggal Event',
+      // Restrict selectable days (contoh: weekdays only)
+      selectableDayPredicate: (DateTime day) {
+        // Tidak bisa pilih Sabtu (6) dan Minggu (7)
+        return day.weekday != DateTime.saturday &&
+            day.weekday != DateTime.sunday;
+      },
+    );
+    if (picked != null) {
+      setState(() => _eventDate = picked);
+    }
+  }
+
+  // ==========================================
+  // TIME PICKER
+  // ==========================================
   Future<void> _pickEventTime() async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
-      initialTime: _eventTime ?? TimeOfDay.now(),
-      helpText: 'Pilih Waktu Acara',
+      initialTime: _eventTime ?? const TimeOfDay(hour: 9, minute: 0),
+      helpText: 'Pilih Waktu Event',
       cancelText: 'Batal',
       confirmText: 'Pilih',
-      // Mode: pengaturan jam dan menit
-      initialEntryMode: TimePickerEntryMode.dial, // atau .input untuk ketik manual
     );
-
     if (picked != null) {
-      setState(() {
-        _eventTime = picked;
-        // Format: HH:MM WIB
-        final hour = picked.hour.toString().padLeft(2, '0');
-        final minute = picked.minute.toString().padLeft(2, '0');
-        _eventTimeController.text = '$hour:$minute WIB';
-      });
+      setState(() => _eventTime = picked);
     }
   }
 
-  // ④ showDateRangePicker untuk trip/perjalanan
-  Future<void> _pickTripRange() async {
+  // ==========================================
+  // DATE RANGE PICKER
+  // ==========================================
+  Future<void> _pickDateRange() async {
     final DateTimeRange? picked = await showDateRangePicker(
       context: context,
       firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(const Duration(days: 365 * 2)),
-      initialDateRange: _tripRange,
-      helpText: 'Pilih Rentang Tanggal Perjalanan',
+      lastDate: DateTime.now().add(const Duration(days: 365)),
+      initialDateRange: _dateRange ??
+          DateTimeRange(
+            start: DateTime.now(),
+            end: DateTime.now().add(const Duration(days: 7)),
+          ),
+      helpText: 'Pilih Rentang Tanggal',
       cancelText: 'Batal',
       confirmText: 'Pilih',
       saveText: 'Simpan',
-      builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
-              primary: Colors.indigo.shade600,
-            ),
-          ),
-          child: child!,
-        );
-      },
     );
-
     if (picked != null) {
-      setState(() => _tripRange = picked);
+      setState(() => _dateRange = picked);
     }
-  }
-
-  // ⑤ Kombinasi DatePicker + TimePicker untuk jadwal rapat
-  Future<void> _pickMeetingDateTime() async {
-    // Step 1: Pilih tanggal
-    final DateTime? date = await showDatePicker(
-      context: context,
-      initialDate: _meetingDateTime ?? DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(const Duration(days: 365)),
-      helpText: 'Pilih Tanggal Rapat',
-    );
-
-    if (date == null) return; // User batal
-
-    // Step 2: Pilih waktu
-    if (!mounted) return;
-    final TimeOfDay? time = await showTimePicker(
-      context: context,
-      initialTime: _meetingDateTime != null
-          ? TimeOfDay.fromDateTime(_meetingDateTime!)
-          : const TimeOfDay(hour: 9, minute: 0),
-      helpText: 'Pilih Waktu Rapat',
-    );
-
-    if (time == null) return;
-
-    // Gabungkan tanggal dan waktu
-    setState(() {
-      _meetingDateTime = DateTime(
-        date.year, date.month, date.day,
-        time.hour, time.minute,
-      );
-      _meetingController.text =
-          '${_formatDateFull(date)} pukul ${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Demo 04: DatePicker & TimePicker'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text('📅 Date & Time Picker'),
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ① Tanggal Lahir — showDatePicker
-            _label('1. DatePicker — Tanggal Lahir'),
-            TextFormField(
-              controller: _birthDateController,
-              readOnly: true, // Tidak bisa ketik manual
-              onTap: _pickBirthDate, // Klik untuk buka picker
-              decoration: InputDecoration(
-                labelText: 'Tanggal Lahir',
-                hintText: 'Klik untuk memilih',
-                prefixIcon: const Icon(Icons.cake),
-                suffixIcon: _birthDate != null
-                    ? IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: () {
-                          setState(() {
-                            _birthDate = null;
-                            _birthDateController.clear();
-                          });
-                        },
-                      )
-                    : const Icon(Icons.calendar_today),
-                border: const OutlineInputBorder(),
+            // ==========================================
+            // 1. BASIC DATE PICKER
+            // ==========================================
+            _buildSectionHeader('1️⃣ DatePicker Basic', 'Pilih tanggal lahir'),
+
+            ListTile(
+              leading: const Icon(Icons.cake, color: Colors.pink),
+              title: const Text('Tanggal Lahir'),
+              subtitle: Text(
+                _birthDate != null
+                    ? _formatDate(_birthDate!)
+                    : 'Belum dipilih — tap untuk pilih',
+              ),
+              trailing: const Icon(Icons.arrow_drop_down),
+              onTap: _pickBirthDate,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+                side: BorderSide(color: Colors.grey.shade300),
               ),
             ),
+
             if (_birthDate != null)
               Padding(
-                padding: const EdgeInsets.only(top: 6, left: 4),
+                padding: const EdgeInsets.only(top: 8, left: 16),
                 child: Text(
-                  '🎂 Umur: ${_calculateAge(_birthDate!)} tahun',
-                  style: TextStyle(
-                    color: Colors.indigo.shade700,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  'Umur: ${DateTime.now().year - _birthDate!.year} tahun',
+                  style: TextStyle(color: Colors.grey.shade600),
                 ),
               ),
+            const SizedBox(height: 24),
 
-            const SizedBox(height: 20),
+            // ==========================================
+            // 2. DATE PICKER WITH RESTRICTIONS
+            // ==========================================
+            _buildSectionHeader(
+              '2️⃣ DatePicker + Restrictions',
+              'Hanya hari kerja (Senin-Jumat)',
+            ),
 
-            // ② Waktu Acara — showTimePicker
-            _label('2. TimePicker — Waktu Acara'),
-            TextFormField(
-              controller: _eventTimeController,
-              readOnly: true,
+            ListTile(
+              leading: const Icon(Icons.event, color: Colors.blue),
+              title: const Text('Tanggal Event'),
+              subtitle: Text(
+                _eventDate != null
+                    ? '${_formatDate(_eventDate!)} (${_getDayName(_eventDate!.weekday)})'
+                    : 'Belum dipilih — Sabtu/Minggu disabled',
+              ),
+              trailing: const Icon(Icons.arrow_drop_down),
+              onTap: _pickEventDate,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+                side: BorderSide(color: Colors.grey.shade300),
+              ),
+            ),
+            const SizedBox(height: 24),
+
+            // ==========================================
+            // 3. TIME PICKER
+            // ==========================================
+            _buildSectionHeader('3️⃣ TimePicker', 'Pilih waktu event'),
+
+            ListTile(
+              leading: const Icon(Icons.access_time, color: Colors.orange),
+              title: const Text('Waktu Event'),
+              subtitle: Text(
+                _eventTime != null
+                    ? _eventTime!.format(context)
+                    : 'Belum dipilih — tap untuk pilih',
+              ),
+              trailing: const Icon(Icons.arrow_drop_down),
               onTap: _pickEventTime,
-              decoration: const InputDecoration(
-                labelText: 'Waktu Acara',
-                hintText: 'Klik untuk memilih waktu',
-                prefixIcon: Icon(Icons.access_time),
-                suffixIcon: Icon(Icons.schedule),
-                border: OutlineInputBorder(),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+                side: BorderSide(color: Colors.grey.shade300),
               ),
             ),
+            const SizedBox(height: 24),
 
-            const SizedBox(height: 20),
+            // ==========================================
+            // 4. DATE RANGE PICKER
+            // ==========================================
+            _buildSectionHeader('4️⃣ DateRangePicker', 'Pilih rentang tanggal'),
 
-            // ③ Rentang Tanggal — showDateRangePicker
-            _label('3. DateRangePicker — Tanggal Perjalanan'),
-            OutlinedButton.icon(
-              onPressed: _pickTripRange,
-              icon: const Icon(Icons.date_range),
-              label: const Text('Pilih Tanggal Perjalanan'),
-              style: OutlinedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 52),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
+            ListTile(
+              leading: const Icon(Icons.date_range, color: Colors.green),
+              title: const Text('Rentang Tanggal'),
+              subtitle: Text(
+                _dateRange != null
+                    ? '${_formatDateShort(_dateRange!.start)} — ${_formatDateShort(_dateRange!.end)} '
+                      '(${_dateRange!.duration.inDays} hari)'
+                    : 'Belum dipilih — tap untuk pilih',
+              ),
+              trailing: const Icon(Icons.arrow_drop_down),
+              onTap: _pickDateRange,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+                side: BorderSide(color: Colors.grey.shade300),
               ),
             ),
-            if (_tripRange != null) ...[
-              const SizedBox(height: 8),
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.indigo.shade50,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('✈️ Berangkat: ${_formatDateFull(_tripRange!.start)}'),
-                    Text('🏠 Kembali: ${_formatDateFull(_tripRange!.end)}'),
-                    Text(
-                      '📅 Durasi: ${_tripRange!.duration.inDays} hari',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+            const SizedBox(height: 24),
 
-            const SizedBox(height: 20),
-
-            // ④ Date + Time — kombinasi untuk jadwal rapat
-            _label('4. Kombinasi Date + Time — Jadwal Rapat'),
-            TextFormField(
-              controller: _meetingController,
-              readOnly: true,
-              onTap: _pickMeetingDateTime,
-              decoration: const InputDecoration(
-                labelText: 'Jadwal Rapat',
-                hintText: 'Klik untuk memilih tanggal & waktu',
-                prefixIcon: Icon(Icons.event),
-                suffixIcon: Icon(Icons.calendar_month),
-                border: OutlineInputBorder(),
-              ),
+            // ==========================================
+            // 5. DATE DI DALAM FORM (TextFormField)
+            // ==========================================
+            _buildSectionHeader(
+              '5️⃣ DatePicker di Form',
+              'Dengan TextFormField read-only + validasi',
             ),
 
-            const SizedBox(height: 30),
-
-            // Info card
-            Container(
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: Colors.indigo.shade50,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.indigo.shade200),
-              ),
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            Form(
+              key: _formKey,
+              child: Column(
                 children: [
-                  Text('📅 Rangkuman DatePicker:',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  SizedBox(height: 8),
-                  Text('• showDatePicker()  →  pilih satu tanggal'),
-                  Text('• showTimePicker()  →  pilih waktu'),
-                  Text('• showDateRangePicker()  →  pilih rentang tanggal'),
-                  Text('• Gunakan readOnly: true + onTap untuk TextField'),
-                  Text('• Bisa dikustomisasi temanya dengan builder'),
-                  Text('• Gabungkan Date+Time untuk jadwal lengkap'),
+                  TextFormField(
+                    controller: _dateController,
+                    readOnly: true,
+                    decoration: const InputDecoration(
+                      labelText: 'Tanggal Acara *',
+                      prefixIcon: Icon(Icons.calendar_today),
+                      border: OutlineInputBorder(),
+                      suffixIcon: Icon(Icons.arrow_drop_down),
+                      hintText: 'Tap untuk pilih tanggal',
+                    ),
+                    onTap: () async {
+                      final picked = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now().add(const Duration(days: 1)),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime.now().add(const Duration(days: 365)),
+                      );
+                      if (picked != null) {
+                        _dateController.text = _formatDate(picked);
+                      }
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Tanggal acara wajib diisi!';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 12),
+
+                  TextFormField(
+                    controller: _timeController,
+                    readOnly: true,
+                    decoration: const InputDecoration(
+                      labelText: 'Waktu Acara *',
+                      prefixIcon: Icon(Icons.access_time),
+                      border: OutlineInputBorder(),
+                      suffixIcon: Icon(Icons.arrow_drop_down),
+                      hintText: 'Tap untuk pilih waktu',
+                    ),
+                    onTap: () async {
+                      final picked = await showTimePicker(
+                        context: context,
+                        initialTime: const TimeOfDay(hour: 9, minute: 0),
+                      );
+                      if (picked != null && context.mounted) {
+                        _timeController.text = picked.format(context);
+                      }
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Waktu acara wajib diisi!';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              '✅ Acara: ${_dateController.text} pukul ${_timeController.text}',
+                            ),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
+                      }
+                    },
+                    icon: const Icon(Icons.check),
+                    label: const Text('Validasi Form'),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 48),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -362,16 +370,20 @@ class _DateTimePickerPageState extends State<DateTimePickerPage> {
     );
   }
 
-  Widget _label(String text) {
+  String _getDayName(int weekday) {
+    const days = ['', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+    return days[weekday];
+  }
+
+  Widget _buildSectionHeader(String title, String subtitle) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 14,
-          color: Colors.indigo,
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          Text(subtitle, style: const TextStyle(color: Colors.grey, fontSize: 13)),
+        ],
       ),
     );
   }
