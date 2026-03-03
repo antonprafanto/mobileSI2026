@@ -1331,13 +1331,20 @@ class Registrant {
     return age;
   }
 
-  // Helper: format tanggal
+  // Helper: format tanggal lahir
   String get formattedDateOfBirth {
     final months = [
       '', 'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun',
       'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des',
     ];
     return '${dateOfBirth.day} ${months[dateOfBirth.month]} ${dateOfBirth.year}';
+  }
+
+  // Helper: format waktu registrasi
+  String get formattedRegisteredAt {
+    return '${registeredAt.day}/${registeredAt.month}/${registeredAt.year} '
+        '${registeredAt.hour.toString().padLeft(2, '0')}:'
+        '${registeredAt.minute.toString().padLeft(2, '0')}';
   }
 }
 ```
@@ -1938,6 +1945,11 @@ class RegistrantDetailPage extends StatelessWidget {
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Terdaftar: ${registrant.formattedRegisteredAt}',
+              style: const TextStyle(color: Colors.grey),
             ),
             const SizedBox(height: 24),
 

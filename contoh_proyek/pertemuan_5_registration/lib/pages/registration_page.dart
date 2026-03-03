@@ -255,7 +255,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
               // Program Studi
               DropdownButtonFormField<String>(
-                initialValue: _prodi,
+                value: _prodi,
                 decoration: const InputDecoration(
                   labelText: 'Program Studi *',
                   prefixIcon: Icon(Icons.school),
