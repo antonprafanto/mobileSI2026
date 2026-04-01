@@ -18,7 +18,7 @@
 |     4     | [State Management dengan Provider](Pertemuan_4_State_Management_dengan_Provider.md) |   ✅   |
 |     5     | [Form, Validasi, dan Debugging](Pertemuan_5_Form_Validasi_dan_Debugging.md)         |   ✅   |
 |     6     | [Networking dan API](Pertemuan_6_Networking_dan_API.md)                              |   ✅   |
-|     7     | Local Storage                                                                       |   🔜   |
+|     7     | [Penyimpanan Lokal, Build APK & Project Akhir](Pertemuan_7_Penyimpanan_Lokal_dan_Build.md) |   ✅   |
 |     8     | UTS                                                                                 |   📝   |
 |     9     | Firebase Authentication                                                             |   🔜   |
 |    10     | Cloud Firestore                                                                     |   🔜   |
@@ -44,6 +44,7 @@ Potongan kode per topik, cocok untuk referensi cepat.
 | [`contoh_kode/pertemuan_4/`](contoh_kode/pertemuan_4/) | State Management & Provider (6 demos)    |
 | [`contoh_kode/pertemuan_5/`](contoh_kode/pertemuan_5/) | Form, Validasi & Debugging (7 demos)     |
 | [`contoh_kode/pertemuan_6/`](contoh_kode/pertemuan_6/) | Networking & API (7 demos)                |
+| [`contoh_kode/pertemuan_7/`](contoh_kode/pertemuan_7/) | SharedPreferences & SQLite (4 demos)    |
 
 ### 🚀 Full Flutter Projects (`contoh_proyek/`)
 
@@ -56,6 +57,7 @@ Project Flutter lengkap yang bisa langsung di-run.
 | [`contoh_proyek/pertemuan_4_shopping_cart/`](contoh_proyek/pertemuan_4_shopping_cart/) | State Management & Provider     | `flutter pub get && flutter run` |
 | [`contoh_proyek/pertemuan_5_registration/`](contoh_proyek/pertemuan_5_registration/)   | Form, Validasi & Debugging      | `flutter pub get && flutter run` |
 | [`contoh_proyek/pertemuan_6_news_app/`](contoh_proyek/pertemuan_6_news_app/)           | Networking & API                | `flutter pub get && flutter run` |
+| [`contoh_proyek/pertemuan_7_task_manager/`](contoh_proyek/pertemuan_7_task_manager/)     | Task Manager (SQLite + Provider)  | `flutter pub get && flutter run` |
 
 ---
 
