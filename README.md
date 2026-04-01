@@ -20,7 +20,7 @@
 |     6     | [Networking dan API](Pertemuan_6_Networking_dan_API.md)                              |   ✅   |
 |     7     | [Penyimpanan Lokal, Build APK & Project Akhir](Pertemuan_7_Penyimpanan_Lokal_dan_Build.md) |   ✅   |
 |     8     | UTS                                                                                 |   📝   |
-|     9     | Firebase Authentication                                                             |   🔜   |
+|     9     | [Firebase Authentication](Pertemuan_9_Firebase_Authentication.md)                     |   ✅   |
 |    10     | Cloud Firestore                                                                     |   🔜   |
 |    11     | Firebase Storage                                                                    |   🔜   |
 |    12     | Push Notification                                                                   |   🔜   |
@@ -45,6 +45,7 @@ Potongan kode per topik, cocok untuk referensi cepat.
 | [`contoh_kode/pertemuan_5/`](contoh_kode/pertemuan_5/) | Form, Validasi & Debugging (7 demos)     |
 | [`contoh_kode/pertemuan_6/`](contoh_kode/pertemuan_6/) | Networking & API (7 demos)                |
 | [`contoh_kode/pertemuan_7/`](contoh_kode/pertemuan_7/) | SharedPreferences & SQLite (4 demos)    |
+| [`contoh_kode/pertemuan_9/`](contoh_kode/pertemuan_9/) | Firebase Auth (4 demos)                 |
 
 ### 🚀 Full Flutter Projects (`contoh_proyek/`)
 
@@ -58,6 +59,7 @@ Project Flutter lengkap yang bisa langsung di-run.
 | [`contoh_proyek/pertemuan_5_registration/`](contoh_proyek/pertemuan_5_registration/)   | Form, Validasi & Debugging      | `flutter pub get && flutter run` |
 | [`contoh_proyek/pertemuan_6_news_app/`](contoh_proyek/pertemuan_6_news_app/)           | Networking & API                | `flutter pub get && flutter run` |
 | [`contoh_proyek/pertemuan_7_task_manager/`](contoh_proyek/pertemuan_7_task_manager/)     | Task Manager (SQLite + Provider)  | `flutter pub get && flutter run` |
+| [`contoh_proyek/pertemuan_9_auth_app/`](contoh_proyek/pertemuan_9_auth_app/)           | Firebase Authentication           | `flutter pub get && flutter run` |
 
 ---
 
