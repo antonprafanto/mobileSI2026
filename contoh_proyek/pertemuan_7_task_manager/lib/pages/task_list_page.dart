@@ -147,7 +147,7 @@ class TaskListPage extends StatelessWidget {
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
             onPressed: () {
-              // TODO: Implement clear all in provider
+              context.read<TaskProvider>().clearAllTasks();
               Navigator.pop(context);
             },
             child: const Text(

@@ -42,8 +42,8 @@ Setelah mengikuti pertemuan ini, Anda diharapkan mampu:
 | `01_shared_prefs_demo.dart`       | SharedPreferences: simpan & baca data sederhana        |
 | `02_sqflite_basics_demo.dart`     | SQLite: create, read, update, delete operations        |
 | `03_database_helper.dart`         | Singleton pattern untuk Database Helper                |
-| `04_task_model.dart`              | Model class untuk Task dengan fromMap/toMap            |
-| `05_task_app_complete/`           | Task Manager App lengkap (praktikum solution)          |
+| `04_prefs_service.dart`           | Pattern SharedPreferences Service                      |
+| `contoh_proyek/pertemuan_7_task_manager/` | Task Manager App lengkap dengan SQLite + Provider      |
 
 ---
 

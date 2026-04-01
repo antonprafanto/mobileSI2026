@@ -53,6 +53,11 @@ class TaskProvider extends ChangeNotifier {
     await loadTasks();
   }
 
+  Future<void> clearAllTasks() async {
+    await _db.deleteAllTasks();
+    await loadTasks();
+  }
+
   void search(String query) {
     _searchQuery = query;
     if (query.isEmpty) {
